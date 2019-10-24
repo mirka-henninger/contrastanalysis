@@ -1,14 +1,17 @@
 Package: contrastanalysis
-Title: What the Package Does (One Line, Title Case)
+Title: Testing Single and Competing Contrasts
 Version: 0.0.0.9000
 Authors@R:
-    person(given = "First",
-           family = "Last",
+    person(given = "Mirka",
+           family = "Henninger",
            role = c("aut", "cre"),
-           email = "first.last@example.com")
-Description: What the package does (one paragraph)
+           email = "mail@mirka-henninger.de")
+Description:  Performs contrast analyses for independent and dependent samples. 
+              Furthermore, it allows to test two competing contrasts against each other. 
 License: MIT + file LICENSE
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true
-Imports: bookdown
+Imports: 
+    bookdown,
+    dplyr
