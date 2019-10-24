@@ -11,18 +11,28 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 # Please put your title here to include it in the file below. 
-Title <- "Title of your paper goes here"
+Title <- "Contrast analyses for independent and dependent samples, as well as tests for competing hypotheses"
 ```
 
 # contrastanalysis
 
-This repository contains the data and code for our paper:
+This R-packages allows to perform contrast analyses for independent and dependent samples. In addition to standard contrast analyses, methods are provided to test two competing hypotheses can be tested against each other. 
+
+## The package can be installed using the <devtools>-package: 
+
+```{r}
+install.packages("devtools")
+devtools::install_github("mirka-henninger/contrastanalysis")
+```
+
+
+<!-- This repository contains the data and code for our paper:
 
 > Authors, (YYYY). _`r Title`_. Name of journal/book <https://doi.org/xxx/xxx>
 
 Our pre-print is online here:
 
-> Authors, (YYYY). _`r Title`_. Name of journal/book, Accessed `r format(Sys.Date(), "%d %b %Y")`. Online at <https://doi.org/xxx/xxx>
+> Authors, (YYYY). _`r Title`_. Name of journal/book, Accessed `r format(Sys.Date(), "%d %b %Y")`. Online at <https://doi.org/xxx/xxx> 
 
 
 ### How to cite
@@ -46,5 +56,5 @@ Or you can install this compendium as an R package, contrastanalysis, from GitHu
 
 ### Contributions
 
-We welcome contributions from everyone. Before you get started, please see our [contributor guidelines](CONTRIBUTING.md). Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+We welcome contributions from everyone. Before you get started, please see our [contributor guidelines](CONTRIBUTING.md). Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.-->
 
