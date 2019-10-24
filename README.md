@@ -5,6 +5,10 @@ contrastanalysis
 
 This R-packages allows to perform contrast analyses for independent and dependent samples. In addition to standard contrast analyses, methods are provided to test two competing hypotheses can be tested against each other.
 
+All functions and explanations are based on Sedlmeier and Renkewitz (2008).
+
+Contrast analyses are a sensible alternative to standard variance analyses as it allows to test specific, directed, a priori hypotheses. This leads in results that are easier to interpret and have higher power.
+
 The package can be installed using the <devtools>-package:
 ----------------------------------------------------------
 
@@ -12,6 +16,11 @@ The package can be installed using the <devtools>-package:
 install.packages("devtools")
 devtools::install_github("mirka-henninger/contrastanalysis")
 ```
+
+References
+----------
+
+Sedlmeier, P., & Renkewitz, F. (2008). *Forschungsmethoden und Statistik in der Psychologie.* München: Pearson Studium.
 
 <!-- This repository contains the data and code for our paper:
 
