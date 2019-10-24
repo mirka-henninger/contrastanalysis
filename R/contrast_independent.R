@@ -2,10 +2,12 @@
 #'
 #' This function allows to perform contrast analyses for independent samples
 #'
-#' @param nGroup: Number of independent / between-subject groups
-#' @param lambda: a matrix of contrast weights with contrasts in rows and groups in columns
-#' @param dat: a matrix or dataframe with two columns; each row contains values for one respondents;
+#' @param nGroup Number of independent / between-subject groups
+#' @param lambda a matrix of contrast weights with contrasts in rows and groups in columns
+#' @param dat a matrix or dataframe with two columns; each row contains values for one respondents;
 #' the first column contains the group indicator, the second column contains the dependent variable
+#'
+#' @return a dataframe with sums of squares, F value, contrast estimate, t value and one-tailed p value
 contrast_independent <- function(nGroup, lambda, dat){
   names(dat) <- c("groups", "values")
   # checks

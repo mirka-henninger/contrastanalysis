@@ -7,12 +7,15 @@
 contrast_independent(nGroup, lambda, dat)
 }
 \arguments{
-\item{nGroup:}{Number of independent / between-subject groups}
+\item{nGroup}{Number of independent / between-subject groups}
 
-\item{lambda:}{a matrix of contrast weights with contrasts in rows and groups in columns}
+\item{lambda}{a matrix of contrast weights with contrasts in rows and groups in columns}
 
-\item{dat:}{a matrix or dataframe with two columns; each row contains values for one respondents;
+\item{dat}{a matrix or dataframe with two columns; each row contains values for one respondents;
 the first column contains the group indicator, the second column contains the dependent variable}
+}
+\value{
+a dataframe with sums of squares, F value, contrast estimate, t value and one-tailed p value
 }
 \description{
 This function allows to perform contrast analyses for independent samples
