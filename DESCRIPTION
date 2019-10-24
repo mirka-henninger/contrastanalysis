@@ -6,7 +6,7 @@ Authors@R:
            family = "Henninger",
            role = c("aut", "cre"),
            email = "mail@mirka-henninger.de")
-Description:  Performs contrast analyses for independent and dependent samples. 
+Description: Performs contrast analyses for independent and dependent samples. 
               Furthermore, it allows to test two competing contrasts against each other. 
 License: MIT + file LICENSE
 ByteCompile: true
@@ -15,3 +15,4 @@ LazyData: true
 Imports: 
     bookdown,
     dplyr
+RoxygenNote: 6.1.1
