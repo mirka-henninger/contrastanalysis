@@ -4,7 +4,15 @@
 \alias{contrast_independent}
 \title{Contrast analyses for independent samples}
 \usage{
-contrast_independent(x)
+contrast_independent(nGroup, lambda, dat)
+}
+\arguments{
+\item{nGroup:}{Number of independent / between-subject groups}
+
+\item{lambda:}{a matrix of contrast weights with contrasts in rows and groups in columns}
+
+\item{dat:}{a matrix or dataframe with two columns; each row contains values for one respondents;
+the first column contains the group indicator, the second column contains the dependent variable}
 }
 \description{
 This function allows to perform contrast analyses for independent samples
