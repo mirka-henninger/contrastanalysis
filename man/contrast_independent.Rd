@@ -9,14 +9,40 @@ contrast_independent(nGroup, lambda, dat)
 \arguments{
 \item{nGroup}{Number of independent / between-subject groups}
 
-\item{lambda}{a matrix of contrast weights with contrasts in rows and groups in columns}
+\item{lambda}{a matrix of contrast weights with contrasts in rows and groups in
+columns}
 
-\item{dat}{a matrix or dataframe with two columns; each row contains values for one respondents;
-the first column contains the group indicator, the second column contains the dependent variable}
+\item{dat}{a matrix or dataframe with two columns; each row contains values for
+one respondents;
+the first column contains the group indicator, the second column contains the
+dependent variable}
 }
 \value{
-a dataframe with sums of squares, F value, contrast estimate, t value and one-tailed p value
+a dataframe with sums of squares, F value, contrast estimate, t value
+and two-tailed p value
 }
 \description{
 This function allows to perform contrast analyses for independent samples
+}
+\examples{
+# set.seed(1)
+nGroup <- 4
+lambda <- matrix(c(-1,-1,1,
+                   1,-1,1,-1,
+                   1,1,-1,-1,1),
+                 ncol = 4,
+                 byrow=TRUE)
+dat <- data.frame(
+  x = rep(c(1:4),each = 50),
+  y = c(rnorm(50,-1,1),rnorm(50),rnorm(50),rnorm(50,1,1))
+)
+contrast_independent(nGroup,lambda,dat)
+# results are the same as the standard linear model or anova:
+
+dat$c1 <- ifelse(dat$x==1 | dat$x==2, -1,1)
+dat$c2 <- ifelse(dat$x==1 | dat$x==3, -1,1)
+dat$c3 <- ifelse(dat$x==2 | dat$x==3, -1,1)
+lmMod <- lm(y~c1+c2+c3,data=dat)
+summary(lmMod)
+anova(lmMod)
 }

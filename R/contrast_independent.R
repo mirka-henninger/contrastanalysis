@@ -3,14 +3,40 @@
 #' This function allows to perform contrast analyses for independent samples
 #'
 #' @param nGroup Number of independent / between-subject groups
-#' @param lambda a matrix of contrast weights with contrasts in rows and groups in columns
-#' @param dat a matrix or dataframe with two columns; each row contains values for one respondents;
-#' the first column contains the group indicator, the second column contains the dependent variable
+#' @param lambda a matrix of contrast weights with contrasts in rows and groups in
+#' columns
+#' @param dat a matrix or dataframe with two columns; each row contains values for
+#' one respondents;
+#' the first column contains the group indicator, the second column contains the
+#' dependent variable
 #'
-#' @return a dataframe with sums of squares, F value, contrast estimate, t value and one-tailed p value
+#' @return a dataframe with sums of squares, F value, contrast estimate, t value
+#' and two-tailed p value
+#'
+#' @examples
+#' # set.seed(1)
+#' nGroup <- 4
+#' lambda <- matrix(c(-1,-1,1,
+#'                    1,-1,1,-1,
+#'                    1,1,-1,-1,1),
+#'                  ncol = 4,
+#'                  byrow=TRUE)
+#' dat <- data.frame(
+#'   x = rep(c(1:4),each = 50),
+#'   y = c(rnorm(50,-1,1),rnorm(50),rnorm(50),rnorm(50,1,1))
+#' )
+#' contrast_independent(nGroup,lambda,dat)
+#' # results are the same as the standard linear model or anova:
+#'
+#' dat$c1 <- ifelse(dat$x==1 | dat$x==2, -1,1)
+#' dat$c2 <- ifelse(dat$x==1 | dat$x==3, -1,1)
+#' dat$c3 <- ifelse(dat$x==2 | dat$x==3, -1,1)
+#' lmMod <- lm(y~c1+c2+c3,data=dat)
+#' summary(lmMod)
+#' anova(lmMod)
 contrast_independent <- function(nGroup, lambda, dat){
   names(dat) <- c("groups", "values")
-  # checks
+  # some checks on the input
   if(nGroup != length(unique(dat$groups)) & nGroup != ncol(lambda)) {
     stop("Please check the data format: the first column must contain ",
          "the group indicator, the second the dependent variable. ",
@@ -28,20 +54,27 @@ contrast_independent <- function(nGroup, lambda, dat){
                                                       groupMeans = mean(values),
                                                       groupVariances = var(values))
 
+  # define contrast estimate
   numerator <- lambda %*% groupVals$groupMeans
   denominator <- (lambda^2) %*% (groupVals$groupSize^(-1))
   # dfContrast <- 1
 
-  # SS contrast
+  # SS contrast / SS within
   SScontrast <- (numerator^2) / denominator
-  SSwithin <- sum(groupVals$groupVariances)/nGroup
-  Fcontrast <- SScontrast / SSwithin
-  tcontrast <- numerator / sqrt(SSwithin * denominator)
+  MSwithin <- sum(groupVals$groupVariances)/nGroup
+  # SSwithin <- (nrow(dat) - nGroup) * MSwithin
+
+  # F and t values
+  Fcontrast <- SScontrast / MSwithin
+  tcontrast <- numerator / sqrt(MSwithin * denominator)
+  pval <- 2*pnorm(-abs(tcontrast)) %>% round(.,4)
+
+  # format output
   output <- data.frame("SumsofSquares" = SScontrast,
                        "F" = Fcontrast,
                        "estimate" = numerator,
                        "t" = tcontrast,
-                       "p" = pnorm(-abs(tcontrast))) %>% round(.,4)
+                       "p" = pval)
   row.names(output) <- paste0("Contrast ", row.names(output))
   return(output)
 }
