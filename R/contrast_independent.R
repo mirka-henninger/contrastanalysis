@@ -39,7 +39,7 @@
 contrast_independent <- function(nGroup, lambda, dat){
   names(dat) <- c("groups", "values")
   # some checks on the input
-  if(nGroup != length(unique(dat$groups)) & nGroup != ncol(lambda)) {
+  if(nGroup != length(unique(dat$groups)) | nGroup != ncol(lambda)) {
     stop("Please check the data format: the first column must contain ",
          "the group indicator, the second the dependent variable. ",
          "nGroup must be the total number of between-subject groups. ",
