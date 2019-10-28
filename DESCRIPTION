@@ -1,11 +1,8 @@
 Package: contrastanalysis
 Title: Testing Single and Competing Contrasts
 Version: 0.0.0.9000
-Authors@R:
-    person(given = "Mirka",
-           family = "Henninger",
-           role = c("aut", "cre"),
-           email = "mail@mirka-henninger.de")
+Authors@R: c(person("Mirka", "Henninger", email = "mail@mirka-henninger.de", role = c("aut", "cre")),
+             person("Simone", "Malejka", role = "aut"))
 Description: Performs contrast analyses for independent and dependent samples. 
               Furthermore, it allows to test two competing contrasts against each other. 
 License: MIT + file LICENSE
