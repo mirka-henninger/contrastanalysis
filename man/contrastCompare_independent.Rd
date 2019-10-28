@@ -23,9 +23,9 @@ contains the dependent variable}
 \value{
 a dataframe with following entries: sums-of-squares, F-value, contrast estimate,
 t value, ' two-tailed p value, and effect sizes r effect, r alerting, and r contrast;
-A test favoring Hypothesis 1 is performed, hence positive t-values indicate that the
+A test favoring Hypothesis 1 is performed, hence a positive t-value indicate that the
 contrast weights contained in lambda1 fit the data better than the contrast weights
-contained in lambda2.
+contained in lambda2, and vice versa for a negative t-value.
 }
 \description{
 This function allows to directly compare two contrasts for independent samples
