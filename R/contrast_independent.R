@@ -10,9 +10,10 @@
 #' the first column contains the group indicator, the second column contains the
 #' dependent variable
 #'
-#' @return a dataframe with sums of squares, F value, contrast estimate, t value,
-#' two-tailed p value, and effect sizes r effect, r alerting, and r contrast
-#' (see Rosenthal et al., 2000; Sedlmeier & Renkewitz, 2013)
+#' @return a dataframe with following entries: sums-of-squares, F-value, contrast estimate,
+#' t value, ' two-tailed p value, and effect sizes r effect, r alerting, and r contrast
+#'
+#' @source Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 #'
 #' @examples
 #' # set.seed(1)

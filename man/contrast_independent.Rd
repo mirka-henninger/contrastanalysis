@@ -3,6 +3,9 @@
 \name{contrast_independent}
 \alias{contrast_independent}
 \title{Contrast analyses for independent samples}
+\source{
+see Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
+}
 \usage{
 contrast_independent(nGroup, lambda, dat)
 }
@@ -18,9 +21,8 @@ the first column contains the group indicator, the second column contains the
 dependent variable}
 }
 \value{
-a dataframe with sums of squares, F value, contrast estimate, t value,
-two-tailed p value, and effect sizes r effect, r alerting, and r contrast
-(see Rosenthal et al., 2000; Sedlmeier & Renkewitz, 2013)
+a dataframe with following entries: sums-of-squares, F-value, contrast estimate,
+t value, ' two-tailed p value, and effect sizes r effect, r alerting, and r contrast
 }
 \description{
 This function allows to perform contrast analyses for independent samples
