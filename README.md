@@ -3,11 +3,9 @@
 contrastanalysis
 ================
 
-This R-packages allows to perform contrast analyses for independent and dependent samples. In addition to standard contrast analyses, methods are provided to test two competing hypotheses can be tested against each other.
+This R-packages allows to perform contrast analyses for independent and dependent samples. In addition to standard contrast analyses, methods are provided to test two competing hypotheses can be tested against each other. All functions and explanations are based on Rosenthal, Rosnow, & Rubin(2000) as well as Sedlmeier and Renkewitz (2008).
 
-All functions and explanations are based on Sedlmeier and Renkewitz (2008).
-
-Contrast analyses are a sensible alternative to standard variance analyses as it allows to test specific, directed, a priori hypotheses. This leads in results that are easier to interpret and have higher power.
+Contrast analyses are a sensible alternative to standard variance analyses as it allows to test specific, directed, a priori hypotheses. This leads to results that are easier to interpret and effects can be detected with a higher power.
 
 The package can be installed using the <devtools>-package:
 ----------------------------------------------------------
@@ -20,6 +18,8 @@ devtools::install_github("mirka-henninger/contrastanalysis")
 References
 ----------
 
+Rosenthal, R., Rosnow, R. L., & Rubin, D. B. (2000). *Contrasts and effect sizes in behavioral research: A correlational approach.* Cambridge University Press.
+
 Sedlmeier, P., & Renkewitz, F. (2008). *Forschungsmethoden und Statistik in der Psychologie.* München: Pearson Studium.
 
 <!-- This repository contains the data and code for our paper:
@@ -28,14 +28,14 @@ Sedlmeier, P., & Renkewitz, F. (2008). *Forschungsmethoden und Statistik in der 
 
 Our pre-print is online here:
 
-> Authors, (YYYY). _Contrast analyses for independent and dependent samples, as well as tests for competing hypotheses_. Name of journal/book, Accessed 24 Oct 2019. Online at <https://doi.org/xxx/xxx> 
+> Authors, (YYYY). _Contrast analyses for independent and dependent samples, as well as tests for competing hypotheses_. Name of journal/book, Accessed 28 Oct 2019. Online at <https://doi.org/xxx/xxx> 
 
 
 ### How to cite
 
 Please cite this compendium as:
 
-> Authors, (2019). _Compendium of R code and data for Contrast analyses for independent and dependent samples, as well as tests for competing hypotheses_. Accessed 24 Oct 2019. Online at <https://doi.org/xxx/xxx>
+> Authors, (2019). _Compendium of R code and data for Contrast analyses for independent and dependent samples, as well as tests for competing hypotheses_. Accessed 28 Oct 2019. Online at <https://doi.org/xxx/xxx>
 
 ### How to download or install
 
