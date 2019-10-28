@@ -1,17 +1,19 @@
 #' Contrast analyses for independent samples
 #'
-#' This function allows to perform contrast analyses for independent samples
+#' This function allows to directly compare two contrasts for independent samples
 #'
 #' @param nGroup Number of independent / between-subject groups
-#' @param lambda a matrix of contrast weights with contrasts in rows and groups in
-#' columns
+#' @param lambda1 a vector of contrast weights for Hypothesis 1
+#' @param lambda2 a vector of contrast weights for Hypothesis 2
 #' @param dat a matrix or dataframe with two columns; each row contains values for
-#' one respondents;
-#' the first column contains the group indicator, the second column contains the
-#' dependent variable
+#' one respondents; the first column contains the group indicator, the second column
+#' contains the dependent variable
 #'
 #' @return a dataframe with following entries: sums-of-squares, F-value, contrast estimate,
-#' t value, ' two-tailed p value, and effect sizes r effect, r alerting, and r contrast
+#' t value, ' two-tailed p value, and effect sizes r effect, r alerting, and r contrast;
+#' A test favoring Hypothesis 1 is performed, hence positive t-values indicate that the
+#' contrast weights contained in lambda1 fit the data better than the contrast weights
+#' contained in lambda2.
 #'
 #' @source Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 #'

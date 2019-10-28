@@ -4,7 +4,7 @@
 \alias{contrast_independent}
 \title{Contrast analyses for independent samples}
 \source{
-see Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
+Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 }
 \usage{
 contrast_independent(nGroup, lambda, dat)
@@ -39,7 +39,7 @@ dat <- data.frame(
   x = rep(c(1:4),each = 50),
   y = c(rnorm(50,-1,1),rnorm(50),rnorm(50),rnorm(50,1,1))
 )
-contrast_independent(nGroup,lambda,dat)
+contrast_independent(nGroup, lambda, dat)
 # results are the same as the standard linear model or anova:
 
 dat$c1 <- ifelse(dat$x==1 | dat$x==2, -1,1)
