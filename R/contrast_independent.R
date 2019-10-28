@@ -10,8 +10,9 @@
 #' the first column contains the group indicator, the second column contains the
 #' dependent variable
 #'
-#' @return a dataframe with sums of squares, F value, contrast estimate, t value
-#' and two-tailed p value
+#' @return a dataframe with sums of squares, F value, contrast estimate, t value,
+#' two-tailed p value, and effect sizes r effect, r alerting, and r contrast
+#' (see Rosenthal et al., 2000; Sedlmeier & Renkewitz, 2013)
 #'
 #' @examples
 #' # set.seed(1)
@@ -67,14 +68,30 @@ contrast_independent <- function(nGroup, lambda, dat){
   # F and t values
   Fcontrast <- SScontrast / MSwithin
   tcontrast <- numerator / sqrt(MSwithin * denominator)
-  pval <- 2*pnorm(-abs(tcontrast)) %>% round(.,4)
+  pval <- 2*pnorm(-abs(tcontrast))
+
+  # effect sizes
+  # r effectsize
+  groupNames <- unique(dat$groups)
+  colnames(lambda) <- groupNames
+  dat <- cbind(dat,t(lambda[,match(dat$groups,colnames(lambda))]))
+  r_effectsize <- cor(dat[,-1])[1,-1]
+  # r alerting
+  r_alerting <- c(cor(groupVals$groupMeans,t(lambda)))
+  # r contrast
+  r_contrast <- sqrt(tcontrast^2/(tcontrast^2+nrow(dat)-nGroup))
 
   # format output
-  output <- data.frame("SumsofSquares" = SScontrast,
-                       "F" = Fcontrast,
-                       "estimate" = numerator,
-                       "t" = tcontrast,
-                       "p" = pval)
+  rounding <- 4
+  output <- data.frame("SumsofSquares" = SScontrast %>% round(.,rounding),
+                       "F" = Fcontrast %>% round(.,rounding),
+                       "estimate" = numerator %>% round(.,rounding),
+                       "t" = tcontrast %>% round(.,rounding),
+                       "p" = pval %>% round(.,rounding),
+                       "rEffectSize" = r_effectsize %>% round(.,rounding),
+                       "rAlerting" = r_alerting %>% round(.,rounding),
+                       "r2Alerting" = r_alerting^2 %>% round(.,rounding),
+                       "rContrast" = r_contrast %>% round(.,rounding))
   row.names(output) <- paste0("Contrast ", row.names(output))
   return(output)
 }
