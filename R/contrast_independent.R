@@ -10,8 +10,21 @@
 #' the first column contains the group indicator, the second column contains the
 #' dependent variable
 #'
-#' @return a dataframe with following entries: sums-of-squares, F-value, contrast estimate,
-#' t value, ' two-tailed p value, and effect sizes r effect, r alerting, and r contrast
+#' @return a dataframe with following entries for each of the contrasts:
+#' \describe{
+#'   \item{\code{SumsofSquares}}{Sums of Squares}
+#'   \item{\code{F}}{F-values}
+#'   \item{\code{estimate}}{Contrast estimates}
+#'   \item{\code{t}}{t-values}
+#'   \item{\code{p}}{two-tailed p-values}
+#'   \item{\code{rEffectSize}}{Correlation between the dependent variable and the
+#'   contrast weights}
+#'   \item{\code{rAlerting}}{Correlation between group means and contrast weights}
+#'   \item{\code{r2Aalerting}}{Squared \code{rAlerting}; can be interpreted similar to
+#'   a determination coefficient as a measured of explained variance by the contrast
+#'   \code{(SScontrast/SSbetween)}}
+#'   \item{\code{rContrast}}{\code{sqrt(t^2/(t^2 + df))}; useful for power analyses}
+#' }
 #'
 #' @source Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 #'
