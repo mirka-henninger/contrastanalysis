@@ -13,6 +13,7 @@ The package can be installed using the <devtools>-package:
 ``` r
 install.packages("devtools")
 devtools::install_github("mirka-henninger/contrastanalysis")
+library(contrastanalysis)
 ```
 
 References
