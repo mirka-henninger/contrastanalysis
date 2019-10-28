@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-contrastanalysis
+Contrast Analyses
 ================
 
 This R-packages allows to perform contrast analyses for independent samples, dependent samples will follow soon. In addition to standard contrast analyses, methods are provided to test two competing hypotheses can be tested against each other. All functions and explanations are based on Rosenthal, Rosnow, & Rubin(2000) as well as Sedlmeier and Renkewitz (2008).
