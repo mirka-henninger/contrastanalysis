@@ -24,6 +24,7 @@
 #'   x = rep(c(1:4),each = 50),
 #'   y = c(rnorm(50,-1,1),rnorm(50),rnorm(50),rnorm(50,1,1))
 #' )
+#' contrastCompare_independent(nGroup, lambda1, lambda2, dat)
 contrastCompare_independent <- function(nGroup, lambda1, lambda2, dat){
 
 # checks on the input -----------------------------------------------------
@@ -34,7 +35,7 @@ contrastCompare_independent <- function(nGroup, lambda1, lambda2, dat){
     stop("Please check the data format: the first column must contain ",
          "the group indicator, the second the dependent variable. ",
          "nGroup must be the total number of between-subject groups. ",
-         "lambdaG1 and lambdaG2 must each contain one set of contrast weights")
+         "lambda1 and lambda2 must each contain one set of contrast weights")
   }
   if(sum(lambda1) != 0 | sum(lambda2) != 0){
     stop("Your contrast weights do not sum to 0 for all contrasts. ",
@@ -45,7 +46,7 @@ contrastCompare_independent <- function(nGroup, lambda1, lambda2, dat){
 # standardize lambda weight -----------------------------------------------
   lambda1Std <- lambda1 / sqrt(mean(lambda1^2))
   lambda2Std <- lambda2 / sqrt(mean(lambda2^2))
-  lambdaDiff <- lambda2Std - lambda1Std
+  lambdaDiff <- lambda1Std - lambda2Std
 
 
 # get group size, means and variances -------------------------------------
@@ -99,5 +100,3 @@ contrastCompare_independent <- function(nGroup, lambda1, lambda2, dat){
 
   return(output)
 }
-
-contrastCompare_independent(4,lambda1,lambda2,dat)
