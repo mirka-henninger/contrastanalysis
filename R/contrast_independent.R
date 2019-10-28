@@ -37,8 +37,9 @@
 #' summary(lmMod)
 #' anova(lmMod)
 contrast_independent <- function(nGroup, lambda, dat){
+
+# some checks on the input ------------------------------------------------
   names(dat) <- c("groups", "values")
-  # some checks on the input
   if(nGroup != length(unique(dat$groups)) | nGroup != ncol(lambda)) {
     stop("Please check the data format: the first column must contain ",
          "the group indicator, the second the dependent variable. ",
@@ -51,27 +52,34 @@ contrast_independent <- function(nGroup, lambda, dat){
          "Please check the weights again!")
   }
 
-  # get group size, means and variances
+
+# get group size, means and variances -------------------------------------
   groupVals <- dat %>% group_by(groups) %>% summarize(groupSize = length(values),
                                                       groupMeans = mean(values),
                                                       groupVariances = var(values))
 
-  # define contrast estimate
+
+# define contrast estimate ------------------------------------------------
   numerator <- lambda %*% groupVals$groupMeans
   denominator <- (lambda^2) %*% (groupVals$groupSize^(-1))
   # dfContrast <- 1
 
-  # SS contrast / SS within
+
+
+# SS contrast and SS within -----------------------------------------------
   SScontrast <- (numerator^2) / denominator
   MSwithin <- sum(groupVals$groupVariances)/nGroup
   # SSwithin <- (nrow(dat) - nGroup) * MSwithin
 
-  # F and t values
+
+# F and t values ----------------------------------------------------------
   Fcontrast <- SScontrast / MSwithin
   tcontrast <- numerator / sqrt(MSwithin * denominator)
   pval <- 2*pnorm(-abs(tcontrast))
 
-  # effect sizes
+
+
+# effect sizes ------------------------------------------------------------
   # r effectsize
   groupNames <- unique(dat$groups)
   colnames(lambda) <- groupNames
@@ -82,7 +90,8 @@ contrast_independent <- function(nGroup, lambda, dat){
   # r contrast
   r_contrast <- sqrt(tcontrast^2/(tcontrast^2+nrow(dat)-nGroup))
 
-  # format output
+
+# format output -----------------------------------------------------------
   rounding <- 4
   output <- data.frame("SumsofSquares" = SScontrast %>% round(.,rounding),
                        "F" = Fcontrast %>% round(.,rounding),
@@ -94,5 +103,6 @@ contrast_independent <- function(nGroup, lambda, dat){
                        "r2Alerting" = r_alerting^2 %>% round(.,rounding),
                        "rContrast" = r_contrast %>% round(.,rounding))
   row.names(output) <- paste0("Contrast ", row.names(output))
+
   return(output)
 }
