@@ -1,10 +1,12 @@
 #' Contrast analyses for independent samples
 #'
-#' This function allows to directly compare two contrasts for independent samples
+#' This function allows to directly compare two contrasts for independent samples by
+#' standardizing the contrast weights
 #'
 #' @param nGroup Number of independent / between-subject groups
 #' @param lambda1 a vector of contrast weights for Hypothesis 1
 #' @param lambda2 a vector of contrast weights for Hypothesis 2
+#' @param dat a matrix or dataframe with two columns; each row contains values for
 #' @param dat a matrix or dataframe with two columns; each row contains values for
 #' one respondents; the first column contains the group indicator, the second column
 #' contains the dependent variable

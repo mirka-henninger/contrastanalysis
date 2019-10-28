@@ -16,6 +16,8 @@ contrastCompare_independent(nGroup, lambda1, lambda2, dat)
 
 \item{lambda2}{a vector of contrast weights for Hypothesis 2}
 
+\item{dat}{a matrix or dataframe with two columns; each row contains values for}
+
 \item{dat}{a matrix or dataframe with two columns; each row contains values for
 one respondents; the first column contains the group indicator, the second column
 contains the dependent variable}
@@ -39,7 +41,8 @@ a dataframe with following entries for each of the contrasts:
   \item{\code{lambda2Std}}{Standardized contrast weights for \code{lambda2}}}
 }
 \description{
-This function allows to directly compare two contrasts for independent samples
+This function allows to directly compare two contrasts for independent samples by
+standardizing the contrast weights
 }
 \note{
 A test favoring Hypothesis 1 is performed, hence a positive t-value indicate that the
