@@ -7,7 +7,7 @@ This R-packages allows to perform contrast analyses for independent samples, dep
 
 Contrast analyses are a sensible alternative to standard variance analyses as it allows to test specific, directed, a priori hypotheses. This leads to results that are easier to interpret and effects can be detected with a higher power.
 
-The package can be installed using the <devtools>-package:
+The package can be installed using the devtools-package:
 ----------------------------------------------------------
 
 ``` r
