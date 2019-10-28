@@ -18,8 +18,9 @@ the first column contains the group indicator, the second column contains the
 dependent variable}
 }
 \value{
-a dataframe with sums of squares, F value, contrast estimate, t value
-and two-tailed p value
+a dataframe with sums of squares, F value, contrast estimate, t value,
+two-tailed p value, and effect sizes r effect, r alerting, and r contrast
+(see Rosenthal et al., 2000; Sedlmeier & Renkewitz, 2013)
 }
 \description{
 This function allows to perform contrast analyses for independent samples
