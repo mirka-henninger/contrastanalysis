@@ -36,9 +36,7 @@ a dataframe with following entries for each of the contrasts:
   \item{\code{r2Aalerting}}{Squared \code{rAlerting}; can be interpreted similar to
   a determination coefficient as a measured of explained variance by the contrast
   \code{(SScontrast/SSbetween)}}
-  \item{\code{rContrast}}{\code{sqrt(t^2/(t^2 + df))}; useful for power analyses}
-  \item{\code{lambda1Std}}{Standardized contrast weights for \code{lambda1}}
-  \item{\code{lambda2Std}}{Standardized contrast weights for \code{lambda2}}}
+  \item{\code{rContrast}}{\code{sqrt(t^2/(t^2 + df))}; useful for power analyses}}
 }
 \description{
 This function allows to directly compare two contrasts for independent samples by

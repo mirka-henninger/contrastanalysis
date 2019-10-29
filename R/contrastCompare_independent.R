@@ -24,9 +24,7 @@
 #'   \item{\code{r2Aalerting}}{Squared \code{rAlerting}; can be interpreted similar to
 #'   a determination coefficient as a measured of explained variance by the contrast
 #'   \code{(SScontrast/SSbetween)}}
-#'   \item{\code{rContrast}}{\code{sqrt(t^2/(t^2 + df))}; useful for power analyses}
-#'   \item{\code{lambda1Std}}{Standardized contrast weights for \code{lambda1}}
-#'   \item{\code{lambda2Std}}{Standardized contrast weights for \code{lambda2}}}
+#'   \item{\code{rContrast}}{\code{sqrt(t^2/(t^2 + df))}; useful for power analyses}}
 #'
 #' @note A test favoring Hypothesis 1 is performed, hence a positive t-value indicate that the
 #' contrast weights contained in lambda1 fit the data better than the contrast weights
@@ -114,10 +112,9 @@ contrastCompare_independent <- function(nGroup, lambda1, lambda2, dat){
                        "rEffectSize" = r_effectsize %>% round(.,rounding),
                        "rAlerting" = r_alerting %>% round(.,rounding),
                        "r2Alerting" = r_alerting^2 %>% round(.,rounding),
-                       "rContrast" = r_contrast %>% round(.,rounding),
-                       "lambda1Std" = lambda1Std,
-                       "lambda2Std" = lambda2Std)
+                       "rContrast" = r_contrast %>% round(.,rounding))
   row.names(output) <- paste0("Contrast ", row.names(output))
 
   return(output)
 }
+
