@@ -29,7 +29,7 @@
 #' @source Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 #'
 #' @examples
-#' # set.seed(1)
+#' set.seed(1)
 #' nGroup <- 4
 #' lambda <- matrix(c(-1,-1,1,
 #'                    1,-1,1,-1,
@@ -119,7 +119,7 @@ contrast_independent <- function(nGroup, lambda, dat){
                        "rAlerting" = round(r_alerting,rounding),
                        "r2Alerting" = round(r_alerting^2,rounding),
                        "rContrast" = round(r_contrast,rounding))
-  row.names(output) <- paste0("Contrast ", row.names(output))
+  row.names(output) <- paste0("Contrast ", 1:nrow(lambda))
 
   return(output)
 }

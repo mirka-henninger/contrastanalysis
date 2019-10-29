@@ -41,7 +41,7 @@ a dataframe with following entries for each of the contrasts:
 This function allows to perform contrast analyses for independent samples
 }
 \examples{
-# set.seed(1)
+set.seed(1)
 nGroup <- 4
 lambda <- matrix(c(-1,-1,1,
                    1,-1,1,-1,
