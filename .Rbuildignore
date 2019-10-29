@@ -6,4 +6,4 @@
 ^README-.*\.png$
 ^CONDUCT\.md$
 ^CONTRIBUTING\.md$
-analysis
+analysis/

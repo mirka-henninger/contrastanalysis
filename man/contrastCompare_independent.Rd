@@ -16,8 +16,6 @@ contrastCompare_independent(nGroup, lambda1, lambda2, dat)
 
 \item{lambda2}{a vector of contrast weights for Hypothesis 2}
 
-\item{dat}{a matrix or dataframe with two columns; each row contains values for}
-
 \item{dat}{a matrix or dataframe with two columns; each row contains values for
 one respondents; the first column contains the group indicator, the second column
 contains the dependent variable}
@@ -48,7 +46,8 @@ contrast weights contained in lambda1 fit the data better than the contrast weig
 contained in lambda2, and vice versa for a negative t-value.
 }
 \examples{
-# set.seed(1)
+library("dplyr")
+set.seed(1)
 nGroup <- 4
 lambda1 <- c(-1,-1,1,1)
 lambda2 <- c(-3,-1,1,3)
@@ -57,4 +56,5 @@ dat <- data.frame(
   y = c(rnorm(50,-1,1),rnorm(50),rnorm(50),rnorm(50,1,1))
 )
 contrastCompare_independent(nGroup, lambda1, lambda2, dat)
+
 }

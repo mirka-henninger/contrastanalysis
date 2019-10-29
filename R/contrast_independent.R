@@ -53,7 +53,7 @@
 #' @export
 contrast_independent <- function(nGroup, lambda, dat){
 
-# some checks on the input ------------------------------------------------
+  # some checks on the input ------------------------------------------------
   names(dat) <- c("groups", "values")
   if(nGroup != length(unique(dat$groups)) | nGroup != ncol(lambda)) {
     stop("Please check the data format: the first column must contain ",
@@ -67,38 +67,40 @@ contrast_independent <- function(nGroup, lambda, dat){
          "Please check the weights again!")
   }
 
+  # get group size, means and variances -------------------------------------
+  groupVals <- dat %>%
+    dplyr::group_by(.data$groups) %>%
+    dplyr::summarize(groupSize = length(.data$values),
+                     groupMeans = mean(.data$values),
+                     groupVariances = var(.data$values))
 
-# get group size, means and variances -------------------------------------
-  groupVals <- dat %>% group_by(groups) %>% summarize(groupSize = length(values),
-                                                      groupMeans = mean(values),
-                                                      groupVariances = var(values))
 
-
-# define contrast estimate ------------------------------------------------
+  # define contrast estimate ------------------------------------------------
   numerator <- lambda %*% groupVals$groupMeans
   denominator <- (lambda^2) %*% (groupVals$groupSize^(-1))
   # dfContrast <- 1
 
 
 
-# SS contrast and SS within -----------------------------------------------
+  # SS contrast and SS within -----------------------------------------------
   SScontrast <- (numerator^2) / denominator
   MSwithin <- sum(groupVals$groupVariances)/nGroup
   # SSwithin <- (nrow(dat) - nGroup) * MSwithin
 
 
-# F and t values ----------------------------------------------------------
+  # F and t values ----------------------------------------------------------
   Fcontrast <- SScontrast / MSwithin
   tcontrast <- numerator / sqrt(MSwithin * denominator)
   pval <- 2*pnorm(-abs(tcontrast))
 
 
 
-# effect sizes ------------------------------------------------------------
+  # effect sizes ------------------------------------------------------------
   # r effectsize
   groupNames <- unique(dat$groups)
   colnames(lambda) <- groupNames
-  dat <- cbind(dat,t(lambda[,match(dat$groups,colnames(lambda))]))
+  dat <- cbind(dat,
+               contrast = optimbase::transpose(lambda[,match(dat$groups,colnames(lambda))]))
   r_effectsize <- cor(dat[,-1])[1,-1]
   # r alerting
   r_alerting <- c(cor(groupVals$groupMeans,t(lambda)))
@@ -106,17 +108,17 @@ contrast_independent <- function(nGroup, lambda, dat){
   r_contrast <- sqrt(tcontrast^2/(tcontrast^2+nrow(dat)-nGroup))
 
 
-# format output -----------------------------------------------------------
+  # format output -----------------------------------------------------------
   rounding <- 4
-  output <- data.frame("SumsofSquares" = SScontrast %>% round(.,rounding),
-                       "F" = Fcontrast %>% round(.,rounding),
-                       "estimate" = numerator %>% round(.,rounding),
-                       "t" = tcontrast %>% round(.,rounding),
-                       "p" = pval %>% round(.,rounding),
-                       "rEffectSize" = r_effectsize %>% round(.,rounding),
-                       "rAlerting" = r_alerting %>% round(.,rounding),
-                       "r2Alerting" = r_alerting^2 %>% round(.,rounding),
-                       "rContrast" = r_contrast %>% round(.,rounding))
+  output <- data.frame("SumsofSquares" = round(SScontrast,rounding),
+                       "F" = round(Fcontrast,rounding),
+                       "estimate" = round(numerator,rounding),
+                       "t" = round(tcontrast,rounding),
+                       "p" = round(pval,rounding),
+                       "rEffectSize" = round(r_effectsize,rounding),
+                       "rAlerting" = round(r_alerting,rounding),
+                       "r2Alerting" = round(r_alerting^2,rounding),
+                       "rContrast" = round(r_contrast,rounding))
   row.names(output) <- paste0("Contrast ", row.names(output))
 
   return(output)

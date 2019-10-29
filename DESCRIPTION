@@ -10,7 +10,10 @@ ByteCompile: true
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    bookdown
+    magrittr,
+    dplyr,
+    rlang,
+    optimbase
 Depends:
-    dplyr
+    R (>= 3.1.0)
 RoxygenNote: 6.1.1

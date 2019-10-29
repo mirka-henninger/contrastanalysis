@@ -61,4 +61,5 @@ dat$c3 <- ifelse(dat$x==2 | dat$x==3, -1,1)
 lmMod <- lm(y~c1+c2+c3,data=dat)
 summary(lmMod)
 anova(lmMod)
+
 }
