@@ -2,6 +2,7 @@
 #'
 #' This function allows to directly compare two contrasts for independent samples by
 #' standardizing the contrast weights
+#' @export
 #'
 #' @param nGroup Number of independent / between-subject groups
 #' @param lambda1 a vector of contrast weights for Hypothesis 1
