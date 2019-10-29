@@ -1,7 +1,6 @@
 #' Contrast analyses for independent samples
 #'
 #' This function allows to perform contrast analyses for independent samples
-#' @export
 #'
 #' @param nGroup Number of independent / between-subject groups
 #' @param lambda a matrix of contrast weights with contrasts in rows and groups in
@@ -50,6 +49,8 @@
 #' lmMod <- lm(y~c1+c2+c3,data=dat)
 #' summary(lmMod)
 #' anova(lmMod)
+#'
+#' @export
 contrast_independent <- function(nGroup, lambda, dat){
 
 # some checks on the input ------------------------------------------------

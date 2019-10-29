@@ -2,7 +2,6 @@
 #'
 #' This function allows to directly compare two contrasts for independent samples by
 #' standardizing the contrast weights
-#' @export
 #'
 #' @param nGroup Number of independent / between-subject groups
 #' @param lambda1 a vector of contrast weights for Hypothesis 1
@@ -43,6 +42,8 @@
 #'   y = c(rnorm(50,-1,1),rnorm(50),rnorm(50),rnorm(50,1,1))
 #' )
 #' contrastCompare_independent(nGroup, lambda1, lambda2, dat)
+#'
+#' @export
 contrastCompare_independent <- function(nGroup, lambda1, lambda2, dat){
 
 # checks on the input -----------------------------------------------------
