@@ -51,7 +51,7 @@ contrast_dependent <- function(nGroup, lambda, dat, testvalue = 0){
          "lambda must contain the contrast weights in rows and the ",
          "group indicator in columns")
   }
-  if(any(rowSums(lambda) != 0)){
+  if(all(!dplyr::near(rowSums(lambda), 0))){
     stop("Your contrast weights do not sum to 0 for all contrasts. ",
          "Please check the weights again!")
   }
@@ -89,7 +89,3 @@ contrast_dependent <- function(nGroup, lambda, dat, testvalue = 0){
 
   return(output)
 }
-
-
-
-
