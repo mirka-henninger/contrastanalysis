@@ -44,36 +44,36 @@ contrastCompare_dependent <- function(nGroup, lambda1, lambda2, dat, testvalue =
   # checks on the input -----------------------------------------------------
   names(dat) <- paste0("group", 1:nGroup)
   if(nGroup != ncol(dat)
-    | nGroup != length(lambda1)
-    | nGroup != length(lambda2)) {
+     | nGroup != length(lambda1)
+     | nGroup != length(lambda2)) {
     stop("Please check the data format: each column must contain ",
          "the dependent variable in the within-subject group.",
          "nGroup must be the total number of within-subject groups. ",
          "lambda1 and lambda2 must each contain one set of contrast weights")
   }
-if(sum(lambda1) != 0 | sum(lambda2) != 0){
-  stop("Your contrast weights do not sum to 0 for all contrasts. ",
-       "Please check the weights again!")
-}
+  if(sum(lambda1) != 0 | sum(lambda2) != 0){
+    stop("Your contrast weights do not sum to 0 for all contrasts. ",
+         "Please check the weights again!")
+  }
 
 
-# standardize lambda weight -----------------------------------------------
-lambda1Std <- lambda1 / sqrt(mean(lambda1^2))
-lambda2Std <- lambda2 / sqrt(mean(lambda2^2))
-lambdaDiff <- lambda1Std - lambda2Std %>% as.matrix() %>% t()
+  # standardize lambda weight -----------------------------------------------
+  lambda1Std <- lambda1 / sqrt(mean(lambda1^2))
+  lambda2Std <- lambda2 / sqrt(mean(lambda2^2))
+  lambdaDiff <- lambda1Std - lambda2Std %>% as.matrix() %>% t()
 
-results <- contrast_dependent(nGroup = nGroup,
-                              lambda = lambdaDiff,
-                              dat = dat)
+  results <- contrast_dependent(nGroup = nGroup,
+                                lambda = lambdaDiff,
+                                dat = dat)
 
-weights <- data.frame(
-  lambda1Std = lambda1Std,
-  lambda2Std = lambda2Std,
-  lambdaDiff = lambdaDiff %>% as.vector()
-)
+  weights <- data.frame(
+    lambda1Std = lambda1Std,
+    lambda2Std = lambda2Std,
+    lambdaDiff = lambdaDiff %>% as.vector()
+  )
 
-output <- list(results = results,
-               contrastWeights = weights)
-return(output)
+  output <- list(results = results,
+                 contrastWeights = weights)
+  return(output)
 }
 
