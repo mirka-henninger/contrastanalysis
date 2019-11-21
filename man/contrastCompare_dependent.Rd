@@ -43,6 +43,7 @@ contrast weights contained in lambda1 fit the data better than the contrast weig
 contained in lambda2, and vice versa for a negative t-value.
 }
 \examples{
+set.seed(1)
 nGroup <- 4
 N <- 50
 lambda1 <- c(3,-1,-1,-1)

@@ -38,7 +38,6 @@ contrast weights contained in lambda1 fit the data better than the contrast weig
 contained in lambda2, and vice versa for a negative t-value.
 }
 \examples{
-library("dplyr")
 set.seed(1)
 nGroup <- 4
 lambda1 <- c(-1,-1,1,1)

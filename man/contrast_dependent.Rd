@@ -39,6 +39,7 @@ Please note that sample sizes must be equal between within-subject groups,
 so no missings are allowed
 }
 \examples{
+set.seed(1)
 nGroup <- 4
 N <- 50
 lambda <- matrix(c(3,-1,-1,-1,

@@ -24,7 +24,6 @@
 #' @source Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 #'
 #' @examples
-#' library("dplyr")
 #' set.seed(1)
 #' nGroup <- 4
 #' lambda1 <- c(-1,-1,1,1)

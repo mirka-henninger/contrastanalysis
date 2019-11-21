@@ -28,6 +28,7 @@
 #' @source Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 #'
 #' @examples
+#' set.seed(1)
 #' nGroup <- 4
 #' N <- 50
 #' lambda1 <- c(3,-1,-1,-1)
