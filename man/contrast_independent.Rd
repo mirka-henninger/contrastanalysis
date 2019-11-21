@@ -16,7 +16,7 @@ contrast_independent(nGroup, lambda, dat)
 columns}
 
 \item{dat}{a matrix or dataframe with two columns; each row contains values for
-one respondents;
+one respondent;
 the first column contains the group indicator, the second column contains the
 dependent variable}
 }

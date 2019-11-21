@@ -2,6 +2,7 @@
 
 export("%>%")
 export(contrastCompare_independent)
+export(contrast_dependent)
 export(contrast_independent)
 import(stats)
 importFrom(magrittr,"%>%")
