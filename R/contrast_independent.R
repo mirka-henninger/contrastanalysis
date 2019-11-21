@@ -36,9 +36,10 @@
 #'                    1,1,-1,-1,1),
 #'                  ncol = 4,
 #'                  byrow=TRUE)
+#' N <- 50
 #' dat <- data.frame(
-#'   x = rep(c(1:4),each = 50),
-#'   y = c(rnorm(50,-1,1),rnorm(50),rnorm(50),rnorm(50,1,1))
+#'   x = rep(c(1:nGroup),each = N),
+#'   y = c(rnorm(N,-1,1),rnorm(N),rnorm(N),rnorm(N,1,1))
 #' )
 #' contrast_independent(nGroup, lambda, dat)
 #' # results are the same as the standard linear model or anova:

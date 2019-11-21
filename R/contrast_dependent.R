@@ -24,6 +24,20 @@
 #' @source Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 #'
 #' @examples
+#' nGroup <- 4
+#' N <- 50
+#' lambda <- matrix(c(3,-1,-1,-1,
+#'                    0,2,-1,-1,
+#'                    0,0,-1,1),
+#'                  ncol = nGroup,
+#'                  byrow=TRUE)
+#' dat <- data.frame(
+#'   group1 = sample(1:10, size = N, replace = TRUE),
+#'   group2 = sample(1:15, size = N, replace = TRUE),
+#'   group3 = sample(1:15, size = N, replace = TRUE),
+#'   group4 = sample(1:20, size = N, replace = TRUE)
+#' )
+#' contrast_dependent(nGroup, lambda,dat)
 #'
 #' @export
 contrast_dependent <- function(nGroup, lambda, dat, testvalue = 0){
@@ -47,8 +61,7 @@ contrast_dependent <- function(nGroup, lambda, dat, testvalue = 0){
   lambda <- t(lambda)
   dat <- as.matrix(dat)
   L <- dat %*% lambda
-  sigmaPooled <- (sum((n-1)*apply(dat,2,var))) / (nGroup*(n-1))
-  sigmaPooled <- colSums((L-rep(colMeans(L),each= nrow(L)))^2)/(n-1)
+  sigmaPooled <- colSums((L-rep(colMeans(L),each = nrow(L)))^2)/(n-1)
 
 
   # define contrast estimate ------------------------------------------------
@@ -78,14 +91,5 @@ contrast_dependent <- function(nGroup, lambda, dat, testvalue = 0){
 }
 
 
-dat <- data.frame(
-  group1 = c(27,25,30,29,30,33,31,35),
-  group2 = c(25,26,32,29,28,30,32,34),
-  group3 = c(21,25,23,26,27,26,29,31),
-  group4 = c(23,24,24,28,24,26,27,32)
-)
 
-nGroup <- 4
-lambda <- matrix(c(1.25,0.25,-.75,-.75,3,-1,-1,-1),
-                 ncol = nGroup,
-                 byrow=TRUE)
+

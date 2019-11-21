@@ -37,5 +37,19 @@ a dataframe with following entries for each of the contrasts:
 This function allows to perform contrast analyses for dependent samples
 }
 \examples{
+nGroup <- 4
+N <- 50
+lambda <- matrix(c(3,-1,-1,-1,
+                   0,2,-1,-1,
+                   0,0,-1,1),
+                 ncol = nGroup,
+                 byrow=TRUE)
+dat <- data.frame(
+  group1 = sample(1:10, size = N, replace = TRUE),
+  group2 = sample(1:15, size = N, replace = TRUE),
+  group3 = sample(1:15, size = N, replace = TRUE),
+  group4 = sample(1:20, size = N, replace = TRUE)
+)
+contrast_dependent(nGroup, lambda,dat)
 
 }
