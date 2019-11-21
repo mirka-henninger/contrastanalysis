@@ -6,7 +6,7 @@
 #' @param lambda a matrix of contrast weights with contrasts in rows and groups in
 #' columns
 #' @param dat a matrix or dataframe with two columns; each row contains values for
-#' one respondents;
+#' one respondent;
 #' the first column contains the group indicator, the second column contains the
 #' dependent variable
 #'
@@ -91,7 +91,7 @@ contrast_independent <- function(nGroup, lambda, dat){
   # F and t values ----------------------------------------------------------
   Fcontrast <- SScontrast / MSwithin
   tcontrast <- numerator / sqrt(MSwithin * denominator)
-  pval <- 2*pnorm(-abs(tcontrast))
+  pval <- 2*pt(-abs(tcontrast),min(groupVals$groupSize))
 
 
 
