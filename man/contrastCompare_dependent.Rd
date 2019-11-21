@@ -23,6 +23,14 @@ subject group}
 
 \item{testvalue}{value under the Null hypothesis; if not specified, it is fixed to 0.}
 }
+\value{
+a list with following entries:
+\describe{
+  \item{\code{Results}}{Results of the contrast analysis}
+  \item{\code{Contrast Weights}}{Standardized contrast weights of the two original contrasts
+  and difference between standardized contrast weights}
+}
+}
 \description{
 This function allows to directly compare two contrasts for dependent samples by
 standardizing the contrast weights

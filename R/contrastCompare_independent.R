@@ -10,20 +10,12 @@
 #' one respondents; the first column contains the group indicator, the second column
 #' contains the dependent variable
 #'
-#' @return a dataframe with following entries for each of the contrasts:
+#' @return a list with following entries:
 #' \describe{
-#'   \item{\code{SumsofSquares}}{Sums of Squares}
-#'   \item{\code{F}}{F-values}
-#'   \item{\code{estimate}}{Contrast estimates}
-#'   \item{\code{t}}{t-values}
-#'   \item{\code{p}}{two-tailed p-values}
-#'   \item{\code{rEffectSize}}{Correlation between the dependent variable and the
-#'   contrast weights}
-#'   \item{\code{rAlerting}}{Correlation between group means and contrast weights}
-#'   \item{\code{r2Aalerting}}{Squared \code{rAlerting}; can be interpreted similar to
-#'   a determination coefficient as a measured of explained variance by the contrast
-#'   \code{(SScontrast/SSbetween)}}
-#'   \item{\code{rContrast}}{\code{sqrt(t^2/(t^2 + df))}; useful for power analyses}}
+#'   \item{\code{Results}}{Results of the contrast analysis}
+#'   \item{\code{Contrast Weights}}{Standardized contrast weights of the two original contrasts
+#'   and difference between standardized contrast weights}
+#' }
 #'
 #' @note A test favoring Hypothesis 1 is performed, hence a positive t-value indicate that the
 #' contrast weights contained in lambda1 fit the data better than the contrast weights

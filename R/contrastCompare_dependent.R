@@ -12,14 +12,12 @@
 #' subject group
 #' @param testvalue value under the Null hypothesis; if not specified, it is fixed to 0.
 #'
-#' @return a dataframe with following entries for each of the contrasts:
+#' @return a list with following entries:
 #' \describe{
-#'   \item{\code{SumsofSquares}}{Sums of Squares}
-#'   \item{\code{F}}{F-values}
-#'   \item{\code{estimate}}{Contrast estimates}
-#'   \item{\code{t}}{t-values}
-#'   \item{\code{p}}{two-tailed p-values}
-#'   \item{\code{g}}{effect size g, a standardized distance measure}
+#'   \item{\code{Results}}{Results of the contrast analysis}
+#'   \item{\code{Contrast Weights}}{Standardized contrast weights of the two original contrasts
+#'   and difference between standardized contrast weights}
+#' }
 #'
 #' @note A test favoring Hypothesis 1 is performed, hence a positive t-value indicate that the
 #' contrast weights contained in lambda1 fit the data better than the contrast weights
