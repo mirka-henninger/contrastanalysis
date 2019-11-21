@@ -20,7 +20,7 @@ one respondent;
 each column contains values of the dependent variable in the respective within-
 subject group}
 
-\item{testvalue}{value under the Null hypothesis; if not specified, it is fixed to 0.}
+\item{testvalue}{value under the null hypothesis; if not specified, it is fixed to 0.}
 }
 \value{
 a dataframe with following entries for each of the contrasts:
@@ -34,7 +34,9 @@ a dataframe with following entries for each of the contrasts:
 }
 }
 \description{
-This function allows to perform contrast analyses for dependent samples
+This function allows to perform contrast analyses for dependent samples.
+Please note that sample sizes must be equal between within-subject groups,
+so no missings are allowed
 }
 \examples{
 nGroup <- 4

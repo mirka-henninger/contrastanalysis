@@ -1,6 +1,8 @@
 #' Contrast analyses for dependent samples
 #'
-#' This function allows to perform contrast analyses for dependent samples
+#' This function allows to perform contrast analyses for dependent samples.
+#' Please note that sample sizes must be equal between within-subject groups,
+#' so no missings are allowed
 #'
 #' @param nGroup Number of dependent / within-subject groups
 #' @param lambda a matrix of contrast weights with contrasts in rows and groups in
@@ -9,7 +11,7 @@
 #' one respondent;
 #' each column contains values of the dependent variable in the respective within-
 #' subject group
-#' @param testvalue value under the Null hypothesis; if not specified, it is fixed to 0.
+#' @param testvalue value under the null hypothesis; if not specified, it is fixed to 0.
 #'
 #' @return a dataframe with following entries for each of the contrasts:
 #' \describe{

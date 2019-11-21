@@ -33,7 +33,9 @@ a list with following entries:
 }
 \description{
 This function allows to directly compare two contrasts for dependent samples by
-standardizing the contrast weights
+standardizing the contrast weights.
+Please note that sample sizes must be equal between within-subject groups,
+so no missings are allowed
 }
 \note{
 A test favoring Hypothesis 1 is performed, hence a positive t-value indicate that the

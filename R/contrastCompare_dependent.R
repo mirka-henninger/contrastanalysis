@@ -1,7 +1,9 @@
 #' Contrast analyses for dependent samples
 #'
 #' This function allows to directly compare two contrasts for dependent samples by
-#' standardizing the contrast weights
+#' standardizing the contrast weights.
+#' Please note that sample sizes must be equal between within-subject groups,
+#' so no missings are allowed
 #'
 #' @param nGroup Number of dependent / within-subject groups
 #' @param lambda1 a vector of contrast weights for Hypothesis 1
@@ -64,7 +66,8 @@ contrastCompare_dependent <- function(nGroup, lambda1, lambda2, dat, testvalue =
 
   results <- contrast_dependent(nGroup = nGroup,
                                 lambda = lambdaDiff,
-                                dat = dat)
+                                dat = dat,
+                                testvalue = testvalue)
 
   weights <- data.frame(
     lambda1Std = lambda1Std,
