@@ -12,27 +12,27 @@ contrast_independent(nGroup, lambda, dat)
 \arguments{
 \item{nGroup}{Number of independent / between-subject groups}
 
-\item{lambda}{a matrix of contrast weights with contrasts in rows and groups in
+\item{lambda}{A matrix of contrast weights with contrasts in rows and groups in
 columns}
 
-\item{dat}{a matrix or dataframe with two columns; each row contains values for
+\item{dat}{A matrix or dataframe with two columns; each row contains values for
 one respondent;
 the first column contains the group indicator, the second column contains the
 dependent variable}
 }
 \value{
-a dataframe with following entries for each of the contrasts:
+A dataframe with following entries for each of the contrasts:
 \describe{
   \item{\code{SumsofSquares}}{Sums of Squares}
   \item{\code{F}}{F-values}
   \item{\code{estimate}}{Contrast estimates}
   \item{\code{t}}{t-values}
-  \item{\code{p}}{two-tailed p-values}
+  \item{\code{p}}{Two-tailed p-values}
   \item{\code{rEffectSize}}{Correlation between the dependent variable and the
-  contrast weights}
+   contrast weights}
   \item{\code{rAlerting}}{Correlation between group means and contrast weights}
   \item{\code{r2Aalerting}}{Squared \code{rAlerting}; can be interpreted similar to
-  a determination coefficient as a measured of explained variance by the contrast
+   a determination coefficient as a measured of explained variance by the contrast
   \code{(SScontrast/SSbetween)}}
   \item{\code{rContrast}}{\code{sqrt(t^2/(t^2 + df))}; useful for power analyses}
 }

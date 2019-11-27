@@ -12,15 +12,15 @@ contrast_dependent(nGroup, lambda, dat, testvalue = 0)
 \arguments{
 \item{nGroup}{Number of dependent / within-subject groups}
 
-\item{lambda}{a matrix of contrast weights with contrasts in rows and groups in
+\item{lambda}{A matrix of contrast weights with contrasts in rows and groups in
 columns}
 
-\item{dat}{a matrix or dataframe with nGroup columns; each row contains values for
+\item{dat}{A matrix or dataframe with nGroup columns; each row contains values for
 one respondent;
 each column contains values of the dependent variable in the respective within-
 subject group}
 
-\item{testvalue}{value under the null hypothesis; if not specified, it is fixed to 0.}
+\item{testvalue}{Value under the null hypothesis; if not specified, it is fixed to 0.}
 }
 \value{
 a dataframe with following entries for each of the contrasts:
@@ -29,8 +29,8 @@ a dataframe with following entries for each of the contrasts:
   \item{\code{F}}{F-values}
   \item{\code{estimate}}{Contrast estimates}
   \item{\code{t}}{t-values}
-  \item{\code{p}}{two-tailed p-values}
-  \item{\code{g}}{effect size g, a standardized distance measure}
+  \item{\code{p}}{Two-tailed p-values}
+  \item{\code{g}}{Effect size g, a standardized distance measure}
 }
 }
 \description{
