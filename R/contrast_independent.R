@@ -60,11 +60,11 @@ contrast_independent <- function(nGroup,
   # Checks on the input ------------------------------------------------
   names(dat) <- c("groups", "values")
   if (nGroup != length(unique(dat$groups)) | nGroup != ncol(lambda)) {
-    stop("Please check the data format: the first column must contain ",
-         "the group indicator, the second the dependent variable. ",
-         "nGroup must be the total number of between-subject groups. ",
-         "lambda must contain the contrast weights in rows and the ",
-         "group indicator in columns")
+    stop("Please check the data format: \n",
+         " * the first column must contain the group indicator \n",
+         " * the second the dependent variable \n",
+         " * nGroup must be the total number of between-subject groups \n",
+         " * lambda must contain the contrast weights in rows and group indicator in columns")
   }
   if (all(!dplyr::near(rowSums(lambda), 0))) {
     stop("Your contrast weights do not sum to 0 for all contrasts. ",

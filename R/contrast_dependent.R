@@ -52,11 +52,10 @@ contrast_dependent <- function(nGroup,
   # Checks on the input ------------------------------------------------
   names(dat) <- paste0("group", 1:nGroup)
   if (nGroup != ncol(dat) | nGroup != ncol(lambda)) {
-    stop("Please check the data format: each column must contain ",
-         "the dependent variable in the within-subject group.",
-         "nGroup must be the total number of within-subject groups. ",
-         "lambda must contain the contrast weights in rows and the ",
-         "group indicator in columns")
+    stop("Please check the data format: \n",
+         " * each column must contain the dependent variable in the within-subject group \n",
+         " * nGroup must be the total number of within-subject groups \n",
+         " * lambda must contain the contrast weights in rows and group indicator in columns")
   }
   if (all(!dplyr::near(rowSums(lambda), 0))) {
     stop("Your contrast weights do not sum to 0 for all contrasts. ",

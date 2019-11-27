@@ -54,10 +54,10 @@ contrast_compare_dependent <- function(nGroup,
   if (nGroup != ncol(dat)
       | nGroup != length(lambda1)
       | nGroup != length(lambda2)) {
-    stop("Please check the data format: each column must contain ",
-         "the dependent variable in the within-subject group.",
-         "nGroup must be the total number of within-subject groups. ",
-         "lambda1 and lambda2 must each contain one set of contrast weights")
+    stop("Please check the data format: \n",
+         " * each column must contain the dependent variable in the within-subject group \n",
+         " * nGroup must be the total number of within-subject groups \n",
+         " * lambda1 and lambda2 must each contain one set of contrast weights")
   }
   if (sum(lambda1) != 0 | sum(lambda2) != 0) {
     stop("Your contrast weights do not sum to 0 for all contrasts. ",

@@ -46,10 +46,11 @@ compare_independent <- function(nGroup,
   if (nGroup != length(unique(dat$groups))
       | nGroup != length(lambda1)
       | nGroup != length(lambda2)) {
-    stop("Please check the data format: the first column must contain ",
-         "the group indicator, the second the dependent variable. ",
-         "nGroup must be the total number of between-subject groups. ",
-         "lambda1 and lambda2 must each contain one set of contrast weights")
+    stop("Please check the data format: \n",
+         " * the first column must contain the group indicator \n",
+         " * the second the dependent variable \n",
+         " * nGroup must be the total number of between-subject groups \n",
+         " * lambda1 and lambda2 must each contain one set of contrast weights")
   }
   if (sum(lambda1) != 0 | sum(lambda2) != 0) {
     stop("Your contrast weights do not sum to 0 for all contrasts. ",
