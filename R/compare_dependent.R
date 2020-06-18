@@ -42,13 +42,13 @@
 #' contrast_compare_dependent(nGroup, lambda1, lambda2, dat)
 #'
 #' @export
-contrast_compare_dependent <- function(nGroup,
-                                       lambda1,
-                                       lambda2,
-                                       dat,
-                                       testvalue = 0) {
-
-
+compare_dependent <- function(nGroup,
+                              lambda1,
+                              lambda2,
+                              dat,
+                              testvalue = 0) {
+  
+  
   # Checks on the input -----------------------------------------------------
   names(dat) <- paste0("group", 1:nGroup)
   if (nGroup != ncol(dat)
@@ -63,24 +63,24 @@ contrast_compare_dependent <- function(nGroup,
     stop("Your contrast weights do not sum to 0 for all contrasts. ",
          "Please check the weights again!")
   }
-
-
+  
+  
   # Standardize lambda weight -----------------------------------------------
   lambda1Std <- lambda1 / sqrt(mean(lambda1^2))
   lambda2Std <- lambda2 / sqrt(mean(lambda2^2))
   lambdaDiff <- t(as.matrix(lambda1Std - lambda2Std))
-
+  
   results <- contrast_dependent(nGroup = nGroup,
                                 lambda = lambdaDiff,
                                 dat = dat,
                                 testvalue = testvalue)
-
+  
   weights <- data.frame(
     lambda1Std = lambda1Std,
     lambda2Std = lambda2Std,
     lambdaDiff = as.vector(lambdaDiff)
   )
-
+  
   output <- list(results = results,
                  contrastWeights = weights)
   return(output)
