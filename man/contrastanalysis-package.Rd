@@ -6,7 +6,7 @@
 \alias{contrastanalysis}
 \title{contrastanalysis: Testing Single and Competing Contrasts}
 \description{
-contrastanalysis: Testing Single and Competing Contrasts
+This R-packages allows to perform contrast analyses for independent and dependent samples.
 }
 \author{
 Mirka Henninger & Simone Malejka
