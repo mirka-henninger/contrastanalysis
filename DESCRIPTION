@@ -10,12 +10,9 @@ ByteCompile: true
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    magrittr,
-    dplyr,
-    rlang,
     optimbase
 Depends:
     R (>= 3.1.0)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Suggests: 
     testthat

@@ -8,6 +8,5 @@
 #' @description This R-packages allows to perform contrast analyses for independent and dependent samples.
 #'
 #' @import stats
-#' @importFrom rlang .data
 #'
 NULL
