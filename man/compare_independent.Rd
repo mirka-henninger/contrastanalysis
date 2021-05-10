@@ -38,14 +38,19 @@ A test favoring Hypothesis 1 is performed, hence a positive t-value indicate
  weights contained in lambda2, and vice versa for a negative t-value.
 }
 \examples{
-set.seed(1)
-nGroup <- 4
-lambda1 <- c(-1,-1,1,1)
-lambda2 <- c(-3,-1,1,3)
-dat <- data.frame(
-  x = rep(c(1:4),each = 50),
-  y = c(rnorm(50,-1,1),rnorm(50),rnorm(50),rnorm(50,1,1))
-)
-compare_independent(nGroup, lambda1, lambda2, dat)
+# load iris dataset
+dat <- iris
+dat <- dat[,c("Species", "Petal.Length")]
+
+# define lambda weights
+lambda1 <- c(-1, 0, 1)  # H1: Iris versicolor is distinct to Iris setosa and Iris virginica
+lambda2 <- c(-2, 1, 1)  # H2: Iris versicolor is more similar to Iris virginica
+
+# Perform contrast analysis
+compare_independent(nGroup=3, lambda1, lambda2, dat)
+# t > 2 indicates that Contrast 1 is a better fit to the data than Contrast 2
+# The test is significant with p < .05
+# Although Iris versicolor is a hybrid of the two other species, it is very similar to
+# to Iris virginica with regards to its petal length
 
 }
