@@ -29,27 +29,25 @@
 #' @source Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 #'
 #' @examples
-#' set.seed(1)
-#' nGroup <- 4
-#' lambda <- matrix(c(-1,-1,1,
-#'                    1,-1,1,-1,
-#'                    1,1,-1,-1,1),
-#'                  ncol = 4,
-#'                  byrow=TRUE)
-#' N <- 50
-#' dat <- data.frame(
-#'   x = rep(c(1:nGroup),each = N),
-#'   y = c(rnorm(N,-1,1),rnorm(N),rnorm(N),rnorm(N,1,1))
-#' )
-#' contrast_independent(nGroup, lambda, dat)
-#' # results are the same as the standard linear model or anova:
+#' # load iris dataset
+#' dat <- iris
+#' dat <- dat[,c("Species", "Petal.Length")]
+#' nGroup <- length(levels(dat$Species))
 #'
-#' dat$c1 <- ifelse(dat$x==1 | dat$x==2, -1,1)
-#' dat$c2 <- ifelse(dat$x==1 | dat$x==3, -1,1)
-#' dat$c3 <- ifelse(dat$x==2 | dat$x==3, -1,1)
-#' lmMod <- lm(y~c1+c2+c3,data=dat)
-#' summary(lmMod)
-#' anova(lmMod)
+#' # define lambda weights
+#' lambda <- matrix(c(
+#'                 -1,0,1, # H1: An increase from setosa over versicolor to virginica
+#'                 -2,1,1), # H2: Setosa has smaller Petal Length than versicolor and virginica
+#'                 ncol = nGroup,
+#'                 byrow=TRUE)
+#' # Perform contrast analysis
+#' contrast_independent(nGroup, lambda, dat)
+#' # t > 2 indicates that Contrast 1 and Contrast 2 fit the data well
+#' # Both tests are significant with p < .05
+#' # It seems that there is an increase in Petal Length from setosa over versicolor to virginica,
+#' # but at the same time the results suggest that setosa has smaller Petal Length than versicolor
+#' # and virginica.
+#'
 #'
 #' @export
 contrast_independent <- function(nGroup,
@@ -66,18 +64,18 @@ contrast_independent <- function(nGroup,
          " * nGroup must be the total number of between-subject groups \n",
          " * lambda must contain the contrast weights in rows and group indicator in columns")
   }
-  if (all(!dplyr::near(rowSums(lambda), 0))) {
+  if (all(!(rowSums(lambda) - 0) < .Machine$double.eps)) {
     stop("Your contrast weights do not sum to 0 for all contrasts. ",
          "Please check the weights again!")
   }
 
   # Get group size, means and variances -------------------------------------
-  groupVals <- dat %>%
-    dplyr::group_by(.data$groups) %>%
-    dplyr::summarize(groupSize = length(.data$values),
-                     groupMeans = mean(.data$values),
-                     groupVariances = var(.data$values))
+  groupVals <- data.frame(groups = levels(dat$groups),
+                            groupSize = tapply(dat$values,dat$groups,length),
+                            groupMeans = tapply(dat$values,dat$groups,mean),
+                            groupVariances = tapply(dat$values,dat$groups,var)
 
+  )
 
   # Define contrast estimate ------------------------------------------------
   numerator <- lambda %*% groupVals$groupMeans

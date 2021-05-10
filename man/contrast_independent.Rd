@@ -41,26 +41,24 @@ A dataframe with following entries for each of the contrasts:
 This function allows to perform contrast analyses for independent samples
 }
 \examples{
-set.seed(1)
-nGroup <- 4
-lambda <- matrix(c(-1,-1,1,
-                   1,-1,1,-1,
-                   1,1,-1,-1,1),
-                 ncol = 4,
-                 byrow=TRUE)
-N <- 50
-dat <- data.frame(
-  x = rep(c(1:nGroup),each = N),
-  y = c(rnorm(N,-1,1),rnorm(N),rnorm(N),rnorm(N,1,1))
-)
-contrast_independent(nGroup, lambda, dat)
-# results are the same as the standard linear model or anova:
+# load iris dataset
+dat <- iris
+dat <- dat[,c("Species", "Petal.Length")]
+nGroup <- length(levels(dat$Species))
 
-dat$c1 <- ifelse(dat$x==1 | dat$x==2, -1,1)
-dat$c2 <- ifelse(dat$x==1 | dat$x==3, -1,1)
-dat$c3 <- ifelse(dat$x==2 | dat$x==3, -1,1)
-lmMod <- lm(y~c1+c2+c3,data=dat)
-summary(lmMod)
-anova(lmMod)
+# define lambda weights
+lambda <- matrix(c(
+                -1,0,1, # H1: An increase from setosa over versicolor to virginica
+                -2,1,1), # H2: Setosa has smaller Petal Length than versicolor and virginica
+                ncol = nGroup,
+                byrow=TRUE)
+# Perform contrast analysis
+contrast_independent(nGroup, lambda, dat)
+# t > 2 indicates that Contrast 1 and Contrast 2 fit the data well
+# Both tests are significant with p < .05
+# It seems that there is an increase in Petal Length from setosa over versicolor to virginica,
+# but at the same time the results suggest that setosa has smaller Petal Length than versicolor
+# and virginica.
+
 
 }
