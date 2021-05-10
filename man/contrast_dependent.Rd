@@ -39,23 +39,23 @@ Please note that sample sizes must be equal between within-subject groups,
 so no missings are allowed
 }
 \examples{
-# Load presidents dataset
-dat <- data.frame(Qtr1=presidents[seq(1, length(presidents), 4)],
+# load presidents dataset
+presidents <- data.frame(Qtr1=presidents[seq(1, length(presidents), 4)],
                Qtr2=presidents[seq(2, length(presidents), 4)],
                Qtr3=presidents[seq(3, length(presidents), 4)],
                Qtr4=presidents[seq(4, length(presidents), 4)])
-               dat <- na.omit(dat)
+presidents <- na.omit(presidents)
+nGroup <- ncol(presidents)
 
-nGroup <- ncol(dat)
-# Define lambda weights
+# define lambda weights
 lambda <- matrix(c(
     1, 0, 0, -1, # H1: decrease in approval ratings with stagnation over warmer months
     3, 1, -1, -3), # H2: linear decrease in  approval ratings
     ncol = nGroup,
     byrow=TRUE)
 
-# Perform contrast analysis
-contrast_dependent(nGroup, lambda,dat)
+# perform contrast analysis
+contrast_dependent(nGroup, lambda,presidents)
 # t > 2 indicates that Contrast 1 and Contrast 2 fit the data well
 # Both tests are significant with p < .05. This suggests that presidental approval
 # ratings decrease over the four calendar quarters, but it cannot be identified

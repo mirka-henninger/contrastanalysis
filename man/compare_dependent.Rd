@@ -43,19 +43,19 @@ A test favoring Hypothesis 1 is performed, hence a positive t-value indicate
  weights contained in lambda2, and vice versa for a negative t-value.
 }
 \examples{
-# Load presidents dataset
-dat <- data.frame(Qtr1=presidents[seq(1, length(presidents), 4)],
-                  Qtr2=presidents[seq(2, length(presidents), 4)],
-                  Qtr3=presidents[seq(3, length(presidents), 4)],
-                  Qtr4=presidents[seq(4, length(presidents), 4)])
-dat <- na.omit(dat)
+# load presidents dataset
+presidents <- data.frame(Qtr1=presidents[seq(1, length(presidents), 4)],
+               Qtr2=presidents[seq(2, length(presidents), 4)],
+               Qtr3=presidents[seq(3, length(presidents), 4)],
+               Qtr4=presidents[seq(4, length(presidents), 4)])
+presidents <- na.omit(presidents)
 
-# Define lambda weights
+# define lambda weights
 lambda1 <- c(1, 0, 0, -1)   # H1: decrease in approval ratings with stagnation over warmer months
 lambda2 <- c(3, 1, -1, -3)  # H2: linear decrease in  approval ratings
 
-# Perform contrast analysis
-compare_dependent(nGroup=4, lambda1, lambda2, dat)
+# perform contrast analysis
+compare_dependent(nGroup=4, lambda1, lambda2, presidents)
 # -2 < t < 2 indicates that both contrasts fit the data equally well
 # The test is not significant with p > .05. This suggests that presidental approval
 # ratings decreases over the four calendar quarters, and there is no 'Christmas bonus'

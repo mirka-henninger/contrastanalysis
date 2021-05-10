@@ -42,9 +42,9 @@ This function allows to perform contrast analyses for independent samples
 }
 \examples{
 # load iris dataset
-dat <- iris
-dat <- dat[,c("Species", "Petal.Length")]
-nGroup <- length(levels(dat$Species))
+data("iris")
+iris <- iris[,c("Species", "Petal.Length")]
+nGroup <- length(levels(iris$Species))
 
 # define lambda weights
 lambda <- matrix(c(
@@ -52,8 +52,8 @@ lambda <- matrix(c(
                 -2,1,1), # H2: Setosa has smaller Petal Length than versicolor and virginica
                 ncol = nGroup,
                 byrow=TRUE)
-# Perform contrast analysis
-contrast_independent(nGroup, lambda, dat)
+# perform contrast analysis
+contrast_independent(nGroup, lambda, iris)
 # t > 2 indicates that Contrast 1 and Contrast 2 fit the data well
 # Both tests are significant with p < .05
 # It seems that there is an increase in Petal Length from setosa over versicolor to virginica,

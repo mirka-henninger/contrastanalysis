@@ -39,17 +39,17 @@ A test favoring Hypothesis 1 is performed, hence a positive t-value indicate
 }
 \examples{
 # load iris dataset
-dat <- iris
-dat <- dat[,c("Species", "Petal.Length")]
+data("iris")
+iris <- iris[,c("Species", "Petal.Length")]
 
 # define lambda weights
 lambda1 <- c(-1, 0, 1)  # H1: Iris versicolor is distinct to Iris setosa and Iris virginica
 lambda2 <- c(-2, 1, 1)  # H2: Iris versicolor is more similar to Iris virginica
 
-# Perform contrast analysis
-compare_independent(nGroup=3, lambda1, lambda2, dat)
+# perform contrast analysis
+compare_independent(nGroup=3, lambda1, lambda2, iris)
 # t > 2 indicates that Contrast 1 is a better fit to the data than Contrast 2
-# The test is significant with p < .05
+# The test is significant with p < .05.
 # Although Iris versicolor is a hybrid of the two other species, it is very similar to
 # to Iris virginica with regards to its petal length
 
