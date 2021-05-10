@@ -26,21 +26,27 @@
 #' @source Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 #'
 #' @examples
-#' set.seed(1)
-#' nGroup <- 4
-#' N <- 50
-#' lambda <- matrix(c(3,-1,-1,-1,
-#'                    0,2,-1,-1,
-#'                    0,0,-1,1),
-#'                  ncol = nGroup,
-#'                  byrow=TRUE)
-#' dat <- data.frame(
-#'   group1 = sample(1:10, size = N, replace = TRUE),
-#'   group2 = sample(1:15, size = N, replace = TRUE),
-#'   group3 = sample(1:15, size = N, replace = TRUE),
-#'   group4 = sample(1:20, size = N, replace = TRUE)
-#' )
+#' # Load presidents dataset
+#' dat <- data.frame(Qtr1=presidents[seq(1, length(presidents), 4)],
+#'                Qtr2=presidents[seq(2, length(presidents), 4)],
+#'                Qtr3=presidents[seq(3, length(presidents), 4)],
+#'                Qtr4=presidents[seq(4, length(presidents), 4)])
+#'                dat <- na.omit(dat)
+#'
+#' nGroup <- ncol(dat)
+#' # Define lambda weights
+#' lambda <- matrix(c(
+#'     1, 0, 0, -1, # H1: decrease in approval ratings with stagnation over warmer months
+#'     3, 1, -1, -3), # H2: linear decrease in  approval ratings
+#'     ncol = nGroup,
+#'     byrow=TRUE)
+#'
+#' # Perform contrast analysis
 #' contrast_dependent(nGroup, lambda,dat)
+#' # t > 2 indicates that Contrast 1 and Contrast 2 fit the data well
+#' # Both tests are significant with p < .05. This suggests that presidental approval
+#' # ratings decrease over the four calendar quarters, but it cannot be identified
+#' # whether or not this decrease stagnates over warmer months.
 #'
 #' @export
 contrast_dependent <- function(nGroup,
@@ -57,7 +63,7 @@ contrast_dependent <- function(nGroup,
          " * nGroup must be the total number of within-subject groups \n",
          " * lambda must contain the contrast weights in rows and group indicator in columns")
   }
-  if (all(!dplyr::near(rowSums(lambda), 0))) {
+  if (all(!(rowSums(lambda) - 0) < .Machine$double.eps)) {
     stop("Your contrast weights do not sum to 0 for all contrasts. ",
          "Please check the weights again!")
   }
