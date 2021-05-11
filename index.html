@@ -64,57 +64,195 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="contrast-analyses" class="section level1">
+
+<div id="contrastanalysis" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#contrast-analyses" class="anchor"></a>Contrast Analyses</h1></div>
-<p>This R-packages allows to perform contrast analyses for independent and dependent samples. In addition to standard contrast analyses, methods are provided to test two competing hypotheses can be tested against each other. All functions and explanations are based on Rosenthal, Rosnow, and Rubin (2000) as well as Sedlmeier and Renkewitz (2008).</p>
+<a href="#contrastanalysis" class="anchor"></a>contrastanalysis</h1></div>
+<p>Mirka Henninger &amp; Simone Malejka 2021-05-11</p>
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+</div>
+<div id="contrastanalysis-1" class="section level1">
+<h1 class="hasAnchor">
+<a href="#contrastanalysis-1" class="anchor"></a>contrastanalysis</h1>
+<p>This R-packages allows to perform contrast analyses for independent and dependent samples. In addition to standard contrast analyses, methods are provided to test two competing hypotheses can be tested against each other. All functions and explanations are based on Rosenthal, Rosnow, and Rubin(2000) as well as Sedlmeier and Renkewitz (2008).</p>
 <p>Contrast analyses are a sensible alternative to standard variance analyses as it allows to test specific, directed, a priori hypotheses. This leads to results that are easier to interpret and effects can be detected with a higher power.</p>
-<div id="the-package-can-be-installed-using-the-devtools-package" class="section level2">
+<div id="the-package-can-be-installed-using-the--package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#the-package-can-be-installed-using-the-devtools-package" class="anchor"></a>The package can be installed using the devtools-package:</h2>
+<a href="#the-package-can-be-installed-using-the--package" class="anchor"></a>The package can be installed using the <devtools>-package:</devtools>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mirka-henninger/contrastanalysis"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">contrastanalysis</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mirka-henninger/contrastanalysis"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="getting-started" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-started" class="anchor"></a>Getting started</h2>
+<div id="introduction" class="section level3">
+<h3 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h3>
+<p><strong>contrastanalysis</strong> allows to perform contrast analyses for independent and dependent samples. In addition to standard contrast analyses, methods are provided to test two competing hypotheses can be tested against each other. All functions and explanations are based on Rosenthal, Rosnow, and Rubin(2000) as well as Sedlmeier and Renkewitz (2008).</p>
+<p>Contrast analyses are a sensible alternative to standard variance analyses as it allows to test specific, directed, a priori hypotheses. This leads to results that are easier to interpret and effects can be detected with a higher power.</p>
+</div>
+<div id="the-first-steps" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-first-steps" class="anchor"></a>The first steps</h3>
+<p>After the contrastanalysis package has been installed, we load it by the following command.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">contrastanalysis</span><span class="op">)</span></code></pre></div>
+<p>To illustrate the functions of this package, we use two datasets that are already available in R: a subset of variables of the <strong>iris</strong> data for contrast analysis for independent samples and <strong>president</strong> for contrast analyses for dependent samples. We load the data using the following code:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># load data</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"iris"</span><span class="op">)</span>
+<span class="va">iris</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"Petal.Length"</span><span class="op">)</span><span class="op">]</span>
+<span class="va">presidents</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Qtr1<span class="op">=</span><span class="va">presidents</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">presidents</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>,
+                         Qtr2<span class="op">=</span><span class="va">presidents</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">presidents</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>,
+                         Qtr3<span class="op">=</span><span class="va">presidents</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">presidents</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>,
+                         Qtr4<span class="op">=</span><span class="va">presidents</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">presidents</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
+<span class="va">presidents</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">presidents</span><span class="op">)</span>
+<span class="co"># some overview of the data</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span>, type <span class="op">=</span> <span class="st">"b"</span>, main <span class="op">=</span> <span class="st">"Example used \nfor independent samples"</span>, xlab <span class="op">=</span> <span class="st">"Species"</span>, ylab <span class="op">=</span> <span class="st">"Petal Length"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">presidents</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"b"</span>, main <span class="op">=</span> <span class="st">"Example used \nfor dependent samples"</span>, xlab <span class="op">=</span> <span class="st">"Calendar Quarter"</span>, ylab <span class="op">=</span> <span class="st">"Approval Ratings"</span><span class="op">)</span></code></pre></div>
+<p><img src="README-unnamed-chunk-5-1.png"><!-- --></p>
+<p>The <strong>iris</strong> dataset contains the independent variable <strong>Species</strong> with three groups (setosa, versicolor, and virginica) and the dependent variable <strong>Petal.Length</strong>. The <strong>presidents</strong> datasets contains quarterly approval rating for the US presidents.</p>
+<p>We show how to test a priori specified hypotheses using planned contrast analysis, but also how to directly test two competing contrasts against each other. We will give an example of each approach for independent samples using the <strong>iris</strong> dataset and for dependent samples using the <strong>presidents</strong> dataset.</p>
+</div>
+<div id="contrast-analysis-for-independent-samples" class="section level3">
+<h3 class="hasAnchor">
+<a href="#contrast-analysis-for-independent-samples" class="anchor"></a>Contrast analysis for independent samples</h3>
+<p>We would like to compare petal length of different species of iris. We have two hypotheses:</p>
+<p><span class="math inline"><em>H</em><sub>1</sub></span>: An increase in petal length from setosa over versicolor to virginica</p>
+<p><span class="math inline"><em>H</em><sub>2</sub></span>: Setosa has smaller petal length than versicolor and virginica</p>
+<p>For <span class="math inline"><em>p</em> = 3</span> groups of species, we can perform <span class="math inline"><em>p</em> − 1 = 2</span> planned contrasts. The contrast weights of the two contrasts are based on the two hypotheses:</p>
+<p><span class="math inline"><em>λ</em><sub><em>H</em><sub>1</sub></sub> = ( − 1, 0, 1)</span></p>
+<p><span class="math inline"><em>λ</em><sub><em>H</em><sub>2</sub></sub> = ( − 2, 1, 1)</span></p>
+<p>Using these specification we can perform a contrast analysis for independent samples using the package.</p>
+<div id="testing-planned-contrasts" class="section level4">
+<h4 class="hasAnchor">
+<a href="#testing-planned-contrasts" class="anchor"></a>Testing planned contrasts</h4>
+<p>The contrast weights <span class="math inline"><strong>λ</strong></span> are assigned to an object using the matrix function in R with contrasts in rows and groups in columns. The data must contain subjects in rows and two columns: the first columns contains the group indicator (here <strong>Species</strong>), the second column contains the dependent variable (here <strong>Petal.Length</strong>).</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># extract the number of groups</span>
+<span class="op">(</span><span class="va">nGroup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] 3</span>
+
+<span class="co"># define lambda weights</span>
+<span class="op">(</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="op">-</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>, <span class="co"># H1: An increase from setosa over versicolor to virginica</span>
+  <span class="op">-</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># H2: Setosa has smaller petal length than versicolor and virginica</span>
+  ncol <span class="op">=</span> <span class="va">nGroup</span>,
+  byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;      [,1] [,2] [,3]</span>
+<span class="co">#&gt; [1,]   -1    0    1</span>
+<span class="co">#&gt; [2,]   -2    1    1</span>
+
+<span class="co"># perform contrast analysis</span>
+<span class="fu"><a href="reference/contrast_independent.html">contrast_independent</a></span><span class="op">(</span><span class="va">nGroup</span>, <span class="va">lambda</span>, <span class="va">iris</span><span class="op">)</span>
+<span class="co">#&gt;            SumsofSquares        F estimate       t p rEffectSize rAlerting</span>
+<span class="co">#&gt; Contrast 1      418.2025 2258.262    4.090 47.5212 0      0.9490    0.9781</span>
+<span class="co">#&gt; Contrast 2      395.3712 2134.975    6.888 46.2058 0      0.9228    0.9511</span>
+<span class="co">#&gt;            r2Alerting rContrast</span>
+<span class="co">#&gt; Contrast 1     0.9568    0.9690</span>
+<span class="co">#&gt; Contrast 2     0.9045    0.9673</span></code></pre></div>
+<p>The output of the <strong>contrast_independent</strong> function contains results for both contrasts: Sums of squares and corresponding F-values, contrast estimates and corresponding <span class="math inline"><em>t</em></span>-values as well as two-tailed <span class="math inline"><em>p</em></span>-values. Furthermore, it contains several effect sizes, such as r_{} which can be interpreted as a correlation between the dependent variable and the contrast weights, <span class="math inline"><em>r</em><sub>alerting</sub></span> corresponding to the correlation between group means and contrast weights, <span class="math inline"><em>r</em><sub>alerting</sub><sup>2</sup></span> which can be interpreted similar to a determination coefficient as a measured of explained variance by the contrast <span class="math inline">$\Big(\frac{SS_{\text{contrast}}}{SS_{\text{between}}}\Big)$</span>. <span class="math inline"><em>r</em><sub>contrast</sub></span> is defined as <span class="math inline">$r_{\text{contrast}} = \sqrt{\frac{t^2}{t^2 + df}}$</span> and is useful for power analyses.</p>
+<p>The results of this empirical example show that for <span class="math inline"><em>α</em> = .05</span>, Contrast 1 and Contrast 2 fit the data well, as all <span class="math inline"><em>t</em> &gt; 46.21</span> and all <span class="math inline"><em>p</em> &lt; .001</span>. Hence, it seems that there is an increase in petal length from setosa over versicolor to virginica, and at the same time the results suggest that setosa has smaller petal length than versicolor and virginica.</p>
+</div>
+<div id="testing-competing-contrasts-against-each-other" class="section level4">
+<h4 class="hasAnchor">
+<a href="#testing-competing-contrasts-against-each-other" class="anchor"></a>Testing competing contrasts against each other</h4>
+<p>However, one may not be interested in whether there is support for <span class="math inline"><em>H</em><sub>1</sub></span> and/or <span class="math inline"><em>H</em><sub>2</sub></span> in the data, but in <em>which</em> of the two hypotheses <span class="math inline"><em>H</em><sub>1</sub></span> and <span class="math inline"><em>H</em><sub>2</sub></span> outperforms the other. We can directly test the two competing hypotheses against each other:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># define lambda weights</span>
+<span class="va">lambda1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># H1: Iris versicolor is distinct to Iris setosa and Iris virginica</span>
+<span class="va">lambda2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># H2: Iris versicolor is more similar to Iris virginica</span>
+
+<span class="co"># Perform contrast analysis</span>
+<span class="fu"><a href="reference/compare_independent.html">compare_independent</a></span><span class="op">(</span>nGroup<span class="op">=</span><span class="fl">3</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">iris</span><span class="op">)</span>
+<span class="co">#&gt; $results</span>
+<span class="co">#&gt;            SumsofSquares      F estimate      t      p rEffectSize rAlerting</span>
+<span class="co">#&gt; Contrast 1        1.1958 6.4574   0.1387 2.5411 0.0142      0.0507    0.0523</span>
+<span class="co">#&gt;            r2Alerting rContrast</span>
+<span class="co">#&gt; Contrast 1     0.0027    0.2051</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $contrastWeights</span>
+<span class="co">#&gt;   lambda1Std lambda2Std lambdaDiff</span>
+<span class="co">#&gt; 1  -1.224745 -1.4142136  0.1894687</span>
+<span class="co">#&gt; 2   0.000000  0.7071068 -0.7071068</span>
+<span class="co">#&gt; 3   1.224745  0.7071068  0.5176381</span></code></pre></div>
+<p>The output of the <strong>compare_independent</strong> function contains the same information as <strong>contrast_independent</strong> in terms of test statistics and effect sizes. But, results are shown for one test only, namely a different comparison of the two hypotheses. In addition, the standardized contrast weights as well as their difference that is used for the contrast analyses are shown in the output.</p>
+<p>When the <span class="math inline"><em>t</em></span>-value of the summary of results is positive and significantly different from <span class="math inline">0</span>, the data supports Hypothesis <span class="math inline"><em>H</em><sub>1</sub></span>, while the data support hypothesis <span class="math inline"><em>H</em><sub>2</sub></span> when the <span class="math inline"><em>t</em></span>-value is negative and significantly different from <span class="math inline">0</span>. Hence, the results of this direct comparison show that for <span class="math inline"><em>α</em> = .05</span>, Contrast 1 does outperform Contrast 2 as <span class="math inline"><em>t</em> = 2.54</span> and <span class="math inline"><em>p</em> = .014</span>. Hence, it seems that there is an increase in petal length from setosa over versicolor to virginica rather than setosa having smaller petal length than versicolor and virginica together. The results suggest that although Iris versicolor is a hybrid of the two other species, it is very similar to Iris virginica with regards to its petal length.</p>
+</div>
+</div>
+<div id="contrast-analysis-for-dependent-samples" class="section level3">
+<h3 class="hasAnchor">
+<a href="#contrast-analysis-for-dependent-samples" class="anchor"></a>Contrast analysis for dependent samples</h3>
+<p>We would like to compare quarterly approval rating for the US presidents and again we have two hypotheses:</p>
+<p><span class="math inline"><em>H</em><sub>1</sub></span>: A decrease in approval ratings with stagnation over warmer months</p>
+<p><span class="math inline"><em>H</em><sub>2</sub></span>: A linear decrease in approval ratings</p>
+<p>Please note that for <span class="math inline"><em>p</em> = 4</span> measurement occasions, we could perform a maximum <span class="math inline"><em>p</em> − 1 = 3</span> planned contrasts. However, as we only have two hypotheses, we only specify two contrast weight vectors:</p>
+<p><span class="math inline"><em>λ</em><sub><em>H</em><sub>1</sub></sub> = ( − 1, 0, 0, 1)</span></p>
+<p><span class="math inline"><em>λ</em><sub><em>H</em><sub>2</sub></sub> = (3, 1,  − 1,  − 3)</span></p>
+<p>Using these specification we can perform a contrast analysis for dependent samples using the package.</p>
+<div id="testing-planned-contrasts-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#testing-planned-contrasts-1" class="anchor"></a>Testing planned contrasts</h4>
+<p>As for the contrast analysis for independent samples, the contrast weights <span class="math inline"><strong>λ</strong></span> are assigned to an object using the matrix function in R with contrasts in rows and groups in columns. The data must contain subjects in rows and <span class="math inline"><em>p</em></span> columns, one for each measurement occasions that contain the dependent variable.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span><span class="va">nGroup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">presidents</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] 4</span>
+
+<span class="co"># define lambda weights</span>
+<span class="op">(</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="co"># H1: decrease in approval ratings with stagnation over warmer months</span>
+  <span class="fl">3</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span>, <span class="co"># H2: linear decrease in  approval ratings</span>
+  ncol <span class="op">=</span> <span class="va">nGroup</span>,
+  byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;      [,1] [,2] [,3] [,4]</span>
+<span class="co">#&gt; [1,]    1    0    0   -1</span>
+<span class="co">#&gt; [2,]    3    1   -1   -3</span>
+
+<span class="co"># perform contrast analysis</span>
+<span class="fu"><a href="reference/contrast_dependent.html">contrast_dependent</a></span><span class="op">(</span><span class="va">nGroup</span>, <span class="va">lambda</span>,<span class="va">presidents</span><span class="op">)</span>
+<span class="co">#&gt;                  F estimate      t      p      g</span>
+<span class="co">#&gt; Contrast 1  9.6148   7.9231 3.1008 0.0047 0.6081</span>
+<span class="co">#&gt; Contrast 2 10.4904  24.1923 3.2389 0.0034 0.6352</span></code></pre></div>
+<p>The output of the <strong>contrast_dependent</strong> function contains results for both contrasts: F-values, contrast estimates and corresponding <span class="math inline"><em>t</em></span>-values as well as two-tailed <span class="math inline"><em>p</em></span>-values. Furthermore, it contains the effect size <span class="math inline"><em>g</em></span>, a standardized distance measure.</p>
+<p>The results of this empirical example show that for <span class="math inline"><em>α</em> = .05</span>, Contrast 1 and Contrast 2 fit the data well, as all <span class="math inline"><em>t</em> &gt; 3.10</span> and all <span class="math inline"><em>p</em> &lt; .003</span>. Hence, it seems that presidential approval ratings decrease over the four calendar quarters, but it cannot be identified whether or not this decrease stagnates over warmer months.</p>
+</div>
+<div id="testing-competing-contrasts-against-each-other-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#testing-competing-contrasts-against-each-other-1" class="anchor"></a>Testing competing contrasts against each other</h4>
+<p>To directly compare the two contrasts and test whether the decrease stagnates over the summer months, we directly test the two competing hypotheses against each other:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># define lambda weights</span>
+<span class="va">lambda1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>   <span class="co"># H1: decrease in approval ratings with stagnation over warmer months</span>
+<span class="va">lambda2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span>  <span class="co"># H2: linear decrease in  approval ratings</span>
+
+<span class="co"># perform contrast analysis</span>
+<span class="fu"><a href="reference/compare_dependent.html">compare_dependent</a></span><span class="op">(</span>nGroup<span class="op">=</span><span class="va">nGroup</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">presidents</span><span class="op">)</span>
+<span class="co">#&gt; $results</span>
+<span class="co">#&gt;                 F estimate      t      p      g</span>
+<span class="co">#&gt; Contrast 1 0.2958   0.3858 0.5439 0.5914 0.1067</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $contrastWeights</span>
+<span class="co">#&gt;   lambda1Std lambda2Std  lambdaDiff</span>
+<span class="co">#&gt; 1   1.414214  1.3416408  0.07257278</span>
+<span class="co">#&gt; 2   0.000000  0.4472136 -0.44721360</span>
+<span class="co">#&gt; 3   0.000000 -0.4472136  0.44721360</span>
+<span class="co">#&gt; 4  -1.414214 -1.3416408 -0.07257278</span></code></pre></div>
+<p>The output of the <strong>compare_dependent</strong> function mirrors the information from <strong>contrast_dependent</strong>, but only shows results for one test only, namely a different comparison of the two hypotheses and shows the standardized contrast weights as well as their difference that is used for the contrast analyses.</p>
+<p>Similar to the **compare_independent* function, the data supports Hypothesis <span class="math inline"><em>H</em><sub>1</sub></span> when the <span class="math inline"><em>t</em></span>-value of the summary of results is positive and significantly different from <span class="math inline">0</span>, while the data support hypothesis <span class="math inline"><em>H</em><sub>2</sub></span> when the <span class="math inline"><em>t</em></span>-value is negative and significantly different from <span class="math inline">0</span>. Hence, the results of this direct comparison show that for <span class="math inline"><em>α</em> = .05</span> neither of the two contrasts outperforms the other as <span class="math inline"><em>t</em> = 0.53</span> and <span class="math inline"><em>p</em> = .59</span>. Hence, there is a decrease in approval ratings, but it is not decisive whether this decrease stagnates over the summer months or not.</p>
+</div>
+</div>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <p>Rosenthal, R., Rosnow, R. L., &amp; Rubin, D. B. (2000). <em>Contrasts and effect sizes in behavioral research: A correlational approach.</em> Cambridge University Press.</p>
 <p>Sedlmeier, P., &amp; Renkewitz, F. (2008). <em>Forschungsmethoden und Statistik in der Psychologie.</em> München: Pearson Studium.</p>
-<!-- This repository contains the data and code for our paper:
-
-> Authors, (YYYY). _Contrast analyses for independent and dependent samples, as well as tests for competing hypotheses_. Name of journal/book <https://doi.org/xxx/xxx>
-
-Our pre-print is online here:
-
-> Authors, (YYYY). _Contrast analyses for independent and dependent samples, as well as tests for competing hypotheses_. Name of journal/book, Accessed 28 Oct 2019. Online at <https://doi.org/xxx/xxx> 
-
-
-### How to cite
-
-Please cite this compendium as:
-
-> Authors, (2019). _Compendium of R code and data for Contrast analyses for independent and dependent samples, as well as tests for competing hypotheses_. Accessed 28 Oct 2019. Online at <https://doi.org/xxx/xxx>
-
-### How to download or install
-
-You can download the compendium as a zip from from this URL: </archive/master.zip>
-
-Or you can install this compendium as an R package, contrastanalysis, from GitHub with:
-### Licenses
-
-**Text and figures :**  [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
-
-**Code :** See the [DESCRIPTION](DESCRIPTION) file
-
-**Data :** [CC-0](http://creativecommons.org/publicdomain/zero/1.0/) attribution requested in reuse
-
-### Contributions
-
-We welcome contributions from everyone. Before you get started, please see our [contributor guidelines](CONTRIBUTING.md). Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.-->
 </div>
 </div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
