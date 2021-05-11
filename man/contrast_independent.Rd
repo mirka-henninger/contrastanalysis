@@ -24,8 +24,9 @@ the dependent variable}
 A dataframe with following entries for each of the contrasts:
 \describe{
   \item{\code{SumsofSquares}}{Sums of Squares}
+  \item{\code{df}}{Degrees of freedom for each contrast}
   \item{\code{F}}{F-values}
-  \item{\code{estimate}}{Contrast estimates}
+  \item{\code{contrast estimate}}{Contrast estimates}
   \item{\code{t}}{t-values}
   \item{\code{p}}{Two-tailed p-values}
   \item{\code{rEffectSize}}{Correlation between the dependent variable and

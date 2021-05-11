@@ -17,8 +17,9 @@
 #' @return a dataframe with following entries for each of the contrasts:
 #' \describe{
 #'   \item{\code{SumsofSquares}}{Sums of Squares}
+#'   \item{\code{df}}{Degrees of freedom for each contrast}
 #'   \item{\code{F}}{F-values}
-#'   \item{\code{estimate}}{Contrast estimates}
+#'   \item{\code{contrast estimate}}{Contrast estimates}
 #'   \item{\code{t}}{t-values}
 #'   \item{\code{p}}{Two-tailed p-values}
 #'   \item{\code{g}}{Effect size g, a standardized distance measure}
@@ -78,6 +79,7 @@ contrast_dependent <- function(nGroup,
   # Define contrast estimate ------------------------------------------------
   numerator <- colMeans(L) - testvalue
   denominator <- sqrt(sigmaPooled / n)
+  dfContrast <- 1
 
 
   # F and t values ----------------------------------------------------------
@@ -93,7 +95,8 @@ contrast_dependent <- function(nGroup,
   # Format output -----------------------------------------------------------
   rounding <- 4
   output <- data.frame("F" = round(Fcontrast, rounding),
-                       "estimate" = round(numerator, rounding),
+                       "df" = dfContrast,
+                       "contrast estimate" = round(numerator, rounding),
                        "t" = round(tcontrast, rounding),
                        "p" = round(pval, rounding),
                        "g" = round(g, rounding))

@@ -13,8 +13,9 @@
 #' @return A dataframe with following entries for each of the contrasts:
 #' \describe{
 #'   \item{\code{SumsofSquares}}{Sums of Squares}
+#'   \item{\code{df}}{Degrees of freedom for each contrast}
 #'   \item{\code{F}}{F-values}
-#'   \item{\code{estimate}}{Contrast estimates}
+#'   \item{\code{contrast estimate}}{Contrast estimates}
 #'   \item{\code{t}}{t-values}
 #'   \item{\code{p}}{Two-tailed p-values}
 #'   \item{\code{rEffectSize}}{Correlation between the dependent variable and
@@ -77,7 +78,7 @@ contrast_independent <- function(nGroup,
   # Define contrast estimate ------------------------------------------------
   numerator <- lambda %*% groupVals$groupMeans
   denominator <- (lambda^2) %*% (groupVals$groupSize^(-1))
-  # dfContrast <- 1
+  dfContrast <- 1
 
 
 
@@ -112,8 +113,9 @@ contrast_independent <- function(nGroup,
   # Format output -----------------------------------------------------------
   rounding <- 4
   output <- data.frame("SumsofSquares" = round(SScontrast, rounding),
+                       "df" = dfContrast,
                        "F" = round(Fcontrast, rounding),
-                       "estimate" = round(numerator, rounding),
+                       "contrast estimate" = round(numerator, rounding),
                        "t" = round(tcontrast, rounding),
                        "p" = round(pval, rounding),
                        "rEffectSize" = round(r_effectsize, rounding),
