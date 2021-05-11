@@ -5,8 +5,6 @@ Mirka Henninger & Simone Malejka
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# contrastanalysis
-
 This R-packages allows to perform contrast analyses for independent and
 dependent samples. In addition to standard contrast analyses, methods
 are provided to test two competing hypotheses can be tested against each
@@ -18,7 +16,7 @@ analyses as it allows to test specific, directed, a priori hypotheses.
 This leads to results that are easier to interpret and effects can be
 detected with a higher power.
 
-## The package can be installed using the <devtools>-package:
+#### The package can be installed using the <devtools>-package:
 
 ``` r
 install.packages("devtools")
@@ -89,29 +87,28 @@ samples using the **iris** dataset and for dependent samples using the
 We would like to compare petal length of different species of iris. We
 have two hypotheses:
 
-\(H_1\): An increase in petal length from setosa over versicolor to
-virginica
+H1: An increase in petal length from setosa over versicolor to virginica
 
-\(H_2\): Setosa has smaller petal length than versicolor and virginica
+H2: Setosa has smaller petal length than versicolor and virginica
 
-For \(p=3\) groups of species, we can perform \(p-1=2\) planned
-contrasts. The contrast weights of the two contrasts are based on the
-two hypotheses:
+For p = 3 groups of species, we can perform p - 1 = 2 planned contrasts.
+The contrast weights of the two contrasts are based on the two
+hypotheses:
 
-\(\lambda_{H_1} = (-1,0,1)\)
+λ(H1) = (-1,0,1)
 
-\(\lambda_{H_2} = (-2,1,1)\)
+λ(H2) = (-2,1,1)
 
 Using these specification we can perform a contrast analysis for
 independent samples using the package.
 
 #### Testing planned contrasts
 
-The contrast weights \(\boldsymbol{\lambda}\) are assigned to an object
-using the matrix function in R with contrasts in rows and groups in
-columns. The data must contain subjects in rows and two columns: the
-first columns contains the group indicator (here **Species**), the
-second column contains the dependent variable (here **Petal.Length**).
+The contrast weights λ are assigned to an object using the matrix
+function in R with contrasts in rows and groups in columns. The data
+must contain subjects in rows and two columns: the first columns
+contains the group indicator (here **Species**), the second column
+contains the dependent variable (here **Petal.Length**).
 
 ``` r
 # extract the number of groups
@@ -140,31 +137,28 @@ contrast_independent(nGroup, lambda, iris)
 
 The output of the **contrast\_independent** function contains results
 for both contrasts: Sums of squares and corresponding F-values, contrast
-estimates and corresponding \(t\)-values as well as two-tailed
-\(p\)-values. Furthermore, it contains several effect sizes, such as
-r\_{} which can be interpreted as a correlation between the dependent
-variable and the contrast weights, \(r_{\text{alerting}}\) corresponding
-to the correlation between group means and contrast weights,
-\(r_{\text{alerting}}^2\) which can be interpreted similar to a
-determination coefficient as a measured of explained variance by the
-contrast \(\Big(\frac{SS_{\text{contrast}}}{SS_{\text{between}}}\Big)\).
-\(r_{\text{contrast}}\) is defined as
-\(r_{\text{contrast}} = \sqrt{\frac{t^2}{t^2 + df}}\) and is useful for
-power analyses.
+estimates and corresponding *t*-values as well as two-tailed *p*-values.
+Furthermore, it contains several effect sizes, such as r\_{} which can
+be interpreted as a correlation between the dependent variable and the
+contrast weights, *r*(alerting) corresponding to the correlation between
+group means and contrast weights, *r*(alerting)² which can be
+interpreted similar to a determination coefficient as a measured of
+explained variance by the contrast. *r*(contrast) is useful for power
+analyses.
 
-The results of this empirical example show that for \(\alpha = .05\),
-Contrast 1 and Contrast 2 fit the data well, as all \(t > 46.21\) and
-all \(p < .001\). Hence, it seems that there is an increase in petal
-length from setosa over versicolor to virginica, and at the same time
-the results suggest that setosa has smaller petal length than versicolor
-and virginica.
+The results of this empirical example show that for α = .05, Contrast 1
+and Contrast 2 fit the data well, as all *t* \> 46.21 and all *p* \<
+.001. Hence, it seems that there is an increase in petal length from
+setosa over versicolor to virginica, and at the same time the results
+suggest that setosa has smaller petal length than versicolor and
+virginica.
 
 #### Testing competing contrasts against each other
 
-However, one may not be interested in whether there is support for
-\(H_1\) and/or \(H_2\) in the data, but in *which* of the two hypotheses
-\(H_1\) and \(H_2\) outperforms the other. We can directly test the two
-competing hypotheses against each other:
+However, one may not be interested in whether there is support for H1
+and/or H2 in the data, but in *which* of the two hypotheses H1 and H2
+outperforms the other. We can directly test the two competing hypotheses
+against each other:
 
 ``` r
 # define lambda weights
@@ -193,35 +187,34 @@ different comparison of the two hypotheses. In addition, the
 standardized contrast weights as well as their difference that is used
 for the contrast analyses are shown in the output.
 
-When the \(t\)-value of the summary of results is positive and
-significantly different from \(0\), the data supports Hypothesis
-\(H_1\), while the data support hypothesis \(H_2\) when the \(t\)-value
-is negative and significantly different from \(0\). Hence, the results
-of this direct comparison show that for \(\alpha = .05\), Contrast 1
-does outperform Contrast 2 as \(t = 2.54\) and \(p = .014\). Hence, it
-seems that there is an increase in petal length from setosa over
-versicolor to virginica rather than setosa having smaller petal length
-than versicolor and virginica together. The results suggest that
-although Iris versicolor is a hybrid of the two other species, it is
-very similar to Iris virginica with regards to its petal length.
+When the *t*-value of the summary of results is positive and
+significantly different from 0, the data supports Hypothesis H1, while
+the data support hypothesis H2 when the *t*-value is negative and
+significantly different from 0. Hence, the results of this direct
+comparison show that for α = .05, Contrast 1 does outperform Contrast 2
+as *t* = 2.54 and *p* = .014. Hence, it seems that there is an increase
+in petal length from setosa over versicolor to virginica rather than
+setosa having smaller petal length than versicolor and virginica
+together. The results suggest that although Iris versicolor is a hybrid
+of the two other species, it is very similar to Iris virginica with
+regards to its petal length.
 
 ### Contrast analysis for dependent samples
 
 We would like to compare quarterly approval rating for the US presidents
 and again we have two hypotheses:
 
-\(H_1\): A decrease in approval ratings with stagnation over warmer
-months
+H1: A decrease in approval ratings with stagnation over warmer months
 
-\(H_2\): A linear decrease in approval ratings
+H2: A linear decrease in approval ratings
 
-Please note that for \(p=4\) measurement occasions, we could perform a
-maximum \(p-1=3\) planned contrasts. However, as we only have two
+Please note that for p = 4 measurement occasions, we could perform a
+maximum p - 1 = 3 planned contrasts. However, as we only have two
 hypotheses, we only specify two contrast weight vectors:
 
-\(\lambda_{H_1} = (-1,0, 0, 1)\)
+λ(H1) = (-1, 0, 0, 1)
 
-\(\lambda_{H_2} = (3, 1, -1, -3)\)
+λ(H2) = (3, 1, -1, -3)
 
 Using these specification we can perform a contrast analysis for
 dependent samples using the package.
@@ -229,10 +222,10 @@ dependent samples using the package.
 #### Testing planned contrasts
 
 As for the contrast analysis for independent samples, the contrast
-weights \(\boldsymbol{\lambda}\) are assigned to an object using the
-matrix function in R with contrasts in rows and groups in columns. The
-data must contain subjects in rows and \(p\) columns, one for each
-measurement occasions that contain the dependent variable.
+weights λ are assigned to an object using the matrix function in R with
+contrasts in rows and groups in columns. The data must contain subjects
+in rows and *p* columns, one for each measurement occasions that contain
+the dependent variable.
 
 ``` r
 (nGroup <- ncol(presidents))
@@ -257,14 +250,14 @@ contrast_dependent(nGroup, lambda,presidents)
 
 The output of the **contrast\_dependent** function contains results for
 both contrasts: F-values, contrast estimates and corresponding
-\(t\)-values as well as two-tailed \(p\)-values. Furthermore, it
-contains the effect size \(g\), a standardized distance measure.
+*t*-values as well as two-tailed *p*-values. Furthermore, it contains
+the effect size *g*, a standardized distance measure.
 
-The results of this empirical example show that for \(\alpha = .05\),
-Contrast 1 and Contrast 2 fit the data well, as all \(t > 3.10\) and all
-\(p < .003\). Hence, it seems that presidential approval ratings
-decrease over the four calendar quarters, but it cannot be identified
-whether or not this decrease stagnates over warmer months.
+The results of this empirical example show that for α = .05, Contrast 1
+and Contrast 2 fit the data well, as all *t* \> 3.10 and all *p* \<
+.003. Hence, it seems that presidential approval ratings decrease over
+the four calendar quarters, but it cannot be identified whether or not
+this decrease stagnates over warmer months.
 
 #### Testing competing contrasts against each other
 
@@ -298,14 +291,13 @@ the standardized contrast weights as well as their difference that is
 used for the contrast analyses.
 
 Similar to the \*\*compare\_independent\* function, the data supports
-Hypothesis \(H_1\) when the \(t\)-value of the summary of results is
-positive and significantly different from \(0\), while the data support
-hypothesis \(H_2\) when the \(t\)-value is negative and significantly
-different from \(0\). Hence, the results of this direct comparison show
-that for \(\alpha = .05\) neither of the two contrasts outperforms the
-other as \(t = 0.53\) and \(p = .59\). Hence, there is a decrease in
-approval ratings, but it is not decisive whether this decrease stagnates
-over the summer months or not.
+Hypothesis H1 when the *t*-value of the summary of results is positive
+and significantly different from 0, while the data support hypothesis H2
+when the *t*-value is negative and significantly different from 0.
+Hence, the results of this direct comparison show that for α = .05
+neither of the two contrasts outperforms the other as *t* = 0.53 and *p*
+= .59. Hence, there is a decrease in approval ratings, but it is not
+decisive whether this decrease stagnates over the summer months or not.
 
 ## References
 
