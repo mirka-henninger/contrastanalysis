@@ -154,8 +154,9 @@ fixed to 0.</p></td>
 
     <p>a dataframe with following entries for each of the contrasts:</p><dl>
   <dt><code>SumsofSquares</code></dt><dd><p>Sums of Squares</p></dd>
+  <dt><code>df</code></dt><dd><p>Degrees of freedom for each contrast</p></dd>
   <dt><code>F</code></dt><dd><p>F-values</p></dd>
-  <dt><code>estimate</code></dt><dd><p>Contrast estimates</p></dd>
+  <dt><code>contrast estimate</code></dt><dd><p>Contrast estimates</p></dd>
   <dt><code>t</code></dt><dd><p>t-values</p></dd>
   <dt><code>p</code></dt><dd><p>Two-tailed p-values</p></dd>
   <dt><code>g</code></dt><dd><p>Effect size g, a standardized distance measure</p></dd>
@@ -181,9 +182,9 @@ fixed to 0.</p></td>
 
 <span class='co'># perform contrast analysis</span>
 <span class='fu'>contrast_dependent</span><span class='op'>(</span><span class='va'>nGroup</span>, <span class='va'>lambda</span>,<span class='va'>presidents</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                  F estimate      t      p      g
-#&gt; Contrast 1  9.6148   7.9231 3.1008 0.0047 0.6081
-#&gt; Contrast 2 10.4904  24.1923 3.2389 0.0034 0.6352</div><div class='input'>
+</div><div class='output co'>#&gt;                  F df contrast.estimate      t      p      g
+#&gt; Contrast 1  9.6148  1            7.9231 3.1008 0.0047 0.6081
+#&gt; Contrast 2 10.4904  1           24.1923 3.2389 0.0034 0.6352</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
