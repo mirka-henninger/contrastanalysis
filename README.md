@@ -295,7 +295,7 @@ Hypothesis H1 when the *t*-value of the summary of results is positive
 and significantly different from 0, while the data support hypothesis H2
 when the *t*-value is negative and significantly different from 0.
 Hence, the results of this direct comparison show that for α = .05
-neither of the two contrasts outperforms the other as *t* = 0.53 and *p*
+neither of the two contrasts outperforms the other as *t* = 0.54 and *p*
 = .59. Hence, there is a decrease in approval ratings, but it is not
 decisive whether this decrease stagnates over the summer months or not.
 
