@@ -70,10 +70,10 @@ contrast_independent <- function(nGroup,
   }
 
   # Get group size, means and variances -------------------------------------
-  groupVals <- data.frame(groups = levels(dat$groups),
-                            groupSize = tapply(dat$values,dat$groups,length),
-                            groupMeans = tapply(dat$values,dat$groups,mean),
-                            groupVariances = tapply(dat$values,dat$groups,var)
+  groupVals <- data.frame(groups = unique(dat$groups),
+                          groupSize = tapply(dat$values,dat$groups,length),
+                          groupMeans = tapply(dat$values,dat$groups,mean),
+                          groupVariances = tapply(dat$values,dat$groups,var)
 
   )
 
