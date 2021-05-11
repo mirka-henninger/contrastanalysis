@@ -122,7 +122,7 @@ The contrast weights λ are assigned to an object using the matrix function in R
 contrast_independent(nGroup, lambda, iris)
 ```
 
-The output of the **contrast_independent** function contains results for both contrasts: Sums of squares and corresponding F-values, contrast estimates and corresponding *t*-values as well as two-tailed *p*-values. Furthermore, it contains several effect sizes, such as r_{\text{effect size}} which can be interpreted as a correlation between the dependent variable and the contrast weights, *r*(alerting) corresponding to the correlation between group means and contrast weights, *r*(alerting)² which can be interpreted similar to a determination coefficient as a measured of explained variance by the contrast. *r*(contrast) is useful for power analyses. 
+The output of the **contrast_independent** function contains results for both contrasts: Sums of squares and corresponding F-values, contrast estimates and corresponding *t*-values as well as two-tailed *p*-values. Furthermore, it contains several effect sizes, such as *r*(effect size) which can be interpreted as a correlation between the dependent variable and the contrast weights, *r*(alerting) corresponding to the correlation between group means and contrast weights, *r*(alerting)² which can be interpreted similar to a determination coefficient as a measured of explained variance by the contrast. *r*(contrast) is useful for power analyses. 
 
 The results of this empirical example show that for α = .05, Contrast 1 and Contrast 2 fit the data well, as all *t* > 46.21 and all *p* < .001. Hence, it seems that there is an increase in petal length from setosa over versicolor to virginica, and at the same time the results suggest that setosa has smaller petal length than versicolor and virginica.
 
@@ -200,7 +200,7 @@ compare_dependent(nGroup=nGroup, lambda1, lambda2, presidents)
 
 The output of the **compare_dependent** function mirrors the information from **contrast_dependent**, but only shows results for one test only, namely a different comparison of the two hypotheses and shows the standardized contrast weights as well as their difference that is used for the contrast analyses. 
 
-Similar to the **compare_independent* function, the data supports Hypothesis H1 when the *t*-value of the summary of results is positive and significantly different from 0, while the data support hypothesis H2 when the *t*-value is negative and significantly different from 0. Hence, the results of this direct comparison show that for α = .05 neither of the two contrasts outperforms the other as *t* = 0.53 and *p* = .59. Hence, there is a decrease in approval ratings, but it is not decisive whether this decrease stagnates over the summer months or not. 
+Similar to the **compare_independent** function, the data supports Hypothesis H1 when the *t*-value of the summary of results is positive and significantly different from 0, while the data support hypothesis H2 when the *t*-value is negative and significantly different from 0. Hence, the results of this direct comparison show that for α = .05 neither of the two contrasts outperforms the other as *t* = 0.53 and *p* = .59. Hence, there is a decrease in approval ratings, but it is not decisive whether this decrease stagnates over the summer months or not. 
 
 
 

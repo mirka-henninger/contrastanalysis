@@ -138,10 +138,10 @@ contrast_independent(nGroup, lambda, iris)
 The output of the **contrast\_independent** function contains results
 for both contrasts: Sums of squares and corresponding F-values, contrast
 estimates and corresponding *t*-values as well as two-tailed *p*-values.
-Furthermore, it contains several effect sizes, such as r\_{} which can
-be interpreted as a correlation between the dependent variable and the
-contrast weights, *r*(alerting) corresponding to the correlation between
-group means and contrast weights, *r*(alerting)² which can be
+Furthermore, it contains several effect sizes, such as *r*(effect size)
+which can be interpreted as a correlation between the dependent variable
+and the contrast weights, *r*(alerting) corresponding to the correlation
+between group means and contrast weights, *r*(alerting)² which can be
 interpreted similar to a determination coefficient as a measured of
 explained variance by the contrast. *r*(contrast) is useful for power
 analyses.
