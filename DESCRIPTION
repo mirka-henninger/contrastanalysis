@@ -1,21 +1,29 @@
 Package: contrastanalysis
 Title: Testing Single and Competing Contrasts
 Version: 0.0.0.9000
-Authors@R: c(person("Mirka", "Henninger", email = "mail@mirka-henninger.de", role = c("aut", "cre")),
-             person("Simone", "Malejka", role = "aut"))
-Description: Performs contrast analyses for independent and dependent samples. 
-              Furthermore, it allows to test two competing contrasts against each other. 
+Authors@R: 
+    c(person(given = "Mirka",
+             family = "Henninger",
+             role = c("aut", "cre"),
+             email = "mail@mirka-henninger.de"),
+      person(given = "Simone",
+             family = "Malejka",
+             role = "aut"))
+Description: Performs contrast analyses for independent and dependent
+    samples.  Furthermore, it allows to test two competing contrasts
+    against each other.
 License: MIT + file LICENSE
-ByteCompile: true
-Encoding: UTF-8
-LazyData: true
-Imports: 
-    optimbase
 Depends:
     R (>= 3.1.0)
-RoxygenNote: 7.1.1
+Imports: 
+    optimbase
 Suggests: 
-    testthat,
     knitr,
-    rmarkdown
-VignetteBuilder: knitr
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
+ByteCompile: true
+Config/testthat/edition: 3
+Encoding: UTF-8
+RoxygenNote: 7.1.1

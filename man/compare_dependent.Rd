@@ -16,31 +16,33 @@ compare_dependent(nGroup, lambda1, lambda2, dat, testvalue = 0)
 
 \item{lambda2}{A vector of contrast weights for Hypothesis 2}
 
-\item{dat}{A matrix or dataframe with nGroup columns; each row contains values for
-one respondent;
-each column contains values of the dependent variable in the respective within-
-subject group}
+\item{dat}{A matrix or dataframe with nGroup columns; each row contains values
+for one respondent;
+each column contains values of the dependent variable in the respective
+within-subject group}
 
-\item{testvalue}{value under the Null hypothesis; if not specified, it is fixed to 0.}
+\item{testvalue}{value under the Null hypothesis; if not specified, it is
+fixed to 0.}
 }
 \value{
 A list with following entries:
 \describe{
   \item{\code{Results}}{Results of the contrast analysis}
-  \item{\code{Contrast Weights}}{Standardized contrast weights of the two original
-   contrasts and difference between standardized contrast weights}
+  \item{\code{Contrast Weights}}{Standardized contrast weights of the
+  two original contrasts and difference between standardized contrast weights}
 }
 }
 \description{
-This function allows to directly compare two contrasts for dependent samples by
-standardizing the contrast weights.
+This function allows to directly compare two contrasts for dependent samples
+by standardizing the contrast weights.
 Please note that sample sizes must be equal between within-subject groups,
 so no missings are allowed
 }
 \note{
-A test favoring Hypothesis 1 is performed, hence a positive t-value indicate
- that the contrast weights contained in lambda1 fit the data better than the contrast
- weights contained in lambda2, and vice versa for a negative t-value.
+A test favoring Hypothesis 1 is performed, hence a positive t-value
+indicate that the contrast weights contained in lambda1 fit the data better
+than the contrast weights contained in lambda2, and vice versa for a negative
+t-value.
 }
 \examples{
 # load presidents dataset
@@ -56,9 +58,5 @@ lambda2 <- c(3, 1, -1, -3)  # H2: linear decrease in  approval ratings
 
 # perform contrast analysis
 compare_dependent(nGroup=4, lambda1, lambda2, presidents)
-# -2 < t < 2 indicates that both contrasts fit the data equally well
-# The test is not significant with p > .05. This suggests that presidental approval
-# ratings decreases over the four calendar quarters, and there is no 'Christmas bonus'
-# in presidental approval ratings in the fourth calendar quarter.
 
 }

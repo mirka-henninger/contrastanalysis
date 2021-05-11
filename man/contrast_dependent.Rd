@@ -12,15 +12,16 @@ contrast_dependent(nGroup, lambda, dat, testvalue = 0)
 \arguments{
 \item{nGroup}{Number of dependent / within-subject groups}
 
-\item{lambda}{A matrix of contrast weights with contrasts in rows and groups in
-columns}
+\item{lambda}{A matrix of contrast weights with contrasts in rows and
+groups in columns}
 
-\item{dat}{A matrix or dataframe with nGroup columns; each row contains values for
-one respondent;
-each column contains values of the dependent variable in the respective within-
-subject group}
+\item{dat}{A matrix or dataframe with nGroup columns; each row contains
+values for one respondent;
+each column contains values of the dependent variable in the respective
+within-subject group}
 
-\item{testvalue}{Value under the null hypothesis; if not specified, it is fixed to 0.}
+\item{testvalue}{Value under the null hypothesis; if not specified, it is
+fixed to 0.}
 }
 \value{
 a dataframe with following entries for each of the contrasts:
@@ -56,9 +57,5 @@ lambda <- matrix(c(
 
 # perform contrast analysis
 contrast_dependent(nGroup, lambda,presidents)
-# t > 2 indicates that Contrast 1 and Contrast 2 fit the data well
-# Both tests are significant with p < .05. This suggests that presidental approval
-# ratings decrease over the four calendar quarters, but it cannot be identified
-# whether or not this decrease stagnates over warmer months.
 
 }

@@ -5,13 +5,14 @@
 #' so no missings are allowed
 #'
 #' @param nGroup Number of dependent / within-subject groups
-#' @param lambda A matrix of contrast weights with contrasts in rows and groups in
-#'  columns
-#' @param dat A matrix or dataframe with nGroup columns; each row contains values for
-#'  one respondent;
-#'  each column contains values of the dependent variable in the respective within-
-#'  subject group
-#' @param testvalue Value under the null hypothesis; if not specified, it is fixed to 0.
+#' @param lambda A matrix of contrast weights with contrasts in rows and
+#' groups in columns
+#' @param dat A matrix or dataframe with nGroup columns; each row contains
+#' values for one respondent;
+#' each column contains values of the dependent variable in the respective
+#' within-subject group
+#' @param testvalue Value under the null hypothesis; if not specified, it is
+#' fixed to 0.
 #'
 #' @return a dataframe with following entries for each of the contrasts:
 #' \describe{
@@ -43,10 +44,6 @@
 #'
 #' # perform contrast analysis
 #' contrast_dependent(nGroup, lambda,presidents)
-#' # t > 2 indicates that Contrast 1 and Contrast 2 fit the data well
-#' # Both tests are significant with p < .05. This suggests that presidental approval
-#' # ratings decrease over the four calendar quarters, but it cannot be identified
-#' # whether or not this decrease stagnates over warmer months.
 #'
 #' @export
 contrast_dependent <- function(nGroup,
@@ -59,9 +56,11 @@ contrast_dependent <- function(nGroup,
   names(dat) <- paste0("group", 1:nGroup)
   if (nGroup != ncol(dat) | nGroup != ncol(lambda)) {
     stop("Please check the data format: \n",
-         " * each column must contain the dependent variable in the within-subject group \n",
+         " * each column must contain the dependent variable in the
+         within-subject group \n",
          " * nGroup must be the total number of within-subject groups \n",
-         " * lambda must contain the contrast weights in rows and group indicator in columns")
+         " * lambda must contain the contrast weights in rows and group
+         indicator in columns")
   }
   if (all(!(rowSums(lambda) - 0) < .Machine$double.eps)) {
     stop("Your contrast weights do not sum to 0 for all contrasts. ",

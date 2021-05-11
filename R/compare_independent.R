@@ -34,10 +34,6 @@
 #'
 #' # perform contrast analysis
 #' compare_independent(nGroup=3, lambda1, lambda2, iris)
-#' # t > 2 indicates that Contrast 1 is a better fit to the data than Contrast 2
-#' # The test is significant with p < .05.
-#' # Although Iris versicolor is a hybrid of the two other species, it is very similar to
-#' # to Iris virginica with regards to its petal length
 #'
 #' @export
 compare_independent <- function(nGroup,

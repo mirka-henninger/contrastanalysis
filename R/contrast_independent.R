@@ -3,12 +3,12 @@
 #' This function allows to perform contrast analyses for independent samples
 #'
 #' @param nGroup Number of independent / between-subject groups
-#' @param lambda A matrix of contrast weights with contrasts in rows and groups in
-#'  columns
-#' @param dat A matrix or dataframe with two columns; each row contains values for
-#'  one respondent;
-#'  the first column contains the group indicator, the second column contains the
-#'  dependent variable
+#' @param lambda A matrix of contrast weights with contrasts in rows and
+#' groups in columns
+#' @param dat A matrix or dataframe with two columns; each row contains
+#' values for one respondent;
+#' the first column contains the group indicator, the second column contains
+#' the dependent variable
 #'
 #' @return A dataframe with following entries for each of the contrasts:
 #' \describe{
@@ -17,11 +17,12 @@
 #'   \item{\code{estimate}}{Contrast estimates}
 #'   \item{\code{t}}{t-values}
 #'   \item{\code{p}}{Two-tailed p-values}
-#'   \item{\code{rEffectSize}}{Correlation between the dependent variable and the
-#'    contrast weights}
+#'   \item{\code{rEffectSize}}{Correlation between the dependent variable and
+#'   the contrast weights}
 #'   \item{\code{rAlerting}}{Correlation between group means and contrast weights}
-#'   \item{\code{r2Aalerting}}{Squared \code{rAlerting}; can be interpreted similar to
-#'    a determination coefficient as a measured of explained variance by the contrast
+#'   \item{\code{r2Aalerting}}{Squared \code{rAlerting}; can be interpreted
+#'   similar to a determination coefficient as a measured of explained variance
+#'   by the contrast
 #'   \code{(SScontrast/SSbetween)}}
 #'   \item{\code{rContrast}}{\code{sqrt(t^2/(t^2 + df))}; useful for power analyses}
 #' }
@@ -42,11 +43,6 @@
 #'                 byrow=TRUE)
 #' # perform contrast analysis
 #' contrast_independent(nGroup, lambda, iris)
-#' # t > 2 indicates that Contrast 1 and Contrast 2 fit the data well
-#' # Both tests are significant with p < .05
-#' # It seems that there is an increase in Petal Length from setosa over versicolor to virginica,
-#' # but at the same time the results suggest that setosa has smaller Petal Length than versicolor
-#' # and virginica.
 #'
 #'
 #' @export
@@ -62,7 +58,8 @@ contrast_independent <- function(nGroup,
          " * the first column must contain the group indicator \n",
          " * the second the dependent variable \n",
          " * nGroup must be the total number of between-subject groups \n",
-         " * lambda must contain the contrast weights in rows and group indicator in columns")
+         " * lambda must contain the contrast weights in rows and group indicator
+         in columns")
   }
   if (all(!(rowSums(lambda) - 0) < .Machine$double.eps)) {
     stop("Your contrast weights do not sum to 0 for all contrasts. ",

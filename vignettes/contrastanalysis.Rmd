@@ -31,7 +31,7 @@ library(contrastanalysis)
 ```
 
 
-To illustrate the functions of this package, we use two datasets that are already available in R: a subset of variables of the **iris** data for contrast analysis for independent samples and \texttt{president} for contrast analyses for dependent samples. We load the data using the following code:
+To illustrate the functions of this package, we use two datasets that are already available in R: a subset of variables of the **iris** data for contrast analysis for independent samples and **president** for contrast analyses for dependent samples. We load the data using the following code:
 
 ```{r, fig.height=3.5, fig.width=6}
 # load data
@@ -50,12 +50,12 @@ plot(colMeans(presidents), type = "b", main = "Example used \nfor dependent samp
 
 The **iris** dataset contains the independent variable **Species** with three groups (setosa, versicolor, and virginica) and the dependent variable **Petal.Length**. The **presidents** datasets contains quarterly approval rating for the US presidents.
 
-We show how to test a priori specified hyptheses using planned contrast analysis, but also how to directly test two competing contrasts against each other. We will give an example of each approach for independent samples using the **iris** dataset and for dependent samples using the **presidents** dataset. 
+We show how to test a priori specified hypotheses using planned contrast analysis, but also how to directly test two competing contrasts against each other. We will give an example of each approach for independent samples using the **iris** dataset and for dependent samples using the **presidents** dataset. 
 
 
 ### Contrast analysis for independent samples
 
-We would like to compare petal length of differet species of iris. We have two hypotheses:
+We would like to compare petal length of different species of iris. We have two hypotheses:
 
 $H_1$: An increase in petal length from setosa over versicolor to virginica
 
@@ -149,7 +149,7 @@ contrast_dependent(nGroup, lambda,presidents)
 
 The output of the **contrast_dependent** function contains results for both contrasts: F-values, contrast estimates and corresponding $t$-values as well as two-tailed $p$-values. Furthermore, it contains the effect size $g$, a standardized distance measure. 
 
-The results of this empirical example show that for $\alpha = .05$, Contrast 1 and Contrast 2 fit the data well, as all $t > 3.10$ and all $p < .003$. Hence, it seems that presidental approval ratings decrease over the four calendar quarters, but it cannot be identified whether or not this decrease stagnates over warmer months. 
+The results of this empirical example show that for $\alpha = .05$, Contrast 1 and Contrast 2 fit the data well, as all $t > 3.10$ and all $p < .003$. Hence, it seems that presidential approval ratings decrease over the four calendar quarters, but it cannot be identified whether or not this decrease stagnates over warmer months. 
 
 #### Testing competing contrasts against each other
 

@@ -7,3 +7,5 @@
 ^CONDUCT\.md$
 ^CONTRIBUTING\.md$
 analysis/
+^cran-comments\.md$
+^\.github$
