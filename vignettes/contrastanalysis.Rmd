@@ -166,7 +166,7 @@ compare_dependent(nGroup=nGroup, lambda1, lambda2, presidents)
 
 The output of the **compare_dependent** function mirrors the information from **contrast_dependent**, but only shows results for one test only, namely a different comparison of the two hypotheses and shows the standardized contrast weights as well as their difference that is used for the contrast analyses. 
 
-Similar to the **compare_independent* function, the data supports Hypothesis $H_1$ when the $t$-value of the summary of results is positive and significantly different from $0$, while the data support hypothesis $H_2$ when the $t$-value is negative and significantly different from $0$. Hence, the results of this direct comparison show that for $\alpha = .05$ neither of the two contrasts outperforms the other as $t = 0.53$ and $p = .59$. Hence, there is a decrease in approval ratings, but it is not decisive whether this decrease stagnates over the summer months or not. 
+Similar to the **compare_independent* function, the data supports Hypothesis $H_1$ when the $t$-value of the summary of results is positive and significantly different from $0$, while the data support hypothesis $H_2$ when the $t$-value is negative and significantly different from $0$. Hence, the results of this direct comparison show that for $\alpha = .05$ neither of the two contrasts outperforms the other as $t = 0.54$ and $p = .59$. Hence, there is a decrease in approval ratings, but it is not decisive whether this decrease stagnates over the summer months or not. 
 
 
 ### References
