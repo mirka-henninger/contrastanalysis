@@ -62,7 +62,7 @@ contrast_independent <- function(nGroup,
          " * lambda must contain the contrast weights in rows and group indicator
          in columns")
   }
-  if (all(!(rowSums(lambda) - 0) < .Machine$double.eps)) {
+  if (all(!(rowSums(lambda) == 0))) {
     stop("Your contrast weights do not sum to 0 for all contrasts. ",
          "Please check the weights again!")
   }

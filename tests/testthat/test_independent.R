@@ -1,5 +1,4 @@
 ### Testcode
-library(contrastanalysis)
 
 ### Generate data
 set.seed(1)
@@ -54,3 +53,23 @@ compareResult <- compare_independent(nGroup, lambda1, lambda2, dat)
 expect_equal(compareResult$results$F, compareResult$results$t^2, tolerance = 1e-3)
 # difference in contrast wteights
 expect_equal(compareResult$contrastWeights$lambda1Std - compareResult$contrastWeights$lambda2Std, compareResult$contrastWeights$lambdaDiff, tolerance = 1e-3)
+
+
+
+# test warnings -----------------------------------------------------------
+# group number is not correct
+expect_error(contrast_independent(nGroup-1, lambda, dat))
+expect_error(contrast_independent(nGroup+1, lambda, dat))
+
+# lambda does not match group
+expect_error(contrast_independent(nGroup, lambda[,-1], dat))
+expect_error(contrast_independent(nGroup, lambda[,-4], dat))
+
+# dat has strange format
+expect_error(contrast_independent(nGroup, lambda, cbind(dat[,2], dat[,1])))
+expect_error(contrast_independent(nGroup, lambda, dat[,1]))
+expect_error(contrast_independent(nGroup, lambda, dat[,2]))
+
+# contrast weights do not sum to zero
+expect_error(contrast_independent(nGroup, lambda+1, dat))
+expect_error(contrast_independent(nGroup, lambda-1, dat))

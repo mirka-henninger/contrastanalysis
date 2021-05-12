@@ -1,5 +1,4 @@
 ### Testcode
-library(contrastanalysis)
 
 ### Generate data
 set.seed(1)
@@ -21,7 +20,24 @@ dat <- data.frame(
 ### Run contrast analysis
 contResult <- contrast_dependent(nGroup, lambda,dat)
 
+longDat <- data.frame(
+  dv = c(dat$x1, dat$x2, dat$x3, dat$x4),
+  iv = rep(1:4, each = nrow(dat)),
+  id = rep(1:50, 4)
+)
+
+a1 <- afex::aov_ez("id", "dv", within = "iv", data = longDat)
+# compare to R functions
+contrANOVA <- emmeans::emmeans(a1, ~ iv)
+#Testing the contrasts
+anoResult <- data.frame(emmeans::contrast(contrANOVA, list(lambda[1,], lambda[2,], lambda[3,])))
+
+
 ### Tests
+# equal contrast estimate
+expect_equal(contResult$contrast.estimate, anoResult$estimate, tolerance = 1e-3)
+# equal p values
+expect_equal(contResult$p, anoResult$p.value, tolerance = 1e-2)
 # squared t value is F value
 expect_equal(contResult$F, contResult$t^2, tolerance = 1e-3)
 

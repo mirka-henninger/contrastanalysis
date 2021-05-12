@@ -18,6 +18,8 @@ Depends:
 Imports: 
     optimbase
 Suggests: 
+    afex,
+    emmeans,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
