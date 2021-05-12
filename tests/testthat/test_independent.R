@@ -27,15 +27,15 @@ anoResult <- data.frame(anova(lmMod))[-nGroup,]
 
 ### Tests
 # equal sums of squares
-expect_equal(contResult$SumsofSquares, anoResult[,2], tolerance = 1e-3)
+expect_equal(contResult$SumsofSquares, anoResult[,2], tolerance = 1e-4)
 # equal F value / t value
-expect_equal(contResult$F, anoResult[,4], tolerance = 1e-3)
-expect_equal(contResult$t, lmResult[,3], tolerance = 1e-3)
-# equal p values
+expect_equal(contResult$F, anoResult[,4], tolerance = 1e-4)
+expect_equal(contResult$t, lmResult[,3], tolerance = 1e-4)
+# equal p values (here tolerance is higher, because p-values may differ due to differences in degrees of freedom)
 expect_equal(contResult$p, anoResult[,5], tolerance = 1e-2)
 expect_equal(contResult$p, lmResult[,4], tolerance = 1e-2)
 # squared t value is F value
-expect_equal(contResult$F, contResult$t^2, tolerance = 1e-3)
+expect_equal(contResult$F, contResult$t^2, tolerance = 1e-4)
 
 
 # compare_independent -----------------------------------------------------
@@ -50,9 +50,9 @@ compareResult <- compare_independent(nGroup, lambda1, lambda2, dat)
 
 ### Tests
 # squared t value is F value
-expect_equal(compareResult$results$F, compareResult$results$t^2, tolerance = 1e-3)
+expect_equal(compareResult$results$F, compareResult$results$t^2, tolerance = 1e-4)
 # difference in contrast wteights
-expect_equal(compareResult$contrastWeights$lambda1Std - compareResult$contrastWeights$lambda2Std, compareResult$contrastWeights$lambdaDiff, tolerance = 1e-3)
+expect_equal(compareResult$contrastWeights$lambda1Std - compareResult$contrastWeights$lambda2Std, compareResult$contrastWeights$lambdaDiff, tolerance = 1e-4)
 
 
 
@@ -73,3 +73,4 @@ expect_error(contrast_independent(nGroup, lambda, dat[,2]))
 # contrast weights do not sum to zero
 expect_error(contrast_independent(nGroup, lambda+1, dat))
 expect_error(contrast_independent(nGroup, lambda-1, dat))
+
