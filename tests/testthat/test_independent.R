@@ -57,6 +57,7 @@ expect_equal(compareResult$contrastWeights$lambda1Std - compareResult$contrastWe
 
 
 # test warnings -----------------------------------------------------------
+### contrast_independent
 # group number is not correct
 expect_error(contrast_independent(nGroup-1, lambda, dat))
 expect_error(contrast_independent(nGroup+1, lambda, dat))
@@ -74,3 +75,22 @@ expect_error(contrast_independent(nGroup, lambda, dat[,2]))
 expect_error(contrast_independent(nGroup, lambda+1, dat))
 expect_error(contrast_independent(nGroup, lambda-1, dat))
 
+
+
+### compare_independent
+# group number is not correct
+expect_error(compare_independent(nGroup-1, lambda1, lambda2, dat))
+expect_error(compare_independent(nGroup+1, lambda1, lambda2, dat))
+
+# lambda does not match group
+expect_error(compare_independent(nGroup,  lambda1[-1], lambda2, dat))
+expect_error(compare_independent(nGroup,  lambda1, lambda2[-1], dat))
+
+# dat has strange format
+expect_error(compare_independent(nGroup, lambda1, lambda2, cbind(dat, dat[,1])))
+expect_error(compare_independent(nGroup, lambda1, lambda2, dat[,-1]))
+expect_error(compare_independent(nGroup, lambda1, lambda2, dat[,-2]))
+
+# contrast weights do not sum to zero
+expect_error(compare_independent(nGroup, lambda1+1, lambda2, dat))
+expect_error(compare_independent(nGroup, lambda1, lambda2+1, dat))
