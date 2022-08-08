@@ -20,10 +20,12 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
+    afex,
+    emmeans,
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 ByteCompile: true
 Config/testthat/edition: 3
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1

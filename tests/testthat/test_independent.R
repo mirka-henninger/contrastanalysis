@@ -16,26 +16,26 @@ dat <- data.frame(
 
 # contrast_independent -----------------------------------------------------
 ### Run contrast analysis
-contResult <- contrast_independent(nGroup, lambda, dat)
+contrast_result <- contrast_independent(nGroup, lambda, dat)
 # compare to linear model
 dat$c1 <- ifelse(dat$x==1 | dat$x==2, -1,1)
 dat$c2 <- ifelse(dat$x==1 | dat$x==3, -1,1)
 dat$c3 <- ifelse(dat$x==2 | dat$x==3, -1,1)
-lmMod <- lm(y~c1+c2+c3,data=dat)
-lmResult <- data.frame(coef(summary(lmMod)))[-1,]
-anoResult <- data.frame(anova(lmMod))[-nGroup,]
+lm_mod <- lm(y~c1+c2+c3,data=dat)
+lm_result <- data.frame(coef(summary(lm_mod)))[-1,]
+ano_result <- data.frame(anova(lm_mod))[-nGroup,]
 
 ### Tests
 # equal sums of squares
-expect_equal(contResult$SumsofSquares, anoResult[,2], tolerance = 1e-4)
+expect_equal(contrast_result$SumsofSquares, ano_result[,2], tolerance = 1e-4)
 # equal F value / t value
-expect_equal(contResult$F, anoResult[,4], tolerance = 1e-4)
-expect_equal(contResult$t, lmResult[,3], tolerance = 1e-4)
+expect_equal(contrast_result$F, ano_result[,4], tolerance = 1e-4)
+expect_equal(contrast_result$t, lm_result[,3], tolerance = 1e-4)
 # equal p values (here tolerance is higher, because p-values may differ due to differences in degrees of freedom)
-expect_equal(contResult$p, anoResult[,5], tolerance = 1e-2)
-expect_equal(contResult$p, lmResult[,4], tolerance = 1e-2)
+expect_equal(contrast_result$p, ano_result[,5], tolerance = 1e-2)
+expect_equal(contrast_result$p, lm_result[,4], tolerance = 1e-2)
 # squared t value is F value
-expect_equal(contResult$F, contResult$t^2, tolerance = 1e-4)
+expect_equal(contrast_result$F, contrast_result$t^2, tolerance = 1e-4)
 
 
 # compare_independent -----------------------------------------------------
@@ -46,13 +46,13 @@ dat <- data.frame(
   y = c(rnorm(50,-1,1),rnorm(50),rnorm(50),rnorm(50,1,1))
 )
 
-compareResult <- compare_independent(nGroup, lambda1, lambda2, dat)
+compare_result <- compare_independent(nGroup, lambda1, lambda2, dat)
 
 ### Tests
 # squared t value is F value
-expect_equal(compareResult$results$F, compareResult$results$t^2, tolerance = 1e-4)
+expect_equal(compare_result$results$F, compare_result$results$t^2, tolerance = 1e-4)
 # difference in contrast wteights
-expect_equal(compareResult$contrastWeights$lambda1Std - compareResult$contrastWeights$lambda2Std, compareResult$contrastWeights$lambdaDiff, tolerance = 1e-4)
+expect_equal(compare_result$contrastWeights$lambda1Std - compare_result$contrastWeights$lambda2Std, compare_result$contrastWeights$lambdaDiff, tolerance = 1e-4)
 
 
 
