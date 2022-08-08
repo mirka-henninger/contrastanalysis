@@ -117,27 +117,27 @@
 <p>The contrast weights <span class="math inline">\(\boldsymbol{\lambda}\)</span> are assigned to an object using the matrix function in R with contrasts in rows and groups in columns. The data must contain subjects in rows and two columns: the first columns contains the group indicator (here <strong>Species</strong>), the second column contains the dependent variable (here <strong>Petal.Length</strong>).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract the number of groups</span></span>
-<span><span class="op">(</span><span class="va">nGroup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">n_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 3</span></span>
 <span></span>
 <span><span class="co"># define lambda weights</span></span>
 <span><span class="op">(</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="op">-</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>, <span class="co"># H1: An increase from setosa over versicolor to virginica</span></span>
 <span>  <span class="op">-</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># H2: Setosa has smaller petal length than versicolor and virginica</span></span>
-<span>  ncol <span class="op">=</span> <span class="va">nGroup</span>,</span>
+<span>  ncol <span class="op">=</span> <span class="va">n_group</span>,</span>
 <span>  byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
 <span><span class="co">#&gt; [1,]   -1    0    1</span></span>
 <span><span class="co">#&gt; [2,]   -2    1    1</span></span>
 <span></span>
 <span><span class="co"># perform contrast analysis</span></span>
-<span><span class="fu"><a href="../reference/contrast_independent.html">contrast_independent</a></span><span class="op">(</span><span class="va">nGroup</span>, <span class="va">lambda</span>, <span class="va">iris</span><span class="op">)</span></span>
-<span><span class="co">#&gt;            SumsofSquares df        F contrast.estimate       t p rEffectSize</span></span>
-<span><span class="co">#&gt; Contrast 1      418.2025  1 2258.262             4.090 47.5212 0      0.9490</span></span>
-<span><span class="co">#&gt; Contrast 2      395.3712  1 2134.975             6.888 46.2058 0      0.9228</span></span>
-<span><span class="co">#&gt;            rAlerting r2Alerting rContrast</span></span>
-<span><span class="co">#&gt; Contrast 1    0.9781     0.9568    0.9690</span></span>
-<span><span class="co">#&gt; Contrast 2    0.9511     0.9045    0.9673</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/contrast_independent.html">contrast_independent</a></span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda</span>, <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                  SS df  F_value contrast_estimate t_value p_value r_effect_size</span></span>
+<span><span class="co">#&gt; Contrast 1 418.2025  1 2258.262             4.090 47.5212       0        0.9490</span></span>
+<span><span class="co">#&gt; Contrast 2 395.3712  1 2134.975             6.888 46.2058       0        0.9228</span></span>
+<span><span class="co">#&gt;            r_alerting r2_alerting r_contrast</span></span>
+<span><span class="co">#&gt; Contrast 1     0.9781      0.9568     0.9690</span></span>
+<span><span class="co">#&gt; Contrast 2     0.9511      0.9045     0.9673</span></span></code></pre></div>
 <p>The output of the <strong>contrast_independent</strong> function contains results for both contrasts: Sums of squares and corresponding F-values, contrast estimates and corresponding <span class="math inline">\(t\)</span>-values as well as two-tailed <span class="math inline">\(p\)</span>-values. Furthermore, it contains several effect sizes, such as r_{} which can be interpreted as a correlation between the dependent variable and the contrast weights, <span class="math inline">\(r_{\text{alerting}}\)</span> corresponding to the correlation between group means and contrast weights, <span class="math inline">\(r_{\text{alerting}}^2\)</span> which can be interpreted similar to a determination coefficient as a measured of explained variance by the contrast <span class="math inline">\(\Big(\frac{SS_{\text{contrast}}}{SS_{\text{between}}}\Big)\)</span>. <span class="math inline">\(r_{\text{contrast}}\)</span> is defined as <span class="math inline">\(r_{\text{contrast}} = \sqrt{\frac{t^2}{t^2 + df}}\)</span> and is useful for power analyses.</p>
 <p>The results of this empirical example show that for <span class="math inline">\(\alpha = .05\)</span>, Contrast 1 and Contrast 2 fit the data well, as all <span class="math inline">\(t &gt; 46.21\)</span> and all <span class="math inline">\(p &lt; .001\)</span>. Hence, it seems that there is an increase in petal length from setosa over versicolor to virginica, and at the same time the results suggest that setosa has smaller petal length than versicolor and virginica.</p>
 </div>
@@ -151,18 +151,18 @@
 <span><span class="va">lambda2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># H2: Iris versicolor is more similar to Iris virginica</span></span>
 <span></span>
 <span><span class="co"># Perform contrast analysis</span></span>
-<span><span class="fu"><a href="../reference/compare_independent.html">compare_independent</a></span><span class="op">(</span>nGroup<span class="op">=</span><span class="fl">3</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/compare_independent.html">compare_independent</a></span><span class="op">(</span>n_group<span class="op">=</span><span class="fl">3</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">iris</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $results</span></span>
-<span><span class="co">#&gt;            SumsofSquares df      F contrast.estimate      t      p rEffectSize</span></span>
-<span><span class="co">#&gt; Contrast 1        1.1958  1 6.4574            0.1387 2.5411 0.0142      0.0507</span></span>
-<span><span class="co">#&gt;            rAlerting r2Alerting rContrast</span></span>
-<span><span class="co">#&gt; Contrast 1    0.0523     0.0027    0.2051</span></span>
+<span><span class="co">#&gt;                SS df F_value contrast_estimate t_value p_value r_effect_size</span></span>
+<span><span class="co">#&gt; Contrast 1 1.1958  1  6.4574            0.1387  2.5411  0.0142        0.0507</span></span>
+<span><span class="co">#&gt;            r_alerting r2_alerting r_contrast</span></span>
+<span><span class="co">#&gt; Contrast 1     0.0523      0.0027     0.2051</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $contrastWeights</span></span>
-<span><span class="co">#&gt;   lambda1Std lambda2Std lambdaDiff</span></span>
-<span><span class="co">#&gt; 1  -1.224745 -1.4142136  0.1894687</span></span>
-<span><span class="co">#&gt; 2   0.000000  0.7071068 -0.7071068</span></span>
-<span><span class="co">#&gt; 3   1.224745  0.7071068  0.5176381</span></span></code></pre></div>
+<span><span class="co">#&gt; $contrast_weights</span></span>
+<span><span class="co">#&gt;   lambda1_std lambda2_std lambda_diff</span></span>
+<span><span class="co">#&gt; 1   -1.224745  -1.4142136   0.1894687</span></span>
+<span><span class="co">#&gt; 2    0.000000   0.7071068  -0.7071068</span></span>
+<span><span class="co">#&gt; 3    1.224745   0.7071068   0.5176381</span></span></code></pre></div>
 <p>The output of the <strong>compare_independent</strong> function contains the same information as <strong>contrast_independent</strong> in terms of test statistics and effect sizes. But, results are shown for one test only, namely a different comparison of the two hypotheses. In addition, the standardized contrast weights as well as their difference that is used for the contrast analyses are shown in the output.</p>
 <p>When the <span class="math inline">\(t\)</span>-value of the summary of results is positive and significantly different from <span class="math inline">\(0\)</span>, the data supports Hypothesis <span class="math inline">\(H_1\)</span>, while the data support hypothesis <span class="math inline">\(H_2\)</span> when the <span class="math inline">\(t\)</span>-value is negative and significantly different from <span class="math inline">\(0\)</span>. Hence, the results of this direct comparison show that for <span class="math inline">\(\alpha = .05\)</span>, Contrast 1 does outperform Contrast 2 as <span class="math inline">\(t = 2.54\)</span> and <span class="math inline">\(p = .014\)</span>. Hence, it seems that there is an increase in petal length from setosa over versicolor to virginica rather than setosa having smaller petal length than versicolor and virginica together. The results suggest that although Iris versicolor is a hybrid of the two other species, it is very similar to Iris virginica with regards to its petal length.</p>
 </div>
@@ -182,24 +182,24 @@
 </h4>
 <p>As for the contrast analysis for independent samples, the contrast weights <span class="math inline">\(\boldsymbol{\lambda}\)</span> are assigned to an object using the matrix function in R with contrasts in rows and groups in columns. The data must contain subjects in rows and <span class="math inline">\(p\)</span> columns, one for each measurement occasions that contain the dependent variable.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">nGroup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">presidents</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">n_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">presidents</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 4</span></span>
 <span></span>
 <span><span class="co"># define lambda weights</span></span>
 <span><span class="op">(</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="co"># H1: decrease in approval ratings with stagnation over warmer months</span></span>
 <span>  <span class="fl">3</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span>, <span class="co"># H2: linear decrease in  approval ratings</span></span>
-<span>  ncol <span class="op">=</span> <span class="va">nGroup</span>,</span>
+<span>  ncol <span class="op">=</span> <span class="va">n_group</span>,</span>
 <span>  byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      [,1] [,2] [,3] [,4]</span></span>
 <span><span class="co">#&gt; [1,]    1    0    0   -1</span></span>
 <span><span class="co">#&gt; [2,]    3    1   -1   -3</span></span>
 <span></span>
 <span><span class="co"># perform contrast analysis</span></span>
-<span><span class="fu"><a href="../reference/contrast_dependent.html">contrast_dependent</a></span><span class="op">(</span><span class="va">nGroup</span>, <span class="va">lambda</span>,<span class="va">presidents</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                  F df contrast.estimate      t      p      g</span></span>
-<span><span class="co">#&gt; Contrast 1  9.6148  1            7.9231 3.1008 0.0047 0.6081</span></span>
-<span><span class="co">#&gt; Contrast 2 10.4904  1           24.1923 3.2389 0.0034 0.6352</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/contrast_dependent.html">contrast_dependent</a></span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda</span>,<span class="va">presidents</span><span class="op">)</span></span>
+<span><span class="co">#&gt;            F_value df contrast_estimate t_value p_value      g</span></span>
+<span><span class="co">#&gt; Contrast 1  9.6148  1            7.9231  3.1008  0.0047 0.6081</span></span>
+<span><span class="co">#&gt; Contrast 2 10.4904  1           24.1923  3.2389  0.0034 0.6352</span></span></code></pre></div>
 <p>The output of the <strong>contrast_dependent</strong> function contains results for both contrasts: F-values, contrast estimates and corresponding <span class="math inline">\(t\)</span>-values as well as two-tailed <span class="math inline">\(p\)</span>-values. Furthermore, it contains the effect size <span class="math inline">\(g\)</span>, a standardized distance measure.</p>
 <p>The results of this empirical example show that for <span class="math inline">\(\alpha = .05\)</span>, Contrast 1 and Contrast 2 fit the data well, as all <span class="math inline">\(t &gt; 3.10\)</span> and all <span class="math inline">\(p &lt; .003\)</span>. Hence, it seems that presidential approval ratings decrease over the four calendar quarters, but it cannot be identified whether or not this decrease stagnates over warmer months.</p>
 </div>
@@ -213,17 +213,17 @@
 <span><span class="va">lambda2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span>  <span class="co"># H2: linear decrease in  approval ratings</span></span>
 <span></span>
 <span><span class="co"># perform contrast analysis</span></span>
-<span><span class="fu"><a href="../reference/compare_dependent.html">compare_dependent</a></span><span class="op">(</span>nGroup<span class="op">=</span><span class="va">nGroup</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">presidents</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/compare_dependent.html">compare_dependent</a></span><span class="op">(</span>n_group<span class="op">=</span><span class="va">n_group</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">presidents</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $results</span></span>
-<span><span class="co">#&gt;                 F df contrast.estimate      t      p      g</span></span>
-<span><span class="co">#&gt; Contrast 1 0.2958  1            0.3858 0.5439 0.5914 0.1067</span></span>
+<span><span class="co">#&gt;            F_value df contrast_estimate t_value p_value      g</span></span>
+<span><span class="co">#&gt; Contrast 1  0.2958  1            0.3858  0.5439  0.5914 0.1067</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $contrastWeights</span></span>
-<span><span class="co">#&gt;   lambda1Std lambda2Std  lambdaDiff</span></span>
-<span><span class="co">#&gt; 1   1.414214  1.3416408  0.07257278</span></span>
-<span><span class="co">#&gt; 2   0.000000  0.4472136 -0.44721360</span></span>
-<span><span class="co">#&gt; 3   0.000000 -0.4472136  0.44721360</span></span>
-<span><span class="co">#&gt; 4  -1.414214 -1.3416408 -0.07257278</span></span></code></pre></div>
+<span><span class="co">#&gt; $contrast_weights</span></span>
+<span><span class="co">#&gt;   lambda1_std lambda2_std lambda_diff</span></span>
+<span><span class="co">#&gt; 1    1.414214   1.3416408  0.07257278</span></span>
+<span><span class="co">#&gt; 2    0.000000   0.4472136 -0.44721360</span></span>
+<span><span class="co">#&gt; 3    0.000000  -0.4472136  0.44721360</span></span>
+<span><span class="co">#&gt; 4   -1.414214  -1.3416408 -0.07257278</span></span></code></pre></div>
 <p>The output of the <strong>compare_dependent</strong> function mirrors the information from <strong>contrast_dependent</strong>, but only shows results for one test only, namely a different comparison of the two hypotheses and shows the standardized contrast weights as well as their difference that is used for the contrast analyses.</p>
 <p>Similar to the **compare_independent* function, the data supports Hypothesis <span class="math inline">\(H_1\)</span> when the <span class="math inline">\(t\)</span>-value of the summary of results is positive and significantly different from <span class="math inline">\(0\)</span>, while the data support hypothesis <span class="math inline">\(H_2\)</span> when the <span class="math inline">\(t\)</span>-value is negative and significantly different from <span class="math inline">\(0\)</span>. Hence, the results of this direct comparison show that for <span class="math inline">\(\alpha = .05\)</span> neither of the two contrasts outperforms the other as <span class="math inline">\(t = 0.54\)</span> and <span class="math inline">\(p = .59\)</span>. Hence, there is a decrease in approval ratings, but it is not decisive whether this decrease stagnates over the summer months or not.</p>
 </div>

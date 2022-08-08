@@ -47,7 +47,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">contrast_independent</span><span class="op">(</span><span class="va">nGroup</span>, <span class="va">lambda</span>, <span class="va">dat</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">contrast_independent</span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda</span>, <span class="va">dat</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="source">
@@ -56,7 +56,7 @@
     </div>
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>nGroup</dt>
+    <dl><dt>n_group</dt>
 <dd><p>Number of independent / between-subject groups</p></dd>
 
 
@@ -105,7 +105,7 @@ the dependent variable</p></dd>
 <dd><p>Squared <code>rAlerting</code>; can be interpreted
   similar to a determination coefficient as a measured of explained variance
   by the contrast
-  <code>(SScontrast/SSbetween)</code></p></dd>
+  <code>(SS_contrast/SSbetween)</code></p></dd>
 
   <dt><code>rContrast</code></dt>
 <dd><p><code>sqrt(t^2/(t^2 + df))</code>; useful for power analyses</p></dd>
@@ -118,22 +118,22 @@ the dependent variable</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># load iris dataset</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"iris"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">iris</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"Petal.Length"</span><span class="op">)</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">nGroup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">n_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># define lambda weights</span></span></span>
 <span class="r-in"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>                <span class="op">-</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>, <span class="co"># H1: An increase from setosa over versicolor to virginica</span></span></span>
 <span class="r-in"><span>                <span class="op">-</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># H2: Setosa has smaller Petal Length than versicolor and virginica</span></span></span>
-<span class="r-in"><span>                ncol <span class="op">=</span> <span class="va">nGroup</span>,</span></span>
+<span class="r-in"><span>                ncol <span class="op">=</span> <span class="va">n_group</span>,</span></span>
 <span class="r-in"><span>                byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># perform contrast analysis</span></span></span>
-<span class="r-in"><span><span class="fu">contrast_independent</span><span class="op">(</span><span class="va">nGroup</span>, <span class="va">lambda</span>, <span class="va">iris</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            SumsofSquares df        F contrast.estimate       t p rEffectSize</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1      418.2025  1 2258.262             4.090 47.5212 0      0.9490</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 2      395.3712  1 2134.975             6.888 46.2058 0      0.9228</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            rAlerting r2Alerting rContrast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1    0.9781     0.9568    0.9690</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 2    0.9511     0.9045    0.9673</span>
+<span class="r-in"><span><span class="fu">contrast_independent</span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda</span>, <span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  SS df  F_value contrast_estimate t_value p_value r_effect_size</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1 418.2025  1 2258.262             4.090 47.5212       0        0.9490</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 2 395.3712  1 2134.975             6.888 46.2058       0        0.9228</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            r_alerting r2_alerting r_contrast</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1     0.9781      0.9568     0.9690</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 2     0.9511      0.9045     0.9673</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
