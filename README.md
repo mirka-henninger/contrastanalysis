@@ -1,7 +1,7 @@
 contrastanalysis
 ================
 Mirka Henninger & Simone Malejka
-2021-05-11
+2022-08-08
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -112,31 +112,31 @@ contains the dependent variable (here **Petal.Length**).
 
 ``` r
 # extract the number of groups
-(nGroup <- length(levels(iris$Species)))
+(n_group <- length(levels(iris$Species)))
 #> [1] 3
 
 # define lambda weights
 (lambda <- matrix(c(
   -1,0,1, # H1: An increase from setosa over versicolor to virginica
   -2,1,1), # H2: Setosa has smaller petal length than versicolor and virginica
-  ncol = nGroup,
+  ncol = n_group,
   byrow=TRUE))
 #>      [,1] [,2] [,3]
 #> [1,]   -1    0    1
 #> [2,]   -2    1    1
 
 # perform contrast analysis
-contrast_independent(nGroup, lambda, iris)
-#>            SumsofSquares        F estimate       t p rEffectSize rAlerting
-#> Contrast 1      418.2025 2258.262    4.090 47.5212 0      0.9490    0.9781
-#> Contrast 2      395.3712 2134.975    6.888 46.2058 0      0.9228    0.9511
-#>            r2Alerting rContrast
-#> Contrast 1     0.9568    0.9690
-#> Contrast 2     0.9045    0.9673
+contrast_independent(n_group, lambda, iris)
+#>                  SS df  F_value contrast_estimate t_value p_value r_effect_size
+#> Contrast 1 418.2025  1 2258.262             4.090 47.5212       0        0.9490
+#> Contrast 2 395.3712  1 2134.975             6.888 46.2058       0        0.9228
+#>            r_alerting r2_alerting r_contrast
+#> Contrast 1     0.9781      0.9568     0.9690
+#> Contrast 2     0.9511      0.9045     0.9673
 ```
 
-The output of the **contrast\_independent** function contains results
-for both contrasts: Sums of squares and corresponding F-values, contrast
+The output of the **contrast_independent** function contains results for
+both contrasts: Sums of squares and corresponding F-values, contrast
 estimates and corresponding *t*-values as well as two-tailed *p*-values.
 Furthermore, it contains several effect sizes, such as *r*(effect size)
 which can be interpreted as a correlation between the dependent variable
@@ -166,22 +166,22 @@ lambda1 <- c(-1, 0, 1)  # H1: Iris versicolor is distinct to Iris setosa and Iri
 lambda2 <- c(-2, 1, 1)  # H2: Iris versicolor is more similar to Iris virginica
 
 # Perform contrast analysis
-compare_independent(nGroup=3, lambda1, lambda2, iris)
+compare_independent(n_group=3, lambda1, lambda2, iris)
 #> $results
-#>            SumsofSquares      F estimate      t      p rEffectSize rAlerting
-#> Contrast 1        1.1958 6.4574   0.1387 2.5411 0.0142      0.0507    0.0523
-#>            r2Alerting rContrast
-#> Contrast 1     0.0027    0.2051
+#>                SS df F_value contrast_estimate t_value p_value r_effect_size
+#> Contrast 1 1.1958  1  6.4574            0.1387  2.5411  0.0142        0.0507
+#>            r_alerting r2_alerting r_contrast
+#> Contrast 1     0.0523      0.0027     0.2051
 #> 
-#> $contrastWeights
-#>   lambda1Std lambda2Std lambdaDiff
-#> 1  -1.224745 -1.4142136  0.1894687
-#> 2   0.000000  0.7071068 -0.7071068
-#> 3   1.224745  0.7071068  0.5176381
+#> $contrast_weights
+#>   lambda1_std lambda2_std lambda_diff
+#> 1   -1.224745  -1.4142136   0.1894687
+#> 2    0.000000   0.7071068  -0.7071068
+#> 3    1.224745   0.7071068   0.5176381
 ```
 
-The output of the **compare\_independent** function contains the same
-information as **contrast\_independent** in terms of test statistics and
+The output of the **compare_independent** function contains the same
+information as **contrast_independent** in terms of test statistics and
 effect sizes. But, results are shown for one test only, namely a
 different comparison of the two hypotheses. In addition, the
 standardized contrast weights as well as their difference that is used
@@ -228,27 +228,27 @@ in rows and *p* columns, one for each measurement occasions that contain
 the dependent variable.
 
 ``` r
-(nGroup <- ncol(presidents))
+(n_group <- ncol(presidents))
 #> [1] 4
 
 # define lambda weights
 (lambda <- matrix(c(
   1, 0, 0, -1, # H1: decrease in approval ratings with stagnation over warmer months
   3, 1, -1, -3), # H2: linear decrease in  approval ratings
-  ncol = nGroup,
+  ncol = n_group,
   byrow=TRUE))
 #>      [,1] [,2] [,3] [,4]
 #> [1,]    1    0    0   -1
 #> [2,]    3    1   -1   -3
 
 # perform contrast analysis
-contrast_dependent(nGroup, lambda,presidents)
-#>                  F estimate      t      p      g
-#> Contrast 1  9.6148   7.9231 3.1008 0.0047 0.6081
-#> Contrast 2 10.4904  24.1923 3.2389 0.0034 0.6352
+contrast_dependent(n_group, lambda,presidents)
+#>            F_value df contrast_estimate t_value p_value      g
+#> Contrast 1  9.6148  1            7.9231  3.1008  0.0047 0.6081
+#> Contrast 2 10.4904  1           24.1923  3.2389  0.0034 0.6352
 ```
 
-The output of the **contrast\_dependent** function contains results for
+The output of the **contrast_dependent** function contains results for
 both contrasts: F-values, contrast estimates and corresponding
 *t*-values as well as two-tailed *p*-values. Furthermore, it contains
 the effect size *g*, a standardized distance measure.
@@ -271,31 +271,31 @@ lambda1 <- c(1, 0, 0, -1)   # H1: decrease in approval ratings with stagnation o
 lambda2 <- c(3, 1, -1, -3)  # H2: linear decrease in  approval ratings
 
 # perform contrast analysis
-compare_dependent(nGroup=nGroup, lambda1, lambda2, presidents)
+compare_dependent(n_group=n_group, lambda1, lambda2, presidents)
 #> $results
-#>                 F estimate      t      p      g
-#> Contrast 1 0.2958   0.3858 0.5439 0.5914 0.1067
+#>            F_value df contrast_estimate t_value p_value      g
+#> Contrast 1  0.2958  1            0.3858  0.5439  0.5914 0.1067
 #> 
-#> $contrastWeights
-#>   lambda1Std lambda2Std  lambdaDiff
-#> 1   1.414214  1.3416408  0.07257278
-#> 2   0.000000  0.4472136 -0.44721360
-#> 3   0.000000 -0.4472136  0.44721360
-#> 4  -1.414214 -1.3416408 -0.07257278
+#> $contrast_weights
+#>   lambda1_std lambda2_std lambda_diff
+#> 1    1.414214   1.3416408  0.07257278
+#> 2    0.000000   0.4472136 -0.44721360
+#> 3    0.000000  -0.4472136  0.44721360
+#> 4   -1.414214  -1.3416408 -0.07257278
 ```
 
-The output of the **compare\_dependent** function mirrors the
-information from **contrast\_dependent**, but only shows results for one
-test only, namely a different comparison of the two hypotheses and shows
-the standardized contrast weights as well as their difference that is
-used for the contrast analyses.
+The output of the **compare_dependent** function mirrors the information
+from **contrast_dependent**, but only shows results for one test only,
+namely a different comparison of the two hypotheses and shows the
+standardized contrast weights as well as their difference that is used
+for the contrast analyses.
 
-Similar to the \*\*compare\_independent\* function, the data supports
+Similar to the **compare_independent** function, the data supports
 Hypothesis H1 when the *t*-value of the summary of results is positive
 and significantly different from 0, while the data support hypothesis H2
 when the *t*-value is negative and significantly different from 0.
 Hence, the results of this direct comparison show that for α = .05
-neither of the two contrasts outperforms the other as *t* = 0.54 and *p*
+neither of the two contrasts outperforms the other as *t* = 0.53 and *p*
 = .59. Hence, there is a decrease in approval ratings, but it is not
 decisive whether this decrease stagnates over the summer months or not.
 
