@@ -51,7 +51,7 @@ so no missings are allowed</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">contrast_dependent</span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda</span>, <span class="va">dat</span>, testvalue <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">contrast_dependent</span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda</span>, <span class="va">data</span>, testvalue <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="source">
@@ -66,10 +66,10 @@ so no missings are allowed</p>
 
 <dt>lambda</dt>
 <dd><p>A matrix of contrast weights with contrasts in rows and
-groups in columns</p></dd>
+groups in columns; or a vector for a single contrast with contrast weights</p></dd>
 
 
-<dt>dat</dt>
+<dt>data</dt>
 <dd><p>A matrix or dataframe with n_group columns; each row contains
 values for one respondent;
 each column contains values of the dependent variable in the respective
