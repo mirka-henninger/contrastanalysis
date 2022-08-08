@@ -6,8 +6,8 @@
 #'
 #' @param n_group Number of dependent / within-subject groups
 #' @param lambda A matrix of contrast weights with contrasts in rows and
-#' groups in columns
-#' @param dat A matrix or dataframe with n_group columns; each row contains
+#' groups in columns; or a vector for a single contrast with contrast weights
+#' @param data A matrix or dataframe with n_group columns; each row contains
 #' values for one respondent;
 #' each column contains values of the dependent variable in the respective
 #' within-subject group
@@ -49,13 +49,16 @@
 #' @export
 contrast_dependent <- function(n_group,
                                lambda,
-                               dat,
+                               data,
                                testvalue = 0) {
 
 
   # Checks on the input ------------------------------------------------
-  names(dat) <- paste0("group", 1:n_group)
-  if (n_group != ncol(dat) | n_group != ncol(lambda)) {
+  names(data) <- paste0("group", 1:n_group)
+  if(is.vector(lambda)){
+    lambda <- t(as.matrix(lambda))
+  }
+  if (n_group != ncol(data) | n_group != ncol(lambda)) {
     stop("Please check the data format: \n",
          " * each column must contain the dependent variable in the
          within-subject group \n",
@@ -67,12 +70,12 @@ contrast_dependent <- function(n_group,
     stop("Your contrast weights do not sum to 0 for all contrasts. ",
          "Please check the weights again!")
   }
-  n <- nrow(dat)
+  n <- nrow(data)
 
   # Compute L and sigma^2 pooled --------------------------------------------
   lambda <- t(lambda)
-  dat <- as.matrix(dat)
-  L <- dat %*% lambda
+  data <- as.matrix(data)
+  L <- data %*% lambda
   sigma_pooled <- colSums((L - rep(colMeans(L), each = nrow(L)))^2) / (n - 1)
 
 

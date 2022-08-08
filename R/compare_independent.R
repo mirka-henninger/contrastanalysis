@@ -6,7 +6,7 @@
 #' @param n_group Number of independent / between-subject groups
 #' @param lambda1 A vector of contrast weights for Hypothesis 1
 #' @param lambda2 A vector of contrast weights for Hypothesis 2
-#' @param dat A matrix or dataframe with two columns; each row contains values for
+#' @param data A matrix or dataframe with two columns; each row contains values for
 #'  one respondents; the first column contains the group indicator, the second column
 #'  contains the dependent variable
 #'
@@ -39,12 +39,12 @@
 compare_independent <- function(n_group,
                                 lambda1,
                                 lambda2,
-                                dat) {
+                                data) {
 
 
   # Checks on the input -----------------------------------------------------
-  names(dat) <- c("groups", "values")
-  if (n_group != length(unique(dat$groups))
+  names(data) <- c("groups", "values")
+  if (n_group != length(unique(data$groups))
       | n_group != length(lambda1)
       | n_group != length(lambda2)) {
     stop("Please check the data format: \n",
@@ -66,7 +66,7 @@ compare_independent <- function(n_group,
 
   results <- contrast_independent(n_group = n_group,
                                   lambda = lambda_diff,
-                                  dat = dat)
+                                  data = data)
 
   weights <- data.frame(
     lambda1_std = lambda1_std,

@@ -7,15 +7,15 @@
 Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 }
 \usage{
-contrast_dependent(n_group, lambda, dat, testvalue = 0)
+contrast_dependent(n_group, lambda, data, testvalue = 0)
 }
 \arguments{
 \item{n_group}{Number of dependent / within-subject groups}
 
 \item{lambda}{A matrix of contrast weights with contrasts in rows and
-groups in columns}
+groups in columns; or a vector for a single contrast with contrast weights}
 
-\item{dat}{A matrix or dataframe with n_group columns; each row contains
+\item{data}{A matrix or dataframe with n_group columns; each row contains
 values for one respondent;
 each column contains values of the dependent variable in the respective
 within-subject group}

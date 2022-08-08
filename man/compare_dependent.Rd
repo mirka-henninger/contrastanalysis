@@ -7,7 +7,7 @@
 Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 }
 \usage{
-compare_dependent(n_group, lambda1, lambda2, dat, testvalue = 0)
+compare_dependent(n_group, lambda1, lambda2, data, testvalue = 0)
 }
 \arguments{
 \item{n_group}{Number of dependent / within-subject groups}
@@ -16,7 +16,7 @@ compare_dependent(n_group, lambda1, lambda2, dat, testvalue = 0)
 
 \item{lambda2}{A vector of contrast weights for Hypothesis 2}
 
-\item{dat}{A matrix or dataframe with n_group columns; each row contains values
+\item{data}{A matrix or dataframe with n_group columns; each row contains values
 for one respondent;
 each column contains values of the dependent variable in the respective
 within-subject group}

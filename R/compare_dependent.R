@@ -8,7 +8,7 @@
 #' @param n_group Number of dependent / within-subject groups
 #' @param lambda1 A vector of contrast weights for Hypothesis 1
 #' @param lambda2 A vector of contrast weights for Hypothesis 2
-#' @param dat A matrix or dataframe with n_group columns; each row contains values
+#' @param data A matrix or dataframe with n_group columns; each row contains values
 #' for one respondent;
 #' each column contains values of the dependent variable in the respective
 #' within-subject group
@@ -48,13 +48,13 @@
 compare_dependent <- function(n_group,
                               lambda1,
                               lambda2,
-                              dat,
+                              data,
                               testvalue = 0) {
 
 
   # Checks on the input -----------------------------------------------------
-  names(dat) <- paste0("group", 1:n_group)
-  if (n_group != ncol(dat)
+  names(data) <- paste0("group", 1:n_group)
+  if (n_group != ncol(data)
       | n_group != length(lambda1)
       | n_group != length(lambda2)) {
     stop("Please check the data format: \n",
@@ -75,7 +75,7 @@ compare_dependent <- function(n_group,
 
   results <- contrast_dependent(n_group = n_group,
                                 lambda = lambda_diff,
-                                dat = dat,
+                                data = data,
                                 testvalue = testvalue)
 
   weights <- data.frame(

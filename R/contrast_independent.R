@@ -4,8 +4,8 @@
 #'
 #' @param n_group Number of independent / between-subject groups
 #' @param lambda A matrix of contrast weights with contrasts in rows and
-#' groups in columns
-#' @param dat A matrix or dataframe with two columns; each row contains
+#' groups in columns; or a vector for a single contrast with contrast weights
+#' @param data A matrix or dataframe with two columns; each row contains
 #' values for one respondent;
 #' the first column contains the group indicator, the second column contains
 #' the dependent variable
@@ -49,12 +49,15 @@
 #' @export
 contrast_independent <- function(n_group,
                                  lambda,
-                                 dat) {
+                                 data) {
 
 
   # Checks on the input ------------------------------------------------
-  names(dat) <- c("groups", "values")
-  if (n_group != length(unique(dat$groups)) | n_group != ncol(lambda)) {
+  names(data) <- c("groups", "values")
+  if(is.vector(lambda)){
+    lambda <- t(as.matrix(lambda))
+  }
+  if (n_group != length(unique(data$groups)) | n_group != ncol(lambda)) {
     stop("Please check the data format: \n",
          " * the first column must contain the group indicator \n",
          " * the second the dependent variable \n",
@@ -68,10 +71,10 @@ contrast_independent <- function(n_group,
   }
 
   # Get group size, means and variances -------------------------------------
-  group_vals <- data.frame(groups = unique(dat$groups),
-                           group_size = tapply(dat$values,dat$groups,length),
-                           group_means = tapply(dat$values,dat$groups,mean),
-                           group_variances = tapply(dat$values,dat$groups,var)
+  group_vals <- data.frame(groups = unique(data$groups),
+                           group_size = tapply(data$values,data$groups,length),
+                           group_means = tapply(data$values,data$groups,mean),
+                           group_variances = tapply(data$values,data$groups,var)
 
   )
 
@@ -85,7 +88,7 @@ contrast_independent <- function(n_group,
   # SS contrast and SS within -----------------------------------------------
   SS_contrast <- (numerator^2) / denominator
   MS_within <- sum(group_vals$group_variances) / n_group
-  # SSwithin <- (nrow(dat) - n_group) * MS_within
+  # SSwithin <- (nrow(data) - n_group) * MS_within
 
 
   # F and t values ----------------------------------------------------------
@@ -97,17 +100,17 @@ contrast_independent <- function(n_group,
 
   # Effect sizes ------------------------------------------------------------
   # r effectsize
-  groupNames <- unique(dat$groups)
-  colnames(lambda) <- groupNames
-  dat <- cbind(dat,
+  group_names <- unique(data$groups)
+  colnames(lambda) <- group_names
+  data <- cbind(data,
                contrast = optimbase::transpose(
-                 lambda[, match(dat$groups,
+                 lambda[, match(data$groups,
                                 colnames(lambda))]))
-  r_effectsize <- cor(dat[, -1])[1, -1]
+  r_effectsize <- cor(data[, -1])[1, -1]
   # r alerting
   r_alerting <- c(cor(group_vals$group_means, t(lambda)))
   # r contrast
-  r_contrast <- sqrt(tcontrast^2 / (tcontrast^2 + nrow(dat) - n_group))
+  r_contrast <- sqrt(tcontrast^2 / (tcontrast^2 + nrow(data) - n_group))
 
 
   # Format output -----------------------------------------------------------

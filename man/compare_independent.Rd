@@ -7,7 +7,7 @@
 Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 }
 \usage{
-compare_independent(n_group, lambda1, lambda2, dat)
+compare_independent(n_group, lambda1, lambda2, data)
 }
 \arguments{
 \item{n_group}{Number of independent / between-subject groups}
@@ -16,7 +16,7 @@ compare_independent(n_group, lambda1, lambda2, dat)
 
 \item{lambda2}{A vector of contrast weights for Hypothesis 2}
 
-\item{dat}{A matrix or dataframe with two columns; each row contains values for
+\item{data}{A matrix or dataframe with two columns; each row contains values for
 one respondents; the first column contains the group indicator, the second column
 contains the dependent variable}
 }

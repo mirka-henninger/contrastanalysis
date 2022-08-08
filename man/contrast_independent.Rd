@@ -7,15 +7,15 @@
 Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 }
 \usage{
-contrast_independent(n_group, lambda, dat)
+contrast_independent(n_group, lambda, data)
 }
 \arguments{
 \item{n_group}{Number of independent / between-subject groups}
 
 \item{lambda}{A matrix of contrast weights with contrasts in rows and
-groups in columns}
+groups in columns; or a vector for a single contrast with contrast weights}
 
-\item{dat}{A matrix or dataframe with two columns; each row contains
+\item{data}{A matrix or dataframe with two columns; each row contains
 values for one respondent;
 the first column contains the group indicator, the second column contains
 the dependent variable}
