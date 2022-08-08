@@ -7,16 +7,16 @@
 Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 }
 \usage{
-compare_dependent(nGroup, lambda1, lambda2, dat, testvalue = 0)
+compare_dependent(n_group, lambda1, lambda2, dat, testvalue = 0)
 }
 \arguments{
-\item{nGroup}{Number of dependent / within-subject groups}
+\item{n_group}{Number of dependent / within-subject groups}
 
 \item{lambda1}{A vector of contrast weights for Hypothesis 1}
 
 \item{lambda2}{A vector of contrast weights for Hypothesis 2}
 
-\item{dat}{A matrix or dataframe with nGroup columns; each row contains values
+\item{dat}{A matrix or dataframe with n_group columns; each row contains values
 for one respondent;
 each column contains values of the dependent variable in the respective
 within-subject group}
@@ -57,6 +57,6 @@ lambda1 <- c(1, 0, 0, -1)   # H1: decrease in approval ratings with stagnation o
 lambda2 <- c(3, 1, -1, -3)  # H2: linear decrease in  approval ratings
 
 # perform contrast analysis
-compare_dependent(nGroup=4, lambda1, lambda2, presidents)
+compare_dependent(n_group=4, lambda1, lambda2, presidents)
 
 }

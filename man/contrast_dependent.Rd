@@ -7,15 +7,15 @@
 Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 }
 \usage{
-contrast_dependent(nGroup, lambda, dat, testvalue = 0)
+contrast_dependent(n_group, lambda, dat, testvalue = 0)
 }
 \arguments{
-\item{nGroup}{Number of dependent / within-subject groups}
+\item{n_group}{Number of dependent / within-subject groups}
 
 \item{lambda}{A matrix of contrast weights with contrasts in rows and
 groups in columns}
 
-\item{dat}{A matrix or dataframe with nGroup columns; each row contains
+\item{dat}{A matrix or dataframe with n_group columns; each row contains
 values for one respondent;
 each column contains values of the dependent variable in the respective
 within-subject group}
@@ -47,16 +47,16 @@ presidents <- data.frame(Qtr1=presidents[seq(1, length(presidents), 4)],
                Qtr3=presidents[seq(3, length(presidents), 4)],
                Qtr4=presidents[seq(4, length(presidents), 4)])
 presidents <- na.omit(presidents)
-nGroup <- ncol(presidents)
+n_group <- ncol(presidents)
 
 # define lambda weights
 lambda <- matrix(c(
     1, 0, 0, -1, # H1: decrease in approval ratings with stagnation over warmer months
     3, 1, -1, -3), # H2: linear decrease in  approval ratings
-    ncol = nGroup,
+    ncol = n_group,
     byrow=TRUE)
 
 # perform contrast analysis
-contrast_dependent(nGroup, lambda,presidents)
+contrast_dependent(n_group, lambda,presidents)
 
 }

@@ -7,10 +7,10 @@
 Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 }
 \usage{
-contrast_independent(nGroup, lambda, dat)
+contrast_independent(n_group, lambda, dat)
 }
 \arguments{
-\item{nGroup}{Number of independent / between-subject groups}
+\item{n_group}{Number of independent / between-subject groups}
 
 \item{lambda}{A matrix of contrast weights with contrasts in rows and
 groups in columns}
@@ -35,7 +35,7 @@ A dataframe with following entries for each of the contrasts:
   \item{\code{r2Aalerting}}{Squared \code{rAlerting}; can be interpreted
   similar to a determination coefficient as a measured of explained variance
   by the contrast
-  \code{(SScontrast/SSbetween)}}
+  \code{(SS_contrast/SSbetween)}}
   \item{\code{rContrast}}{\code{sqrt(t^2/(t^2 + df))}; useful for power analyses}
 }
 }
@@ -46,16 +46,16 @@ This function allows to perform contrast analyses for independent samples
 # load iris dataset
 data("iris")
 iris <- iris[,c("Species", "Petal.Length")]
-nGroup <- length(levels(iris$Species))
+n_group <- length(levels(iris$Species))
 
 # define lambda weights
 lambda <- matrix(c(
                 -1,0,1, # H1: An increase from setosa over versicolor to virginica
                 -2,1,1), # H2: Setosa has smaller Petal Length than versicolor and virginica
-                ncol = nGroup,
+                ncol = n_group,
                 byrow=TRUE)
 # perform contrast analysis
-contrast_independent(nGroup, lambda, iris)
+contrast_independent(n_group, lambda, iris)
 
 
 }

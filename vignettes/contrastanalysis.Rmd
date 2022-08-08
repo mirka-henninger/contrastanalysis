@@ -75,17 +75,17 @@ The contrast weights $\boldsymbol{\lambda}$ are assigned to an object using the 
 
 ```{r}
 # extract the number of groups
-(nGroup <- length(levels(iris$Species)))
+(n_group <- length(levels(iris$Species)))
 
 # define lambda weights
 (lambda <- matrix(c(
   -1,0,1, # H1: An increase from setosa over versicolor to virginica
   -2,1,1), # H2: Setosa has smaller petal length than versicolor and virginica
-  ncol = nGroup,
+  ncol = n_group,
   byrow=TRUE))
 
 # perform contrast analysis
-contrast_independent(nGroup, lambda, iris)
+contrast_independent(n_group, lambda, iris)
 ```
 
 The output of the **contrast_independent** function contains results for both contrasts: Sums of squares and corresponding F-values, contrast estimates and corresponding $t$-values as well as two-tailed $p$-values. Furthermore, it contains several effect sizes, such as r_{\text{effect size}} which can be interpreted as a correlation between the dependent variable and the contrast weights, $r_{\text{alerting}}$ corresponding to the correlation between group means and contrast weights, $r_{\text{alerting}}^2$ which can be interpreted similar to a determination coefficient as a measured of explained variance by the contrast $\Big(\frac{SS_{\text{contrast}}}{SS_{\text{between}}}\Big)$. $r_{\text{contrast}}$ is defined as $r_{\text{contrast}} = \sqrt{\frac{t^2}{t^2 + df}}$ and is useful for power analyses. 
@@ -103,7 +103,7 @@ lambda1 <- c(-1, 0, 1)  # H1: Iris versicolor is distinct to Iris setosa and Iri
 lambda2 <- c(-2, 1, 1)  # H2: Iris versicolor is more similar to Iris virginica
 
 # Perform contrast analysis
-compare_independent(nGroup=3, lambda1, lambda2, iris)
+compare_independent(n_group=3, lambda1, lambda2, iris)
 ```
 
 The output of the **compare_independent** function contains the same information as **contrast_independent** in terms of test statistics and effect sizes. But, results are shown for one test only, namely a different comparison of the two hypotheses. In addition, the standardized contrast weights as well as their difference that is used for the contrast analyses are shown in the output. 
@@ -133,17 +133,17 @@ Using these specification we can perform a contrast analysis for dependent sampl
 As for the contrast analysis for independent samples, the contrast weights $\boldsymbol{\lambda}$ are assigned to an object using the matrix function in R with contrasts in rows and groups in columns. The data must contain subjects in rows and $p$ columns, one for each measurement occasions that contain the dependent variable. 
 
 ```{r}
-(nGroup <- ncol(presidents))
+(n_group <- ncol(presidents))
 
 # define lambda weights
 (lambda <- matrix(c(
   1, 0, 0, -1, # H1: decrease in approval ratings with stagnation over warmer months
   3, 1, -1, -3), # H2: linear decrease in  approval ratings
-  ncol = nGroup,
+  ncol = n_group,
   byrow=TRUE))
 
 # perform contrast analysis
-contrast_dependent(nGroup, lambda,presidents)
+contrast_dependent(n_group, lambda,presidents)
 ```
 
 
@@ -161,7 +161,7 @@ lambda1 <- c(1, 0, 0, -1)   # H1: decrease in approval ratings with stagnation o
 lambda2 <- c(3, 1, -1, -3)  # H2: linear decrease in  approval ratings
 
 # perform contrast analysis
-compare_dependent(nGroup=nGroup, lambda1, lambda2, presidents)
+compare_dependent(n_group=n_group, lambda1, lambda2, presidents)
 ```
 
 The output of the **compare_dependent** function mirrors the information from **contrast_dependent**, but only shows results for one test only, namely a different comparison of the two hypotheses and shows the standardized contrast weights as well as their difference that is used for the contrast analyses. 

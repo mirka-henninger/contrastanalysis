@@ -7,10 +7,10 @@
 Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 }
 \usage{
-compare_independent(nGroup, lambda1, lambda2, dat)
+compare_independent(n_group, lambda1, lambda2, dat)
 }
 \arguments{
-\item{nGroup}{Number of independent / between-subject groups}
+\item{n_group}{Number of independent / between-subject groups}
 
 \item{lambda1}{A vector of contrast weights for Hypothesis 1}
 
@@ -47,6 +47,6 @@ lambda1 <- c(-1, 0, 1)  # H1: Iris versicolor is distinct to Iris setosa and Iri
 lambda2 <- c(-2, 1, 1)  # H2: Iris versicolor is more similar to Iris virginica
 
 # perform contrast analysis
-compare_independent(nGroup=3, lambda1, lambda2, iris)
+compare_independent(n_group=3, lambda1, lambda2, iris)
 
 }

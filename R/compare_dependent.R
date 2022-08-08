@@ -5,10 +5,10 @@
 #' Please note that sample sizes must be equal between within-subject groups,
 #' so no missings are allowed
 #'
-#' @param nGroup Number of dependent / within-subject groups
+#' @param n_group Number of dependent / within-subject groups
 #' @param lambda1 A vector of contrast weights for Hypothesis 1
 #' @param lambda2 A vector of contrast weights for Hypothesis 2
-#' @param dat A matrix or dataframe with nGroup columns; each row contains values
+#' @param dat A matrix or dataframe with n_group columns; each row contains values
 #' for one respondent;
 #' each column contains values of the dependent variable in the respective
 #' within-subject group
@@ -42,10 +42,10 @@
 #' lambda2 <- c(3, 1, -1, -3)  # H2: linear decrease in  approval ratings
 #'
 #' # perform contrast analysis
-#' compare_dependent(nGroup=4, lambda1, lambda2, presidents)
+#' compare_dependent(n_group=4, lambda1, lambda2, presidents)
 #'
 #' @export
-compare_dependent <- function(nGroup,
+compare_dependent <- function(n_group,
                               lambda1,
                               lambda2,
                               dat,
@@ -53,13 +53,13 @@ compare_dependent <- function(nGroup,
 
 
   # Checks on the input -----------------------------------------------------
-  names(dat) <- paste0("group", 1:nGroup)
-  if (nGroup != ncol(dat)
-      | nGroup != length(lambda1)
-      | nGroup != length(lambda2)) {
+  names(dat) <- paste0("group", 1:n_group)
+  if (n_group != ncol(dat)
+      | n_group != length(lambda1)
+      | n_group != length(lambda2)) {
     stop("Please check the data format: \n",
          " * each column must contain the dependent variable in the within-subject group \n",
-         " * nGroup must be the total number of within-subject groups \n",
+         " * n_group must be the total number of within-subject groups \n",
          " * lambda1 and lambda2 must each contain one set of contrast weights")
   }
   if (sum(lambda1) != 0 | sum(lambda2) != 0) {
@@ -69,23 +69,23 @@ compare_dependent <- function(nGroup,
 
 
   # Standardize lambda weight -----------------------------------------------
-  lambda1Std <- lambda1 / sqrt(mean(lambda1^2))
-  lambda2Std <- lambda2 / sqrt(mean(lambda2^2))
-  lambdaDiff <- t(as.matrix(lambda1Std - lambda2Std))
+  lambda1_std <- lambda1 / sqrt(mean(lambda1^2))
+  lambda2_std <- lambda2 / sqrt(mean(lambda2^2))
+  lambda_diff <- t(as.matrix(lambda1_std - lambda2_std))
 
-  results <- contrast_dependent(nGroup = nGroup,
-                                lambda = lambdaDiff,
+  results <- contrast_dependent(n_group = n_group,
+                                lambda = lambda_diff,
                                 dat = dat,
                                 testvalue = testvalue)
 
   weights <- data.frame(
-    lambda1Std = lambda1Std,
-    lambda2Std = lambda2Std,
-    lambdaDiff = as.vector(lambdaDiff)
+    lambda1_std = lambda1_std,
+    lambda2_std = lambda2_std,
+    lambda_diff = as.vector(lambda_diff)
   )
 
   output <- list(results = results,
-                 contrastWeights = weights)
+                 contrast_weights = weights)
   return(output)
 }
 

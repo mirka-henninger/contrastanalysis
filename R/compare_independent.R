@@ -3,7 +3,7 @@
 #' This function allows to directly compare two contrasts for independent samples by
 #' standardizing the contrast weights
 #'
-#' @param nGroup Number of independent / between-subject groups
+#' @param n_group Number of independent / between-subject groups
 #' @param lambda1 A vector of contrast weights for Hypothesis 1
 #' @param lambda2 A vector of contrast weights for Hypothesis 2
 #' @param dat A matrix or dataframe with two columns; each row contains values for
@@ -33,10 +33,10 @@
 #' lambda2 <- c(-2, 1, 1)  # H2: Iris versicolor is more similar to Iris virginica
 #'
 #' # perform contrast analysis
-#' compare_independent(nGroup=3, lambda1, lambda2, iris)
+#' compare_independent(n_group=3, lambda1, lambda2, iris)
 #'
 #' @export
-compare_independent <- function(nGroup,
+compare_independent <- function(n_group,
                                 lambda1,
                                 lambda2,
                                 dat) {
@@ -44,13 +44,13 @@ compare_independent <- function(nGroup,
 
   # Checks on the input -----------------------------------------------------
   names(dat) <- c("groups", "values")
-  if (nGroup != length(unique(dat$groups))
-      | nGroup != length(lambda1)
-      | nGroup != length(lambda2)) {
+  if (n_group != length(unique(dat$groups))
+      | n_group != length(lambda1)
+      | n_group != length(lambda2)) {
     stop("Please check the data format: \n",
          " * the first column must contain the group indicator \n",
          " * the second the dependent variable \n",
-         " * nGroup must be the total number of between-subject groups \n",
+         " * n_group must be the total number of between-subject groups \n",
          " * lambda1 and lambda2 must each contain one set of contrast weights")
   }
   if (sum(lambda1) != 0 | sum(lambda2) != 0) {
@@ -60,22 +60,22 @@ compare_independent <- function(nGroup,
 
 
   # Standardize lambda weight -----------------------------------------------
-  lambda1Std <- lambda1 / sqrt(mean(lambda1^2))
-  lambda2Std <- lambda2 / sqrt(mean(lambda2^2))
-  lambdaDiff <- t(as.matrix(lambda1Std - lambda2Std))
+  lambda1_std <- lambda1 / sqrt(mean(lambda1^2))
+  lambda2_std <- lambda2 / sqrt(mean(lambda2^2))
+  lambda_diff <- t(as.matrix(lambda1_std - lambda2_std))
 
-  results <- contrast_independent(nGroup = nGroup,
-                                  lambda = lambdaDiff,
+  results <- contrast_independent(n_group = n_group,
+                                  lambda = lambda_diff,
                                   dat = dat)
 
   weights <- data.frame(
-    lambda1Std = lambda1Std,
-    lambda2Std = lambda2Std,
-    lambdaDiff = as.vector(lambdaDiff)
+    lambda1_std = lambda1_std,
+    lambda2_std = lambda2_std,
+    lambda_diff = as.vector(lambda_diff)
   )
 
   output <- list(results = results,
-                 contrastWeights = weights)
+                 contrast_weights = weights)
   return(output)
 }
 
