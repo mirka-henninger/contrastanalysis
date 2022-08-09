@@ -81,7 +81,7 @@ contrast_independent <- function(n_group,
   # Define contrast estimate ------------------------------------------------
   numerator <- lambda %*% group_vals$group_means
   denominator <- (lambda^2) %*% (group_vals$group_size^(-1))
-  df_contrast <- 1
+  df <- nrow(data) - ncol(data)
 
 
 
@@ -94,7 +94,7 @@ contrast_independent <- function(n_group,
   # F and t values ----------------------------------------------------------
   F_contrast <- SS_contrast / MS_within
   tcontrast <- numerator / sqrt(MS_within * denominator)
-  p_val <- 2 * pt( - abs(tcontrast), min(group_vals$group_size))
+  p_val <- 2 * pt( - abs(tcontrast), df)
 
 
 
@@ -116,7 +116,7 @@ contrast_independent <- function(n_group,
   # Format output -----------------------------------------------------------
   rounding <- 4
   output <- data.frame("SS" = round(SS_contrast, rounding),
-                       "df" = df_contrast,
+                       "df" = df,
                        "F_value" = round(F_contrast, rounding),
                        "contrast_estimate" = round(numerator, rounding),
                        "t_value" = round(tcontrast, rounding),

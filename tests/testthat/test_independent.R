@@ -31,9 +31,9 @@ expect_equal(contrast_result$SS, ano_result[,2], tolerance = 1e-4)
 # equal F value / t value
 expect_equal(contrast_result$F_value, ano_result[,4], tolerance = 1e-4)
 expect_equal(contrast_result$t_value, lm_result[,3], tolerance = 1e-4)
-# equal p values (here tolerance is higher, because p-values may differ due to differences in degrees of freedom)
-expect_equal(contrast_result$p_value, ano_result[,5], tolerance = 1e-2)
-expect_equal(contrast_result$p_value, lm_result[,4], tolerance = 1e-2)
+# equal p values
+expect_equal(contrast_result$p_value, ano_result[,5], tolerance = 1e-4)
+expect_equal(contrast_result$p_value, lm_result[,4], tolerance = 1e-4)
 # squared t value is F value
 expect_equal(contrast_result$F_value, contrast_result$t^2, tolerance = 1e-4)
 
