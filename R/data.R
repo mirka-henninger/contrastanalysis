@@ -24,10 +24,10 @@
 #' This dataset originates from a study conducted at the University of Zurich
 #' in the area of visual working memory. This is a vast simplification of
 #' the original study for illustrative purposes.
-#' The experiment consisted of 324 trials per participant. They were presented
-#' with eather two, four, or eight colored squares (set size manipulation) and
-#' had to reproduce the color shortly afterwards. Then they were asked to
-#' judge their confidence on the given response.
+#' The experiment consisted of 324 trials per participant. The participants were
+#' presented either two, four, or eight colored squares (set size manipulation)
+#' and they had to reproduce the color shortly afterwards. Then they were asked
+#' to judge their confidence on the given response.
 #'
 #' For more details see: https://psyarxiv.com/xmf24/
 #'
