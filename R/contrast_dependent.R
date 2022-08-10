@@ -29,7 +29,8 @@
 #'
 #' @examples
 #' # load presidents dataset
-#' presidents <- data.frame(Qtr1=presidents[seq(1, length(presidents), 4)],
+#' presidents <- data.frame(
+#'                Qtr1=presidents[seq(1, length(presidents), 4)],
 #'                Qtr2=presidents[seq(2, length(presidents), 4)],
 #'                Qtr3=presidents[seq(3, length(presidents), 4)],
 #'                Qtr4=presidents[seq(4, length(presidents), 4)])
@@ -70,40 +71,41 @@ contrast_dependent <- function(n_group,
     stop("Your contrast weights do not sum to 0 for all contrasts. ",
          "Please check the weights again!")
   }
-  n <- nrow(data)
 
   # Compute L and sigma^2 pooled --------------------------------------------
+  n <- nrow(data)
+  df <- n - 1
   lambda <- t(lambda)
   data <- as.matrix(data)
   L <- data %*% lambda
-  sigma_pooled <- colSums((L - rep(colMeans(L), each = nrow(L)))^2) / (n - 1)
+  sigma2 <- apply(L, 2, var) # or alternatively: colSums((L - rep(colMeans(L), each = nrow(L)))^2) / (n-1)
 
 
   # Define contrast estimate ------------------------------------------------
   numerator <- colMeans(L) - testvalue
-  denominator <- sqrt(sigma_pooled / n)
-  df_contrast <- 1
+  denominator <- sqrt(sigma2 / n)
 
 
   # F and t values ----------------------------------------------------------
   t_contrast <- numerator / denominator
   F_contrast <- t_contrast^2
-  p_val <- 2 * pt( - abs(t_contrast), (n - 1))
+  p_val <- 2 * pt( - abs(t_contrast), df)
 
 
   # Effect sizes ------------------------------------------------------------
-  g <- colMeans(L) / sqrt(sigma_pooled)
+  g <- colMeans(L) / sqrt(sigma2)
 
 
   # Format output -----------------------------------------------------------
   rounding <- 4
-  output <- data.frame("F_value" = round(F_contrast, rounding),
-                       "df" = df_contrast,
+  output <- data.frame("df" = df,
                        "contrast_estimate" = round(numerator, rounding),
                        "t_value" = round(t_contrast, rounding),
+                       "F_value" = round(F_contrast, rounding),
                        "p_value" = round(p_val, rounding),
                        "g" = round(g, rounding))
   row.names(output) <- paste0("Contrast ", 1:ncol(lambda))
 
   return(output)
 }
+

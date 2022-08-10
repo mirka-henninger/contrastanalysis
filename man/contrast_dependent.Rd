@@ -42,7 +42,8 @@ so no missings are allowed
 }
 \examples{
 # load presidents dataset
-presidents <- data.frame(Qtr1=presidents[seq(1, length(presidents), 4)],
+presidents <- data.frame(
+               Qtr1=presidents[seq(1, length(presidents), 4)],
                Qtr2=presidents[seq(2, length(presidents), 4)],
                Qtr3=presidents[seq(3, length(presidents), 4)],
                Qtr4=presidents[seq(4, length(presidents), 4)])
