@@ -197,9 +197,9 @@
 <span></span>
 <span><span class="co"># perform contrast analysis</span></span>
 <span><span class="fu"><a href="../reference/contrast_dependent.html">contrast_dependent</a></span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda</span>,<span class="va">presidents</span><span class="op">)</span></span>
-<span><span class="co">#&gt;            F_value df contrast_estimate t_value p_value      g</span></span>
-<span><span class="co">#&gt; Contrast 1  9.6148  1            7.9231  3.1008  0.0047 0.6081</span></span>
-<span><span class="co">#&gt; Contrast 2 10.4904  1           24.1923  3.2389  0.0034 0.6352</span></span></code></pre></div>
+<span><span class="co">#&gt;            df contrast_estimate t_value F_value p_value      g</span></span>
+<span><span class="co">#&gt; Contrast 1 25            7.9231  3.1008  9.6148  0.0047 0.6081</span></span>
+<span><span class="co">#&gt; Contrast 2 25           24.1923  3.2389 10.4904  0.0034 0.6352</span></span></code></pre></div>
 <p>The output of the <strong>contrast_dependent</strong> function contains results for both contrasts: F-values, contrast estimates and corresponding <span class="math inline">\(t\)</span>-values as well as two-tailed <span class="math inline">\(p\)</span>-values. Furthermore, it contains the effect size <span class="math inline">\(g\)</span>, a standardized distance measure.</p>
 <p>The results of this empirical example show that for <span class="math inline">\(\alpha = .05\)</span>, Contrast 1 and Contrast 2 fit the data well, as all <span class="math inline">\(t &gt; 3.10\)</span> and all <span class="math inline">\(p &lt; .003\)</span>. Hence, it seems that presidential approval ratings decrease over the four calendar quarters, but it cannot be identified whether or not this decrease stagnates over warmer months.</p>
 </div>
@@ -215,8 +215,8 @@
 <span><span class="co"># perform contrast analysis</span></span>
 <span><span class="fu"><a href="../reference/compare_dependent.html">compare_dependent</a></span><span class="op">(</span>n_group<span class="op">=</span><span class="va">n_group</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">presidents</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $results</span></span>
-<span><span class="co">#&gt;            F_value df contrast_estimate t_value p_value      g</span></span>
-<span><span class="co">#&gt; Contrast 1  0.2958  1            0.3858  0.5439  0.5914 0.1067</span></span>
+<span><span class="co">#&gt;            df contrast_estimate t_value F_value p_value      g</span></span>
+<span><span class="co">#&gt; Contrast 1 25            0.3858  0.5439  0.2958  0.5914 0.1067</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $contrast_weights</span></span>
 <span><span class="co">#&gt;   lambda1_std lambda2_std lambda_diff</span></span>
