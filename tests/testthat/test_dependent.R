@@ -34,8 +34,10 @@ anova_result <- data.frame(emmeans::contrast(contr_anova,
 ### Tests
 # equal contrast estimate
 expect_equal(cont_result$contrast_estimate, anova_result$estimate, tolerance = 1e-4)
-# equal p values (here tolerance is higher, because p-values may differ due to differences in degrees of freedom)
-expect_equal(cont_result$p_value, anova_result$p.value, tolerance = 1e-1)
+# equal p values
+expect_equal(cont_result$p_value, anova_result$p.value, tolerance = 1e-3)
+# compare t-values
+expect_equal(cont_result$t_value, anova_result$t.ratio, tolerance = 1e-3)
 # squared t value is F value
 expect_equal(cont_result$F_value, cont_result$t_value^2, tolerance = 1e-4)
 
