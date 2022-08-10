@@ -7,10 +7,9 @@
 \format{
 a data frame with 6660 rows and 4 variables:
 \describe{
-  \item{ID}{the participant's id}
-  \item{Trial}{trial indicator}
-  \item{SetSize}{set size manipulation (within-subjects)}
-  \item{confidence}{confidence rating}
+  \item{confidence_setsize_2}{mean confidence rating per participants at set size = 2}
+  \item{confidence_setsize_3}{mean confidence rating per participants at set size = 4}
+  \item{confidence_setsize_8}{mean confidence rating per participants at set size = 8}
 }
 }
 \usage{
