@@ -49,7 +49,7 @@ standardizing the contrast weights</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compare_independent</span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">data</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compare_independent</span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda_preferred</span>, <span class="va">lambda_competing</span>, <span class="va">data</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="source">
@@ -62,11 +62,11 @@ standardizing the contrast weights</p>
 <dd><p>Number of independent / between-subject groups</p></dd>
 
 
-<dt>lambda1</dt>
+<dt>lambda_preferred</dt>
 <dd><p>A vector of contrast weights for Hypothesis 1</p></dd>
 
 
-<dt>lambda2</dt>
+<dt>lambda_competing</dt>
 <dd><p>A vector of contrast weights for Hypothesis 2</p></dd>
 
 
@@ -91,9 +91,10 @@ contains the dependent variable</p></dd>
 </dl></div>
     <div id="note">
     <h2>Note</h2>
-    <p>A test favoring Hypothesis 1 is performed, hence a positive t-value indicate
- that the contrast weights contained in lambda1 fit the data better than the contrast
- weights contained in lambda2, and vice versa for a negative t-value.</p>
+    <p>A test favoring Hypothesis 1 is performed. This means that when the t-value is positive,
+ the contrast weights contained in lambda_preferred reflect the data better than the contrast weights
+ contained in lambda_competing. When the t-value is negative, the contrast weights contained in
+ lambda_competing reflect the data better, and Hypothesis 2 is favored over Hypothesis 1.</p>
     </div>
 
     <div id="ref-examples">
@@ -103,11 +104,11 @@ contains the dependent variable</p></dd>
 <span class="r-in"><span><span class="va">iris</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"Petal.Length"</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># define lambda weights</span></span></span>
-<span class="r-in"><span><span class="va">lambda1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># H1: Iris versicolor is distinct to Iris setosa and Iris virginica</span></span></span>
-<span class="r-in"><span><span class="va">lambda2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># H2: Iris versicolor is more similar to Iris virginica</span></span></span>
+<span class="r-in"><span><span class="va">lambda_preferred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># H1: Iris versicolor is distinct to Iris setosa and Iris virginica</span></span></span>
+<span class="r-in"><span><span class="va">lambda_competing</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># H2: Iris versicolor is more similar to Iris virginica</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># perform contrast analysis</span></span></span>
-<span class="r-in"><span><span class="fu">compare_independent</span><span class="op">(</span>n_group<span class="op">=</span><span class="fl">3</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">compare_independent</span><span class="op">(</span>n_group<span class="op">=</span><span class="fl">3</span>, <span class="va">lambda_preferred</span>, <span class="va">lambda_competing</span>, <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $results</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                SS  df contrast_estimate t_value F_value p_value r_effect_size</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1 1.1958 148            0.1387  2.5411  6.4574  0.0121        0.0507</span>
@@ -115,10 +116,10 @@ contains the dependent variable</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1     0.0523      0.0027     0.2051</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $contrast_weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   lambda1_std lambda2_std lambda_diff</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   -1.224745  -1.4142136   0.1894687</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    0.000000   0.7071068  -0.7071068</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    1.224745   0.7071068   0.5176381</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   lambda_preferred_std lambda_competing_std lambda_diff</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1            -1.224745           -1.4142136   0.1894687</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2             0.000000            0.7071068  -0.7071068</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3             1.224745            0.7071068   0.5176381</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

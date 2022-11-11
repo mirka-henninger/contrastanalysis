@@ -62,7 +62,7 @@
       <h1 data-toc-skip>contrastanalysis</h1>
                         <h4 data-toc-skip class="author">Mirka Henninger &amp; Simone Malejka</h4>
             
-            <h4 data-toc-skip class="date">2022-08-10</h4>
+            <h4 data-toc-skip class="date">2022-11-11</h4>
       
       
       <div class="hidden name"><code>contrastanalysis.Rmd</code></div>
@@ -159,10 +159,10 @@
 <span><span class="co">#&gt; Contrast 1     0.0523      0.0027     0.2051</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $contrast_weights</span></span>
-<span><span class="co">#&gt;   lambda1_std lambda2_std lambda_diff</span></span>
-<span><span class="co">#&gt; 1   -1.224745  -1.4142136   0.1894687</span></span>
-<span><span class="co">#&gt; 2    0.000000   0.7071068  -0.7071068</span></span>
-<span><span class="co">#&gt; 3    1.224745   0.7071068   0.5176381</span></span></code></pre></div>
+<span><span class="co">#&gt;   lambda_preferred_std lambda_competing_std lambda_diff</span></span>
+<span><span class="co">#&gt; 1            -1.224745           -1.4142136   0.1894687</span></span>
+<span><span class="co">#&gt; 2             0.000000            0.7071068  -0.7071068</span></span>
+<span><span class="co">#&gt; 3             1.224745            0.7071068   0.5176381</span></span></code></pre></div>
 <p>The output of the <strong>compare_independent</strong> function contains the same information as <strong>contrast_independent</strong> in terms of test statistics and effect sizes. But, results are shown for one test only, namely a different comparison of the two hypotheses. In addition, the standardized contrast weights as well as their difference that is used for the contrast analyses are shown in the output.</p>
 <p>When the <span class="math inline">\(t\)</span>-value of the summary of results is positive and significantly different from <span class="math inline">\(0\)</span>, the data supports Hypothesis <span class="math inline">\(H_1\)</span>, while the data support hypothesis <span class="math inline">\(H_2\)</span> when the <span class="math inline">\(t\)</span>-value is negative and significantly different from <span class="math inline">\(0\)</span>. Hence, the results of this direct comparison show that for <span class="math inline">\(\alpha = .05\)</span>, Contrast 1 does outperform Contrast 2 as <span class="math inline">\(t = 2.54\)</span> and <span class="math inline">\(p = .014\)</span>. Hence, it seems that there is an increase in petal length from setosa over versicolor to virginica rather than setosa having smaller petal length than versicolor and virginica together. The results suggest that although Iris versicolor is a hybrid of the two other species, it is very similar to Iris virginica with regards to its petal length.</p>
 </div>
