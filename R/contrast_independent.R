@@ -53,6 +53,13 @@ contrast_independent <- function(n_group,
 
   # Checks on the input ------------------------------------------------
   names(data) <- c("groups", "values")
+  if(is.matrix(lambda)){
+    message("Please note that each contrast is tested separately, the contrast are not tested jointly!\n",
+            "* When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts\n",
+            "tested together.\n",
+            "* However, the results may differ when non-orthogonal contrasts are tested separately.\n",
+            "* You may want to switch to an alternative package to conduct a joint test of all contrasts")
+  }
   if(is.vector(lambda)){
     lambda <- t(as.matrix(lambda))
   }
@@ -67,13 +74,6 @@ contrast_independent <- function(n_group,
   if (all(!(abs(rowSums(lambda)) < .Machine$double.eps^0.5))) {
     stop("Your contrast weights do not sum to 0 for all contrasts. ",
          "Please check the weights again!")
-  }
-  if(is.matrix(lambda)){
-    message("Please note that each contrast is tested separately, the contrast are not tested jointly!\n",
-            "* When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts\n",
-            "tested together.\n",
-            "* However, the results may differ when non-orthogonal contrasts are tested separately.\n",
-            "* You may want to switch to an alternative package to conduct a joint test of all contrasts")
   }
 
   # Get group size, means and variances -------------------------------------

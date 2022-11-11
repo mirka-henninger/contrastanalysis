@@ -1,7 +1,7 @@
 contrastanalysis
 ================
 Mirka Henninger & Simone Malejka
-2022-08-08
+2022-11-11
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -11,10 +11,10 @@ are provided to test two competing hypotheses can be tested against each
 other. All functions and explanations are based on Rosenthal, Rosnow,
 and Rubin(2000) as well as Sedlmeier and Renkewitz (2008).
 
-Contrast analyses are a sensible alternative to standard variance
-analyses as it allows to test specific, directed, a priori hypotheses.
-This leads to results that are easier to interpret and effects can be
-detected with a higher power.
+Contrast analyses allow researchers to test specific, directed, a priori
+hypotheses and are thus a sensible alternative to standard variance
+analyses. The results of contrast analyses are easier to interpret and
+effects can be detected with a higher power.
 
 #### The package can be installed using the <devtools>-package:
 
@@ -97,7 +97,7 @@ hypotheses:
 
 λ(H1) = (-1,0,1)
 
-λ(H2) = (-2,1,1)
+λ(H2) = (-1,0.5,0.5)
 
 Using these specification we can perform a contrast analysis for
 independent samples using the package.
@@ -116,23 +116,30 @@ contains the dependent variable (here **Petal.Length**).
 #> [1] 3
 
 # define lambda weights
-(lambda <- matrix(c(
-  -1,0,1, # H1: An increase from setosa over versicolor to virginica
-  -2,1,1), # H2: Setosa has smaller petal length than versicolor and virginica
-  ncol = n_group,
-  byrow=TRUE))
-#>      [,1] [,2] [,3]
-#> [1,]   -1    0    1
-#> [2,]   -2    1    1
+lambda1 <- c(-1,0,1) # H1: An increase from setosa over versicolor to virginica
+lambda2 <- c(-2,1,1) # H2: Setosa has smaller petal length than versicolor and virginica
 
 # perform contrast analysis
-contrast_independent(n_group, lambda, iris)
-#>                  SS df  F_value contrast_estimate t_value p_value r_effect_size
-#> Contrast 1 418.2025  1 2258.262             4.090 47.5212       0        0.9490
-#> Contrast 2 395.3712  1 2134.975             6.888 46.2058       0        0.9228
-#>            r_alerting r2_alerting r_contrast
-#> Contrast 1     0.9781      0.9568     0.9690
-#> Contrast 2     0.9511      0.9045     0.9673
+contrast_independent(n_group, lambda1, iris)
+#> Please note that each contrast is tested separately, the contrast are not tested jointly!
+#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
+#> tested together.
+#> * However, the results may differ when non-orthogonal contrasts are tested separately.
+#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
+#>                  SS  df contrast_estimate t_value  F_value p_value
+#> Contrast 1 418.2025 147              4.09 47.5212 2258.262       0
+#>            r_effect_size r_alerting r2_alerting r_contrast
+#> Contrast 1         0.949     0.9781      0.9568      0.969
+contrast_independent(n_group, lambda2, iris)
+#> Please note that each contrast is tested separately, the contrast are not tested jointly!
+#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
+#> tested together.
+#> * However, the results may differ when non-orthogonal contrasts are tested separately.
+#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
+#>                  SS  df contrast_estimate t_value  F_value p_value
+#> Contrast 1 395.3712 147             6.888 46.2058 2134.975       0
+#>            r_effect_size r_alerting r2_alerting r_contrast
+#> Contrast 1        0.9228     0.9511      0.9045     0.9673
 ```
 
 The output of the **contrast_independent** function contains results for
@@ -166,18 +173,23 @@ lambda1 <- c(-1, 0, 1)  # H1: Iris versicolor is distinct to Iris setosa and Iri
 lambda2 <- c(-2, 1, 1)  # H2: Iris versicolor is more similar to Iris virginica
 
 # Perform contrast analysis
-compare_independent(n_group=3, lambda1, lambda2, iris)
+compare_independent(n_group=3, lambda_preferred = lambda1, lambda_competing = lambda2, iris)
+#> Please note that each contrast is tested separately, the contrast are not tested jointly!
+#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
+#> tested together.
+#> * However, the results may differ when non-orthogonal contrasts are tested separately.
+#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
 #> $results
-#>                SS df F_value contrast_estimate t_value p_value r_effect_size
-#> Contrast 1 1.1958  1  6.4574            0.1387  2.5411  0.0142        0.0507
+#>                SS  df contrast_estimate t_value F_value p_value r_effect_size
+#> Contrast 1 1.1958 147            0.1387  2.5411  6.4574  0.0121        0.0507
 #>            r_alerting r2_alerting r_contrast
 #> Contrast 1     0.0523      0.0027     0.2051
 #> 
 #> $contrast_weights
-#>   lambda1_std lambda2_std lambda_diff
-#> 1   -1.224745  -1.4142136   0.1894687
-#> 2    0.000000   0.7071068  -0.7071068
-#> 3    1.224745   0.7071068   0.5176381
+#>   lambda_preferred_std lambda_competing_std lambda_diff
+#> 1            -1.224745           -1.4142136   0.1894687
+#> 2             0.000000            0.7071068  -0.7071068
+#> 3             1.224745            0.7071068   0.5176381
 ```
 
 The output of the **compare_independent** function contains the same
@@ -214,7 +226,7 @@ hypotheses, we only specify two contrast weight vectors:
 
 λ(H1) = (-1, 0, 0, 1)
 
-λ(H2) = (3, 1, -1, -3)
+λ(H2) = (1, 1/3, -1/3, -1)
 
 Using these specification we can perform a contrast analysis for
 dependent samples using the package.
@@ -232,20 +244,26 @@ the dependent variable.
 #> [1] 4
 
 # define lambda weights
-(lambda <- matrix(c(
-  1, 0, 0, -1, # H1: decrease in approval ratings with stagnation over warmer months
-  3, 1, -1, -3), # H2: linear decrease in  approval ratings
-  ncol = n_group,
-  byrow=TRUE))
-#>      [,1] [,2] [,3] [,4]
-#> [1,]    1    0    0   -1
-#> [2,]    3    1   -1   -3
+lambda1 <- c(1, 0, 0, -1) # H1: decrease in approval ratings with stagnation over warmer months
+lambda2 <- c(1, 1/3, -1/3, -1) # H2: linear decrease in  approval ratings
 
 # perform contrast analysis
-contrast_dependent(n_group, lambda,presidents)
-#>            F_value df contrast_estimate t_value p_value      g
-#> Contrast 1  9.6148  1            7.9231  3.1008  0.0047 0.6081
-#> Contrast 2 10.4904  1           24.1923  3.2389  0.0034 0.6352
+contrast_dependent(n_group, lambda1, presidents)
+#> Please note that each contrast is tested separately, the contrast are not tested jointly!
+#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
+#> tested together.
+#> * However, the results may differ when non-orthogonal contrasts are tested separately.
+#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
+#>            df contrast_estimate t_value F_value p_value      g
+#> Contrast 1 25            7.9231  3.1008  9.6148  0.0047 0.6081
+contrast_dependent(n_group, lambda2, presidents)
+#> Please note that each contrast is tested separately, the contrast are not tested jointly!
+#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
+#> tested together.
+#> * However, the results may differ when non-orthogonal contrasts are tested separately.
+#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
+#>            df contrast_estimate t_value F_value p_value      g
+#> Contrast 1 25            8.0641  3.2389 10.4904  0.0034 0.6352
 ```
 
 The output of the **contrast_dependent** function contains results for
@@ -268,20 +286,25 @@ hypotheses against each other:
 ``` r
 # define lambda weights
 lambda1 <- c(1, 0, 0, -1)   # H1: decrease in approval ratings with stagnation over warmer months
-lambda2 <- c(3, 1, -1, -3)  # H2: linear decrease in  approval ratings
+lambda2 <- c(1, 1/3, -1/3, -1) # H2: linear decrease in  approval ratings
 
 # perform contrast analysis
-compare_dependent(n_group=n_group, lambda1, lambda2, presidents)
+compare_dependent(n_group=n_group, lambda_preferred = lambda1, lambda_competing = lambda2, presidents)
+#> Please note that each contrast is tested separately, the contrast are not tested jointly!
+#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
+#> tested together.
+#> * However, the results may differ when non-orthogonal contrasts are tested separately.
+#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
 #> $results
-#>            F_value df contrast_estimate t_value p_value      g
-#> Contrast 1  0.2958  1            0.3858  0.5439  0.5914 0.1067
+#>            df contrast_estimate t_value F_value p_value      g
+#> Contrast 1 25            0.3858  0.5439  0.2958  0.5914 0.1067
 #> 
 #> $contrast_weights
-#>   lambda1_std lambda2_std lambda_diff
-#> 1    1.414214   1.3416408  0.07257278
-#> 2    0.000000   0.4472136 -0.44721360
-#> 3    0.000000  -0.4472136  0.44721360
-#> 4   -1.414214  -1.3416408 -0.07257278
+#>   lambda_preferred_std lambda_competing_std lambda_diff
+#> 1             1.414214            1.3416408  0.07257278
+#> 2             0.000000            0.4472136 -0.44721360
+#> 3             0.000000           -0.4472136  0.44721360
+#> 4            -1.414214           -1.3416408 -0.07257278
 ```
 
 The output of the **compare_dependent** function mirrors the information
