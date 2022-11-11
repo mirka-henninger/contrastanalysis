@@ -7,14 +7,14 @@
 Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 }
 \usage{
-compare_independent(n_group, lambda1, lambda2, data)
+compare_independent(n_group, lambda_preferred, lambda_competing, data)
 }
 \arguments{
 \item{n_group}{Number of independent / between-subject groups}
 
-\item{lambda1}{A vector of contrast weights for Hypothesis 1}
+\item{lambda_preferred}{A vector of contrast weights for Hypothesis 1}
 
-\item{lambda2}{A vector of contrast weights for Hypothesis 2}
+\item{lambda_competing}{A vector of contrast weights for Hypothesis 2}
 
 \item{data}{A matrix or dataframe with two columns; each row contains values for
 one respondents; the first column contains the group indicator, the second column
@@ -33,9 +33,10 @@ This function allows to directly compare two contrasts for independent samples b
 standardizing the contrast weights
 }
 \note{
-A test favoring Hypothesis 1 is performed, hence a positive t-value indicate
- that the contrast weights contained in lambda1 fit the data better than the contrast
- weights contained in lambda2, and vice versa for a negative t-value.
+A test favoring Hypothesis 1 is performed. This means that when the t-value is positive,
+ the contrast weights contained in lambda_preferred reflect the data better than the contrast weights
+ contained in lambda_competing. When the t-value is negative, the contrast weights contained in
+ lambda_competing reflect the data better, and Hypothesis 2 is favored over Hypothesis 1.
 }
 \examples{
 # load iris dataset
@@ -43,10 +44,10 @@ data("iris")
 iris <- iris[,c("Species", "Petal.Length")]
 
 # define lambda weights
-lambda1 <- c(-1, 0, 1)  # H1: Iris versicolor is distinct to Iris setosa and Iris virginica
-lambda2 <- c(-2, 1, 1)  # H2: Iris versicolor is more similar to Iris virginica
+lambda_preferred <- c(-1, 0, 1)  # H1: Iris versicolor is distinct to Iris setosa and Iris virginica
+lambda_competing <- c(-2, 1, 1)  # H2: Iris versicolor is more similar to Iris virginica
 
 # perform contrast analysis
-compare_independent(n_group=3, lambda1, lambda2, iris)
+compare_independent(n_group=3, lambda_preferred, lambda_competing, iris)
 
 }
