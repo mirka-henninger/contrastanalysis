@@ -46,13 +46,13 @@ dat <- data.frame(
   y = c(rnorm(50,-1,1),rnorm(50),rnorm(50),rnorm(50,1,1))
 )
 
-compare_result <- compare_independent(n_group, lambda1, lambda2, dat)
+compare_result <- compare_independent(n_group, lambda_preferred = lambda1, lambda_competing = lambda2, dat)
 
 ### Tests
 # squared t value is F value
 expect_equal(compare_result$results$F_value, compare_result$results$t_value^2, tolerance = 1e-4)
 # difference in contrast wteights
-expect_equal(compare_result$contrast_weights$lambda1_std - compare_result$contrast_weights$lambda2_std,
+expect_equal(compare_result$contrast_weights$lambda_preferred_std - compare_result$contrast_weights$lambda_competing_std,
              compare_result$contrast_weights$lambda_diff, tolerance = 1e-4)
 
 
@@ -80,18 +80,18 @@ expect_error(contrast_independent(n_group, lambda-1, dat))
 
 ### compare_independent
 # group number is not correct
-expect_error(compare_independent(n_group-1, lambda1, lambda2, dat))
-expect_error(compare_independent(n_group+1, lambda1, lambda2, dat))
+expect_error(compare_independent(n_group-1, lambda_preferred = lambda1, lambda_competing = lambda2, dat))
+expect_error(compare_independent(n_group+1, lambda_preferred = lambda1, lambda_competing = lambda2, dat))
 
 # lambda does not match group
-expect_error(compare_independent(n_group,  lambda1[-1], lambda2, dat))
-expect_error(compare_independent(n_group,  lambda1, lambda2[-1], dat))
+expect_error(compare_independent(n_group,  lambda_preferred = lambda1[-1], lambda_competing = lambda2, dat))
+expect_error(compare_independent(n_group,  lambda_preferred = lambda1,     lambda_competing = lambda2[-1], dat))
 
 # dat has strange format
-expect_error(compare_independent(n_group, lambda1, lambda2, cbind(dat, dat[,1])))
-expect_error(compare_independent(n_group, lambda1, lambda2, dat[,-1]))
-expect_error(compare_independent(n_group, lambda1, lambda2, dat[,-2]))
+expect_error(compare_independent(n_group, lambda_preferred = lambda1, lambda_competing = lambda2, cbind(dat, dat[,1])))
+expect_error(compare_independent(n_group, lambda_preferred = lambda1, lambda_competing = lambda2, dat[,-1]))
+expect_error(compare_independent(n_group, lambda_preferred = lambda1, lambda_competing = lambda2, dat[,-2]))
 
 # contrast weights do not sum to zero
-expect_error(compare_independent(n_group, lambda1+1, lambda2, dat))
-expect_error(compare_independent(n_group, lambda1, lambda2+1, dat))
+expect_error(compare_independent(n_group, lambda_preferred = lambda1+1, lambda_competing = lambda2, dat))
+expect_error(compare_independent(n_group, lambda_preferred = lambda1,   lambda_competing = lambda2+1, dat))
