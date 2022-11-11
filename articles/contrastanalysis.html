@@ -132,6 +132,11 @@
 <span></span>
 <span><span class="co"># perform contrast analysis</span></span>
 <span><span class="fu"><a href="../reference/contrast_independent.html">contrast_independent</a></span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda</span>, <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Please note that each contrast is tested separately, the contrast are not tested jointly!</span></span>
+<span><span class="co">#&gt; * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span></span>
+<span><span class="co">#&gt; tested together.</span></span>
+<span><span class="co">#&gt; * However, the results may differ when non-orthogonal contrasts are tested separately.</span></span>
+<span><span class="co">#&gt; * You may want to switch to an alternative package to conduct a joint test of all contrasts</span></span>
 <span><span class="co">#&gt;                  SS  df contrast_estimate t_value  F_value p_value</span></span>
 <span><span class="co">#&gt; Contrast 1 418.2025 147             4.090 47.5212 2258.262       0</span></span>
 <span><span class="co">#&gt; Contrast 2 395.3712 147             6.888 46.2058 2134.975       0</span></span>
@@ -152,6 +157,11 @@
 <span></span>
 <span><span class="co"># Perform contrast analysis</span></span>
 <span><span class="fu"><a href="../reference/compare_independent.html">compare_independent</a></span><span class="op">(</span>n_group<span class="op">=</span><span class="fl">3</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Please note that each contrast is tested separately, the contrast are not tested jointly!</span></span>
+<span><span class="co">#&gt; * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span></span>
+<span><span class="co">#&gt; tested together.</span></span>
+<span><span class="co">#&gt; * However, the results may differ when non-orthogonal contrasts are tested separately.</span></span>
+<span><span class="co">#&gt; * You may want to switch to an alternative package to conduct a joint test of all contrasts</span></span>
 <span><span class="co">#&gt; $results</span></span>
 <span><span class="co">#&gt;                SS  df contrast_estimate t_value F_value p_value r_effect_size</span></span>
 <span><span class="co">#&gt; Contrast 1 1.1958 147            0.1387  2.5411  6.4574  0.0121        0.0507</span></span>
@@ -197,6 +207,11 @@
 <span></span>
 <span><span class="co"># perform contrast analysis</span></span>
 <span><span class="fu"><a href="../reference/contrast_dependent.html">contrast_dependent</a></span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda</span>,<span class="va">presidents</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Please note that each contrast is tested separately, the contrast are not tested jointly!</span></span>
+<span><span class="co">#&gt; * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span></span>
+<span><span class="co">#&gt; tested together.</span></span>
+<span><span class="co">#&gt; * However, the results may differ when non-orthogonal contrasts are tested separately.</span></span>
+<span><span class="co">#&gt; * You may want to switch to an alternative package to conduct a joint test of all contrasts</span></span>
 <span><span class="co">#&gt;            df contrast_estimate t_value F_value p_value      g</span></span>
 <span><span class="co">#&gt; Contrast 1 25            7.9231  3.1008  9.6148  0.0047 0.6081</span></span>
 <span><span class="co">#&gt; Contrast 2 25           24.1923  3.2389 10.4904  0.0034 0.6352</span></span></code></pre></div>
@@ -214,6 +229,11 @@
 <span></span>
 <span><span class="co"># perform contrast analysis</span></span>
 <span><span class="fu"><a href="../reference/compare_dependent.html">compare_dependent</a></span><span class="op">(</span>n_group<span class="op">=</span><span class="va">n_group</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">presidents</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Please note that each contrast is tested separately, the contrast are not tested jointly!</span></span>
+<span><span class="co">#&gt; * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span></span>
+<span><span class="co">#&gt; tested together.</span></span>
+<span><span class="co">#&gt; * However, the results may differ when non-orthogonal contrasts are tested separately.</span></span>
+<span><span class="co">#&gt; * You may want to switch to an alternative package to conduct a joint test of all contrasts</span></span>
 <span><span class="co">#&gt; $results</span></span>
 <span><span class="co">#&gt;            df contrast_estimate t_value F_value p_value      g</span></span>
 <span><span class="co">#&gt; Contrast 1 25            0.3858  0.5439  0.2958  0.5914 0.1067</span></span>

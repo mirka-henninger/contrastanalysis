@@ -126,11 +126,21 @@ the dependent variable</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># perform contrast analysis</span></span></span>
 <span class="r-in"><span><span class="fu">contrast_independent</span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda1</span>, <span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Please note that each contrast is tested separately, the contrast are not tested jointly!</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> tested together.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * However, the results may differ when non-orthogonal contrasts are tested separately.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * You may want to switch to an alternative package to conduct a joint test of all contrasts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  SS  df contrast_estimate t_value  F_value p_value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1 418.2025 147              4.09 47.5212 2258.262       0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            r_effect_size r_alerting r2_alerting r_contrast</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1         0.949     0.9781      0.9568      0.969</span>
 <span class="r-in"><span><span class="fu">contrast_independent</span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda2</span>, <span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Please note that each contrast is tested separately, the contrast are not tested jointly!</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> tested together.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * However, the results may differ when non-orthogonal contrasts are tested separately.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * You may want to switch to an alternative package to conduct a joint test of all contrasts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  SS  df contrast_estimate t_value  F_value p_value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1 395.3712 147             3.444 46.2058 2134.975       0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            r_effect_size r_alerting r2_alerting r_contrast</span>

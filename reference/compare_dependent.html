@@ -122,6 +122,11 @@ t-value.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># perform contrast analysis</span></span></span>
 <span class="r-in"><span><span class="fu">compare_dependent</span><span class="op">(</span>n_group<span class="op">=</span><span class="fl">4</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">presidents</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Please note that each contrast is tested separately, the contrast are not tested jointly!</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> tested together.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * However, the results may differ when non-orthogonal contrasts are tested separately.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * You may want to switch to an alternative package to conduct a joint test of all contrasts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $results</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            df contrast_estimate t_value F_value p_value      g</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1 25            0.3858  0.5439  0.2958  0.5914 0.1067</span>
