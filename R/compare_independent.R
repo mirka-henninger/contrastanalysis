@@ -63,7 +63,7 @@ compare_independent <- function(n_group,
   # Standardize lambda weight -----------------------------------------------
   lambda_preferred_std <- lambda_preferred / sqrt(mean(lambda_preferred^2))
   lambda_competing_std <- lambda_competing / sqrt(mean(lambda_competing^2))
-  lambda_diff <- t(as.matrix(lambda_preferred_std - lambda_competing_std))
+  lambda_diff <- as.vector(t(as.matrix(lambda_preferred_std - lambda_competing_std)))
 
   results <- contrast_independent(n_group = n_group,
                                   lambda = lambda_diff,
