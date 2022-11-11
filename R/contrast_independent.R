@@ -56,6 +56,13 @@ contrast_independent <- function(n_group,
   if(is.vector(lambda)){
     lambda <- t(as.matrix(lambda))
   }
+  if(is.matrix(lambda)){
+    message("Please note that each contrast is tested separately, the contrast are not tested jointly!\n",
+            "* When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts\n",
+            "tested together.\n",
+            "* However, the results may differ when non-orthogonal contrasts are tested separately.\n",
+            "* You may want to switch to an alternative package to conduct a joint test of all contrasts")
+  }
   if (n_group != length(unique(data$groups)) | n_group != ncol(lambda)) {
     stop("Please check the data format: \n",
          " * the first column must contain the group indicator \n",

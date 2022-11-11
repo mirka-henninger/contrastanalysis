@@ -38,14 +38,12 @@
 #' n_group <- ncol(presidents)
 #'
 #' # define lambda weights
-#' lambda <- matrix(c(
-#'     1, 0, 0, -1, # H1: decrease in approval ratings with stagnation over warmer months
-#'     3, 1, -1, -3), # H2: linear decrease in  approval ratings
-#'     ncol = n_group,
-#'     byrow=TRUE)
+#' lambda1 <- c(1, 0, 0, -1) # H1: decrease in approval ratings with stagnation over warmer months
+#' lambda2 <- c(3, 1, -1, -3) # H2: linear decrease in  approval ratings
 #'
 #' # perform contrast analysis
-#' contrast_dependent(n_group, lambda,presidents)
+#' contrast_dependent(n_group, lambda1, presidents)
+#' contrast_dependent(n_group, lambda2, presidents)
 #'
 #' @export
 contrast_dependent <- function(n_group,
@@ -58,6 +56,13 @@ contrast_dependent <- function(n_group,
   names(data) <- paste0("group", 1:n_group)
   if(is.vector(lambda)){
     lambda <- t(as.matrix(lambda))
+  }
+  if(is.matrix(lambda)){
+    message("Please note that each contrast is tested separately, the contrast are not tested jointly!\n",
+            "* When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts\n",
+            "tested together.\n",
+            "* However, the results may differ when non-orthogonal contrasts are tested separately.\n",
+            "* You may want to switch to an alternative package to conduct a joint test of all contrasts")
   }
   if (n_group != ncol(data) | n_group != ncol(lambda)) {
     stop("Please check the data format: \n",

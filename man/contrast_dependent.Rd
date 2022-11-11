@@ -51,13 +51,11 @@ presidents <- na.omit(presidents)
 n_group <- ncol(presidents)
 
 # define lambda weights
-lambda <- matrix(c(
-    1, 0, 0, -1, # H1: decrease in approval ratings with stagnation over warmer months
-    3, 1, -1, -3), # H2: linear decrease in  approval ratings
-    ncol = n_group,
-    byrow=TRUE)
+lambda1 <- c(1, 0, 0, -1) # H1: decrease in approval ratings with stagnation over warmer months
+lambda2 <- c(3, 1, -1, -3) # H2: linear decrease in  approval ratings
 
 # perform contrast analysis
-contrast_dependent(n_group, lambda,presidents)
+contrast_dependent(n_group, lambda1, presidents)
+contrast_dependent(n_group, lambda2, presidents)
 
 }
