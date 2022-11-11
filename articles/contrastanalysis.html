@@ -109,7 +109,7 @@
 <p><span class="math inline">\(H_2\)</span>: Setosa has smaller petal length than versicolor and virginica</p>
 <p>For <span class="math inline">\(p=3\)</span> groups of species, we can perform <span class="math inline">\(p-1=2\)</span> planned contrasts. The contrast weights of the two contrasts are based on the two hypotheses:</p>
 <p><span class="math inline">\(\lambda_{H_1} = (-1,0,1)\)</span></p>
-<p><span class="math inline">\(\lambda_{H_2} = (-2,1,1)\)</span></p>
+<p><span class="math inline">\(\lambda_{H_2} = (-1,0.5,0.5)\)</span> <span class="math inline">\(\lambda_{H_2} = (-1,0.5,0.5)\)</span></p>
 <p>Using these specification we can perform a contrast analysis for independent samples using the package.</p>
 <div class="section level4">
 <h4 id="testing-planned-contrasts">Testing planned contrasts<a class="anchor" aria-label="anchor" href="#testing-planned-contrasts"></a>
@@ -121,42 +121,44 @@
 <span><span class="co">#&gt; [1] 3</span></span>
 <span></span>
 <span><span class="co"># define lambda weights</span></span>
-<span><span class="op">(</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="op">-</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>, <span class="co"># H1: An increase from setosa over versicolor to virginica</span></span>
-<span>  <span class="op">-</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># H2: Setosa has smaller petal length than versicolor and virginica</span></span>
-<span>  ncol <span class="op">=</span> <span class="va">n_group</span>,</span>
-<span>  byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
-<span><span class="co">#&gt; [1,]   -1    0    1</span></span>
-<span><span class="co">#&gt; [2,]   -2    1    1</span></span>
+<span><span class="va">lambda1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span> <span class="co"># H1: An increase from setosa over versicolor to virginica</span></span>
+<span><span class="va">lambda2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span> <span class="co"># H2: Setosa has smaller petal length than versicolor and virginica</span></span>
 <span></span>
 <span><span class="co"># perform contrast analysis</span></span>
-<span><span class="fu"><a href="../reference/contrast_independent.html">contrast_independent</a></span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda</span>, <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/contrast_independent.html">contrast_independent</a></span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda1</span>, <span class="va">iris</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Please note that each contrast is tested separately, the contrast are not tested jointly!</span></span>
 <span><span class="co">#&gt; * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span></span>
 <span><span class="co">#&gt; tested together.</span></span>
 <span><span class="co">#&gt; * However, the results may differ when non-orthogonal contrasts are tested separately.</span></span>
 <span><span class="co">#&gt; * You may want to switch to an alternative package to conduct a joint test of all contrasts</span></span>
 <span><span class="co">#&gt;                  SS  df contrast_estimate t_value  F_value p_value</span></span>
-<span><span class="co">#&gt; Contrast 1 418.2025 147             4.090 47.5212 2258.262       0</span></span>
-<span><span class="co">#&gt; Contrast 2 395.3712 147             6.888 46.2058 2134.975       0</span></span>
+<span><span class="co">#&gt; Contrast 1 418.2025 147              4.09 47.5212 2258.262       0</span></span>
 <span><span class="co">#&gt;            r_effect_size r_alerting r2_alerting r_contrast</span></span>
-<span><span class="co">#&gt; Contrast 1        0.9490     0.9781      0.9568     0.9690</span></span>
-<span><span class="co">#&gt; Contrast 2        0.9228     0.9511      0.9045     0.9673</span></span></code></pre></div>
+<span><span class="co">#&gt; Contrast 1         0.949     0.9781      0.9568      0.969</span></span>
+<span><span class="fu"><a href="../reference/contrast_independent.html">contrast_independent</a></span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda2</span>, <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Please note that each contrast is tested separately, the contrast are not tested jointly!</span></span>
+<span><span class="co">#&gt; * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span></span>
+<span><span class="co">#&gt; tested together.</span></span>
+<span><span class="co">#&gt; * However, the results may differ when non-orthogonal contrasts are tested separately.</span></span>
+<span><span class="co">#&gt; * You may want to switch to an alternative package to conduct a joint test of all contrasts</span></span>
+<span><span class="co">#&gt;                  SS  df contrast_estimate t_value  F_value p_value</span></span>
+<span><span class="co">#&gt; Contrast 1 395.3712 147             6.888 46.2058 2134.975       0</span></span>
+<span><span class="co">#&gt;            r_effect_size r_alerting r2_alerting r_contrast</span></span>
+<span><span class="co">#&gt; Contrast 1        0.9228     0.9511      0.9045     0.9673</span></span></code></pre></div>
 <p>The output of the <strong>contrast_independent</strong> function contains results for both contrasts: Sums of squares and corresponding F-values, contrast estimates and corresponding <span class="math inline">\(t\)</span>-values as well as two-tailed <span class="math inline">\(p\)</span>-values. Furthermore, it contains several effect sizes, such as r_{} which can be interpreted as a correlation between the dependent variable and the contrast weights, <span class="math inline">\(r_{\text{alerting}}\)</span> corresponding to the correlation between group means and contrast weights, <span class="math inline">\(r_{\text{alerting}}^2\)</span> which can be interpreted similar to a determination coefficient as a measured of explained variance by the contrast <span class="math inline">\(\Big(\frac{SS_{\text{contrast}}}{SS_{\text{between}}}\Big)\)</span>. <span class="math inline">\(r_{\text{contrast}}\)</span> is defined as <span class="math inline">\(r_{\text{contrast}} = \sqrt{\frac{t^2}{t^2 + df}}\)</span> and is useful for power analyses.</p>
 <p>The results of this empirical example show that for <span class="math inline">\(\alpha = .05\)</span>, Contrast 1 and Contrast 2 fit the data well, as all <span class="math inline">\(t &gt; 46.21\)</span> and all <span class="math inline">\(p &lt; .001\)</span>. Hence, it seems that there is an increase in petal length from setosa over versicolor to virginica, and at the same time the results suggest that setosa has smaller petal length than versicolor and virginica.</p>
 </div>
 <div class="section level4">
 <h4 id="testing-competing-contrasts-against-each-other">Testing competing contrasts against each other<a class="anchor" aria-label="anchor" href="#testing-competing-contrasts-against-each-other"></a>
 </h4>
-<p>However, one may not be interested in whether there is support for <span class="math inline">\(H_1\)</span> and/or <span class="math inline">\(H_2\)</span> in the data, but in <em>which</em> of the two hypotheses <span class="math inline">\(H_1\)</span> and <span class="math inline">\(H_2\)</span> outperforms the other. We can directly test the two competing hypotheses against each other:</p>
+<p>However, one may not be interested in whether there is support for H1 and/or H2 in the data, but in <em>which</em> of the two hypotheses H1 and H2 outperforms the other. We can directly test the two competing hypotheses against each other:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define lambda weights</span></span>
 <span><span class="va">lambda1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># H1: Iris versicolor is distinct to Iris setosa and Iris virginica</span></span>
 <span><span class="va">lambda2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># H2: Iris versicolor is more similar to Iris virginica</span></span>
 <span></span>
 <span><span class="co"># Perform contrast analysis</span></span>
-<span><span class="fu"><a href="../reference/compare_independent.html">compare_independent</a></span><span class="op">(</span>n_group<span class="op">=</span><span class="fl">3</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/compare_independent.html">compare_independent</a></span><span class="op">(</span>n_group<span class="op">=</span><span class="fl">3</span>, lambda_preferred <span class="op">=</span> <span class="va">lambda1</span>, lambda_competing <span class="op">=</span> <span class="va">lambda2</span>, <span class="va">iris</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Please note that each contrast is tested separately, the contrast are not tested jointly!</span></span>
 <span><span class="co">#&gt; * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span></span>
 <span><span class="co">#&gt; tested together.</span></span>
@@ -174,39 +176,33 @@
 <span><span class="co">#&gt; 2             0.000000            0.7071068  -0.7071068</span></span>
 <span><span class="co">#&gt; 3             1.224745            0.7071068   0.5176381</span></span></code></pre></div>
 <p>The output of the <strong>compare_independent</strong> function contains the same information as <strong>contrast_independent</strong> in terms of test statistics and effect sizes. But, results are shown for one test only, namely a different comparison of the two hypotheses. In addition, the standardized contrast weights as well as their difference that is used for the contrast analyses are shown in the output.</p>
-<p>When the <span class="math inline">\(t\)</span>-value of the summary of results is positive and significantly different from <span class="math inline">\(0\)</span>, the data supports Hypothesis <span class="math inline">\(H_1\)</span>, while the data support hypothesis <span class="math inline">\(H_2\)</span> when the <span class="math inline">\(t\)</span>-value is negative and significantly different from <span class="math inline">\(0\)</span>. Hence, the results of this direct comparison show that for <span class="math inline">\(\alpha = .05\)</span>, Contrast 1 does outperform Contrast 2 as <span class="math inline">\(t = 2.54\)</span> and <span class="math inline">\(p = .014\)</span>. Hence, it seems that there is an increase in petal length from setosa over versicolor to virginica rather than setosa having smaller petal length than versicolor and virginica together. The results suggest that although Iris versicolor is a hybrid of the two other species, it is very similar to Iris virginica with regards to its petal length.</p>
+<p>When the <em>t</em>-value of the summary of results is positive and significantly different from 0, the data supports Hypothesis H1, while the data support hypothesis H2 when the <em>t</em>-value is negative and significantly different from 0. Hence, the results of this direct comparison show that for α = .05, Contrast 1 does outperform Contrast 2 as <em>t</em> = 2.54 and <em>p</em> = .014. Hence, it seems that there is an increase in petal length from setosa over versicolor to virginica rather than setosa having smaller petal length than versicolor and virginica together. The results suggest that although Iris versicolor is a hybrid of the two other species, it is very similar to Iris virginica with regards to its petal length.</p>
 </div>
 </div>
 <div class="section level3">
 <h3 id="contrast-analysis-for-dependent-samples">Contrast analysis for dependent samples<a class="anchor" aria-label="anchor" href="#contrast-analysis-for-dependent-samples"></a>
 </h3>
 <p>We would like to compare quarterly approval rating for the US presidents and again we have two hypotheses:</p>
-<p><span class="math inline">\(H_1\)</span>: A decrease in approval ratings with stagnation over warmer months</p>
-<p><span class="math inline">\(H_2\)</span>: A linear decrease in approval ratings</p>
-<p>Please note that for <span class="math inline">\(p=4\)</span> measurement occasions, we could perform a maximum <span class="math inline">\(p-1=3\)</span> planned contrasts. However, as we only have two hypotheses, we only specify two contrast weight vectors:</p>
-<p><span class="math inline">\(\lambda_{H_1} = (-1,0, 0, 1)\)</span></p>
-<p><span class="math inline">\(\lambda_{H_2} = (3, 1, -1, -3)\)</span></p>
+<p>H1: A decrease in approval ratings with stagnation over warmer months</p>
+<p>H2: A linear decrease in approval ratings</p>
+<p>Please note that for p = 4 measurement occasions, we could perform a maximum p - 1 = 3 planned contrasts. However, as we only have two hypotheses, we only specify two contrast weight vectors:</p>
+<p>λ(H1) = (-1, 0, 0, 1)</p>
+<p>λ(H2) = (1, 1/3, -1/3, -1)</p>
 <p>Using these specification we can perform a contrast analysis for dependent samples using the package.</p>
 <div class="section level4">
 <h4 id="testing-planned-contrasts-1">Testing planned contrasts<a class="anchor" aria-label="anchor" href="#testing-planned-contrasts-1"></a>
 </h4>
-<p>As for the contrast analysis for independent samples, the contrast weights <span class="math inline">\(\boldsymbol{\lambda}\)</span> are assigned to an object using the matrix function in R with contrasts in rows and groups in columns. The data must contain subjects in rows and <span class="math inline">\(p\)</span> columns, one for each measurement occasions that contain the dependent variable.</p>
+<p>As for the contrast analysis for independent samples, the contrast weights λ are assigned to an object using the matrix function in R with contrasts in rows and groups in columns. The data must contain subjects in rows and <em>p</em> columns, one for each measurement occasions that contain the dependent variable.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">n_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">presidents</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 4</span></span>
 <span></span>
 <span><span class="co"># define lambda weights</span></span>
-<span><span class="op">(</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="co"># H1: decrease in approval ratings with stagnation over warmer months</span></span>
-<span>  <span class="fl">3</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span>, <span class="co"># H2: linear decrease in  approval ratings</span></span>
-<span>  ncol <span class="op">=</span> <span class="va">n_group</span>,</span>
-<span>  byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      [,1] [,2] [,3] [,4]</span></span>
-<span><span class="co">#&gt; [1,]    1    0    0   -1</span></span>
-<span><span class="co">#&gt; [2,]    3    1   -1   -3</span></span>
+<span><span class="va">lambda1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co"># H1: decrease in approval ratings with stagnation over warmer months</span></span>
+<span><span class="va">lambda2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co"># H2: linear decrease in  approval ratings</span></span>
 <span></span>
 <span><span class="co"># perform contrast analysis</span></span>
-<span><span class="fu"><a href="../reference/contrast_dependent.html">contrast_dependent</a></span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda</span>,<span class="va">presidents</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/contrast_dependent.html">contrast_dependent</a></span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda1</span>, <span class="va">presidents</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Please note that each contrast is tested separately, the contrast are not tested jointly!</span></span>
 <span><span class="co">#&gt; * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span></span>
 <span><span class="co">#&gt; tested together.</span></span>
@@ -214,9 +210,16 @@
 <span><span class="co">#&gt; * You may want to switch to an alternative package to conduct a joint test of all contrasts</span></span>
 <span><span class="co">#&gt;            df contrast_estimate t_value F_value p_value      g</span></span>
 <span><span class="co">#&gt; Contrast 1 25            7.9231  3.1008  9.6148  0.0047 0.6081</span></span>
-<span><span class="co">#&gt; Contrast 2 25           24.1923  3.2389 10.4904  0.0034 0.6352</span></span></code></pre></div>
-<p>The output of the <strong>contrast_dependent</strong> function contains results for both contrasts: F-values, contrast estimates and corresponding <span class="math inline">\(t\)</span>-values as well as two-tailed <span class="math inline">\(p\)</span>-values. Furthermore, it contains the effect size <span class="math inline">\(g\)</span>, a standardized distance measure.</p>
-<p>The results of this empirical example show that for <span class="math inline">\(\alpha = .05\)</span>, Contrast 1 and Contrast 2 fit the data well, as all <span class="math inline">\(t &gt; 3.10\)</span> and all <span class="math inline">\(p &lt; .003\)</span>. Hence, it seems that presidential approval ratings decrease over the four calendar quarters, but it cannot be identified whether or not this decrease stagnates over warmer months.</p>
+<span><span class="fu"><a href="../reference/contrast_dependent.html">contrast_dependent</a></span><span class="op">(</span><span class="va">n_group</span>, <span class="va">lambda2</span>, <span class="va">presidents</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Please note that each contrast is tested separately, the contrast are not tested jointly!</span></span>
+<span><span class="co">#&gt; * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span></span>
+<span><span class="co">#&gt; tested together.</span></span>
+<span><span class="co">#&gt; * However, the results may differ when non-orthogonal contrasts are tested separately.</span></span>
+<span><span class="co">#&gt; * You may want to switch to an alternative package to conduct a joint test of all contrasts</span></span>
+<span><span class="co">#&gt;            df contrast_estimate t_value F_value p_value      g</span></span>
+<span><span class="co">#&gt; Contrast 1 25            8.0641  3.2389 10.4904  0.0034 0.6352</span></span></code></pre></div>
+<p>The output of the <strong>contrast_dependent</strong> function contains results for both contrasts: F-values, contrast estimates and corresponding <em>t</em>-values as well as two-tailed <em>p</em>-values. Furthermore, it contains the effect size <em>g</em>, a standardized distance measure.</p>
+<p>The results of this empirical example show that for α = .05, Contrast 1 and Contrast 2 fit the data well, as all <em>t</em> &gt; 3.10 and all <em>p</em> &lt; .003. Hence, it seems that presidential approval ratings decrease over the four calendar quarters, but it cannot be identified whether or not this decrease stagnates over warmer months.</p>
 </div>
 <div class="section level4">
 <h4 id="testing-competing-contrasts-against-each-other-1">Testing competing contrasts against each other<a class="anchor" aria-label="anchor" href="#testing-competing-contrasts-against-each-other-1"></a>
@@ -225,10 +228,10 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define lambda weights</span></span>
 <span><span class="va">lambda1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>   <span class="co"># H1: decrease in approval ratings with stagnation over warmer months</span></span>
-<span><span class="va">lambda2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span>  <span class="co"># H2: linear decrease in  approval ratings</span></span>
+<span><span class="va">lambda2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co"># H2: linear decrease in  approval ratings</span></span>
 <span></span>
 <span><span class="co"># perform contrast analysis</span></span>
-<span><span class="fu"><a href="../reference/compare_dependent.html">compare_dependent</a></span><span class="op">(</span>n_group<span class="op">=</span><span class="va">n_group</span>, <span class="va">lambda1</span>, <span class="va">lambda2</span>, <span class="va">presidents</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/compare_dependent.html">compare_dependent</a></span><span class="op">(</span>n_group<span class="op">=</span><span class="va">n_group</span>, lambda_preferred <span class="op">=</span> <span class="va">lambda1</span>, lambda_competing <span class="op">=</span> <span class="va">lambda2</span>, <span class="va">presidents</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Please note that each contrast is tested separately, the contrast are not tested jointly!</span></span>
 <span><span class="co">#&gt; * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts</span></span>
 <span><span class="co">#&gt; tested together.</span></span>
@@ -239,13 +242,13 @@
 <span><span class="co">#&gt; Contrast 1 25            0.3858  0.5439  0.2958  0.5914 0.1067</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $contrast_weights</span></span>
-<span><span class="co">#&gt;   lambda1_std lambda2_std lambda_diff</span></span>
-<span><span class="co">#&gt; 1    1.414214   1.3416408  0.07257278</span></span>
-<span><span class="co">#&gt; 2    0.000000   0.4472136 -0.44721360</span></span>
-<span><span class="co">#&gt; 3    0.000000  -0.4472136  0.44721360</span></span>
-<span><span class="co">#&gt; 4   -1.414214  -1.3416408 -0.07257278</span></span></code></pre></div>
+<span><span class="co">#&gt;   lambda_preferred_std lambda_competing_std lambda_diff</span></span>
+<span><span class="co">#&gt; 1             1.414214            1.3416408  0.07257278</span></span>
+<span><span class="co">#&gt; 2             0.000000            0.4472136 -0.44721360</span></span>
+<span><span class="co">#&gt; 3             0.000000           -0.4472136  0.44721360</span></span>
+<span><span class="co">#&gt; 4            -1.414214           -1.3416408 -0.07257278</span></span></code></pre></div>
 <p>The output of the <strong>compare_dependent</strong> function mirrors the information from <strong>contrast_dependent</strong>, but only shows results for one test only, namely a different comparison of the two hypotheses and shows the standardized contrast weights as well as their difference that is used for the contrast analyses.</p>
-<p>Similar to the **compare_independent* function, the data supports Hypothesis <span class="math inline">\(H_1\)</span> when the <span class="math inline">\(t\)</span>-value of the summary of results is positive and significantly different from <span class="math inline">\(0\)</span>, while the data support hypothesis <span class="math inline">\(H_2\)</span> when the <span class="math inline">\(t\)</span>-value is negative and significantly different from <span class="math inline">\(0\)</span>. Hence, the results of this direct comparison show that for <span class="math inline">\(\alpha = .05\)</span> neither of the two contrasts outperforms the other as <span class="math inline">\(t = 0.54\)</span> and <span class="math inline">\(p = .59\)</span>. Hence, there is a decrease in approval ratings, but it is not decisive whether this decrease stagnates over the summer months or not.</p>
+<p>Similar to the <strong>compare_independent</strong> function, the data supports Hypothesis H1 when the <em>t</em>-value of the summary of results is positive and significantly different from 0, while the data support hypothesis H2 when the <em>t</em>-value is negative and significantly different from 0. Hence, the results of this direct comparison show that for α = .05 neither of the two contrasts outperforms the other as <em>t</em> = 0.53 and <em>p</em> = .59. Hence, there is a decrease in approval ratings, but it is not decisive whether this decrease stagnates over the summer months or not.</p>
 </div>
 </div>
 <div class="section level3">
