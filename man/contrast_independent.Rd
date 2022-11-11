@@ -49,13 +49,12 @@ iris <- iris[,c("Species", "Petal.Length")]
 n_group <- length(levels(iris$Species))
 
 # define lambda weights
-lambda <- matrix(c(
-                -1,0,1, # H1: An increase from setosa over versicolor to virginica
-                -2,1,1), # H2: Setosa has smaller Petal Length than versicolor and virginica
-                ncol = n_group,
-                byrow=TRUE)
+lambda1 <- c(-1,0,1) # H1: An increase from setosa over versicolor to virginica
+lambda2 <- c(-1,0.5,0.5) # H2: Setosa has smaller Petal Length than versicolor and virginica
+
 # perform contrast analysis
-contrast_independent(n_group, lambda, iris)
+contrast_independent(n_group, lambda1, iris)
+contrast_independent(n_group, lambda2, iris)
 
 
 }

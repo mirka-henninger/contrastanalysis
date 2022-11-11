@@ -37,13 +37,12 @@
 #' n_group <- length(levels(iris$Species))
 #'
 #' # define lambda weights
-#' lambda <- matrix(c(
-#'                 -1,0,1, # H1: An increase from setosa over versicolor to virginica
-#'                 -2,1,1), # H2: Setosa has smaller Petal Length than versicolor and virginica
-#'                 ncol = n_group,
-#'                 byrow=TRUE)
+#' lambda1 <- c(-1,0,1) # H1: An increase from setosa over versicolor to virginica
+#' lambda2 <- c(-1,0.5,0.5) # H2: Setosa has smaller Petal Length than versicolor and virginica
+#'
 #' # perform contrast analysis
-#' contrast_independent(n_group, lambda, iris)
+#' contrast_independent(n_group, lambda1, iris)
+#' contrast_independent(n_group, lambda2, iris)
 #'
 #'
 #' @export
@@ -81,7 +80,7 @@ contrast_independent <- function(n_group,
   # Define contrast estimate ------------------------------------------------
   numerator <- lambda %*% group_vals$group_means
   denominator <- (lambda^2) %*% (group_vals$group_size^(-1))
-  df <- nrow(data) - ncol(data)
+  df <- nrow(data) - n_group
 
 
 
@@ -106,12 +105,12 @@ contrast_independent <- function(n_group,
                contrast = optimbase::transpose(
                  lambda[, match(data$groups,
                                 colnames(lambda))]))
+  # r effect size
   r_effectsize <- cor(data[, -1])[1, -1]
   # r alerting
   r_alerting <- c(cor(group_vals$group_means, t(lambda)))
   # r contrast
   r_contrast <- sqrt(tcontrast^2 / (tcontrast^2 + nrow(data) - n_group))
-
 
   # Format output -----------------------------------------------------------
   rounding <- 4
