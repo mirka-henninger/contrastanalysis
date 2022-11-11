@@ -57,13 +57,6 @@ contrast_dependent <- function(n_group,
   if(is.vector(lambda)){
     lambda <- t(as.matrix(lambda))
   }
-  if(is.matrix(lambda)){
-    message("Please note that each contrast is tested separately, the contrast are not tested jointly!\n",
-            "* When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts\n",
-            "tested together.\n",
-            "* However, the results may differ when non-orthogonal contrasts are tested separately.\n",
-            "* You may want to switch to an alternative package to conduct a joint test of all contrasts")
-  }
   if (n_group != ncol(data) | n_group != ncol(lambda)) {
     stop("Please check the data format: \n",
          " * each column must contain the dependent variable in the
@@ -75,6 +68,13 @@ contrast_dependent <- function(n_group,
   if (all(!(abs(rowSums(lambda)) < .Machine$double.eps^0.5))) {
     stop("Your contrast weights do not sum to 0 for all contrasts. ",
          "Please check the weights again!")
+  }
+  if(is.matrix(lambda)){
+    message("Please note that each contrast is tested separately, the contrast are not tested jointly!\n",
+            "* When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts\n",
+            "tested together.\n",
+            "* However, the results may differ when non-orthogonal contrasts are tested separately.\n",
+            "* You may want to switch to an alternative package to conduct a joint test of all contrasts")
   }
 
   # Compute L and sigma^2 pooled --------------------------------------------

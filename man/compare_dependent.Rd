@@ -7,14 +7,20 @@
 Rosenthal et al. (2000); Sedlmeier & Renkewitz (2013)
 }
 \usage{
-compare_dependent(n_group, lambda1, lambda2, data, testvalue = 0)
+compare_dependent(
+  n_group,
+  lambda_preferred,
+  lambda_competing,
+  data,
+  testvalue = 0
+)
 }
 \arguments{
 \item{n_group}{Number of dependent / within-subject groups}
 
-\item{lambda1}{A vector of contrast weights for Hypothesis 1}
+\item{lambda_preferred}{A vector of contrast weights for Hypothesis 1}
 
-\item{lambda2}{A vector of contrast weights for Hypothesis 2}
+\item{lambda_competing}{A vector of contrast weights for Hypothesis 2}
 
 \item{data}{A matrix or dataframe with n_group columns; each row contains values
 for one respondent;
@@ -40,8 +46,8 @@ so no missings are allowed
 }
 \note{
 A test favoring Hypothesis 1 is performed, hence a positive t-value
-indicate that the contrast weights contained in lambda1 fit the data better
-than the contrast weights contained in lambda2, and vice versa for a negative
+indicate that the contrast weights contained in lambda_preferred fit the data better
+than the contrast weights contained in lambda_competing, and vice versa for a negative
 t-value.
 }
 \examples{
@@ -53,10 +59,10 @@ presidents <- data.frame(Qtr1=presidents[seq(1, length(presidents), 4)],
 presidents <- na.omit(presidents)
 
 # define lambda weights
-lambda1 <- c(1, 0, 0, -1)   # H1: decrease in approval ratings with stagnation over warmer months
-lambda2 <- c(3, 1, -1, -3)  # H2: linear decrease in  approval ratings
+lambda_preferred <- c(1, 0, 0, -1)   # H1: decrease in ratings with stagnation over warmer months
+lambda_competing <- c(3, 1, -1, -3)  # H2: linear decrease in approval ratings
 
 # perform contrast analysis
-compare_dependent(n_group=4, lambda1, lambda2, presidents)
+compare_dependent(n_group=4, lambda_preferred, lambda_competing, presidents)
 
 }

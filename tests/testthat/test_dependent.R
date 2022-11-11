@@ -46,14 +46,14 @@ expect_equal(cont_result$F_value, cont_result$t_value^2, tolerance = 1e-4)
 lambda1 <- c(3,-1,-1,-1)
 lambda2 <- c(0,2,-1,-1)
 
-compare_result <- compare_dependent(n_group, lambda1, lambda2, dat)
+compare_result <- compare_dependent(n_group, lambda_preferred = lambda1, lambda_competing = lambda2, dat)
 
 ### Tests
 # squared t value is F value
 expect_equal(compare_result$results$F_value,
              compare_result$results$t_value^2, tolerance = 1e-3)
 # difference in contrast wteights
-expect_equal(compare_result$contrast_weights$lambda1_std - compare_result$contrast_weights$lambda2_std,
+expect_equal(compare_result$contrast_weights$lambda_preferred_std - compare_result$contrast_weights$lambda_competing_std,
              compare_result$contrast_weights$lambda_diff, tolerance = 1e-4)
 
 # test warnings -----------------------------------------------------------
@@ -78,18 +78,18 @@ expect_error(contrast_dependent(n_group, lambda-1, dat))
 
 ### compare_dependent
 # group number is not correct
-expect_error(compare_dependent(n_group-1, lambda1, lambda2, dat))
-expect_error(compare_dependent(n_group+1, lambda1, lambda2, dat))
+expect_error(compare_dependent(n_group-1, lambda_preferred = lambda1, lambda_competing = lambda2, dat))
+expect_error(compare_dependent(n_group+1, lambda_preferred = lambda1, lambda_competing = lambda2, dat))
 
 # lambda does not match group
-expect_error(compare_dependent(n_group,  lambda1[-1], lambda2, dat))
-expect_error(compare_dependent(n_group,  lambda1, lambda2[-1], dat))
+expect_error(compare_dependent(n_group,  lambda_preferred = lambda1[-1], lambda_competing = lambda2, dat))
+expect_error(compare_dependent(n_group,  lambda_preferred = lambda1, lambda_competing = lambda2[-1], dat))
 
 # dat has strange format
-expect_error(compare_dependent(n_group, lambda1, lambda2, cbind(dat, dat[,1])))
-expect_error(compare_dependent(n_group, lambda1, lambda2, dat[,-1]))
-expect_error(compare_dependent(n_group, lambda1, lambda2, dat[,-4]))
+expect_error(compare_dependent(n_group, lambda_preferred = lambda1, lambda_competing = lambda2, cbind(dat, dat[,1])))
+expect_error(compare_dependent(n_group, lambda_preferred = lambda1, lambda_competing = lambda2, dat[,-1]))
+expect_error(compare_dependent(n_group, lambda_preferred = lambda1, lambda_competing = lambda2, dat[,-4]))
 
 # contrast weights do not sum to zero
-expect_error(compare_dependent(n_group, lambda1+1, lambda2, dat))
-expect_error(compare_dependent(n_group, lambda1, lambda2+1, dat))
+expect_error(compare_dependent(n_group, lambda_preferred = lambda1+1, lambda_competing = lambda2, dat))
+expect_error(compare_dependent(n_group, lambda_preferred = lambda1, lambda_competing = lambda2+1, dat))

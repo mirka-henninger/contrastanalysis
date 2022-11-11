@@ -99,7 +99,7 @@ For p = 3 groups of species, we can perform p - 1 = 2 planned contrasts. The con
 
 λ(H1) = (-1,0,1)
 
-λ(H2) = (-2,1,1)
+λ(H2) = (-1,0.5,0.5)
 
 Using these specification we can perform a contrast analysis for independent samples using the package. 
 
@@ -112,14 +112,12 @@ The contrast weights λ are assigned to an object using the matrix function in R
 (n_group <- length(levels(iris$Species)))
 
 # define lambda weights
-(lambda <- matrix(c(
-  -1,0,1, # H1: An increase from setosa over versicolor to virginica
-  -2,1,1), # H2: Setosa has smaller petal length than versicolor and virginica
-  ncol = n_group,
-  byrow=TRUE))
+lambda1 <- c(-1,0,1) # H1: An increase from setosa over versicolor to virginica
+lambda2 <- c(-2,1,1) # H2: Setosa has smaller petal length than versicolor and virginica
 
 # perform contrast analysis
-contrast_independent(n_group, lambda, iris)
+contrast_independent(n_group, lambda1, iris)
+contrast_independent(n_group, lambda2, iris)
 ```
 
 The output of the **contrast_independent** function contains results for both contrasts: Sums of squares and corresponding F-values, contrast estimates and corresponding *t*-values as well as two-tailed *p*-values. Furthermore, it contains several effect sizes, such as *r*(effect size) which can be interpreted as a correlation between the dependent variable and the contrast weights, *r*(alerting) corresponding to the correlation between group means and contrast weights, *r*(alerting)² which can be interpreted similar to a determination coefficient as a measured of explained variance by the contrast. *r*(contrast) is useful for power analyses. 
@@ -137,7 +135,7 @@ lambda1 <- c(-1, 0, 1)  # H1: Iris versicolor is distinct to Iris setosa and Iri
 lambda2 <- c(-2, 1, 1)  # H2: Iris versicolor is more similar to Iris virginica
 
 # Perform contrast analysis
-compare_independent(n_group=3, lambda1, lambda2, iris)
+compare_independent(n_group=3, lambda_preferred = lambda1, lambda_competing = lambda2, iris)
 ```
 
 The output of the **compare_independent** function contains the same information as **contrast_independent** in terms of test statistics and effect sizes. But, results are shown for one test only, namely a different comparison of the two hypotheses. In addition, the standardized contrast weights as well as their difference that is used for the contrast analyses are shown in the output. 
@@ -158,7 +156,7 @@ Please note that for p = 4 measurement occasions, we could perform a maximum p -
 
 λ(H1) = (-1, 0, 0, 1)
 
-λ(H2) = (3, 1, -1, -3)
+λ(H2) = (1, 1/3, -1/3, -1)
 
 Using these specification we can perform a contrast analysis for dependent samples using the package. 
 
@@ -170,14 +168,12 @@ As for the contrast analysis for independent samples, the contrast weights λ ar
 (n_group <- ncol(presidents))
 
 # define lambda weights
-(lambda <- matrix(c(
-  1, 0, 0, -1, # H1: decrease in approval ratings with stagnation over warmer months
-  3, 1, -1, -3), # H2: linear decrease in  approval ratings
-  ncol = n_group,
-  byrow=TRUE))
+lambda1 <- c(1, 0, 0, -1) # H1: decrease in approval ratings with stagnation over warmer months
+lambda2 <- c(1, 1/3, -1/3, -1) # H2: linear decrease in  approval ratings
 
 # perform contrast analysis
-contrast_dependent(n_group, lambda,presidents)
+contrast_dependent(n_group, lambda1, presidents)
+contrast_dependent(n_group, lambda2, presidents)
 ```
 
 
@@ -192,10 +188,10 @@ To directly compare the two contrasts and test whether the decrease stagnates ov
 ```{r}
 # define lambda weights
 lambda1 <- c(1, 0, 0, -1)   # H1: decrease in approval ratings with stagnation over warmer months
-lambda2 <- c(3, 1, -1, -3)  # H2: linear decrease in  approval ratings
+lambda2 <- c(1, 1/3, -1/3, -1) # H2: linear decrease in  approval ratings
 
 # perform contrast analysis
-compare_dependent(n_group=n_group, lambda1, lambda2, presidents)
+compare_dependent(n_group=n_group, lambda_preferred = lambda1, lambda_competing = lambda2, presidents)
 ```
 
 The output of the **compare_dependent** function mirrors the information from **contrast_dependent**, but only shows results for one test only, namely a different comparison of the two hypotheses and shows the standardized contrast weights as well as their difference that is used for the contrast analyses. 
