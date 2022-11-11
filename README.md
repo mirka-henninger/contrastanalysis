@@ -121,21 +121,11 @@ lambda2 <- c(-2,1,1) # H2: Setosa has smaller petal length than versicolor and v
 
 # perform contrast analysis
 contrast_independent(n_group, lambda1, iris)
-#> Please note that each contrast is tested separately, the contrast are not tested jointly!
-#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
-#> tested together.
-#> * However, the results may differ when non-orthogonal contrasts are tested separately.
-#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
 #>                  SS  df contrast_estimate t_value  F_value p_value
 #> Contrast 1 418.2025 147              4.09 47.5212 2258.262       0
 #>            r_effect_size r_alerting r2_alerting r_contrast
 #> Contrast 1         0.949     0.9781      0.9568      0.969
 contrast_independent(n_group, lambda2, iris)
-#> Please note that each contrast is tested separately, the contrast are not tested jointly!
-#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
-#> tested together.
-#> * However, the results may differ when non-orthogonal contrasts are tested separately.
-#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
 #>                  SS  df contrast_estimate t_value  F_value p_value
 #> Contrast 1 395.3712 147             6.888 46.2058 2134.975       0
 #>            r_effect_size r_alerting r2_alerting r_contrast
@@ -174,11 +164,6 @@ lambda2 <- c(-2, 1, 1)  # H2: Iris versicolor is more similar to Iris virginica
 
 # Perform contrast analysis
 compare_independent(n_group=3, lambda_preferred = lambda1, lambda_competing = lambda2, iris)
-#> Please note that each contrast is tested separately, the contrast are not tested jointly!
-#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
-#> tested together.
-#> * However, the results may differ when non-orthogonal contrasts are tested separately.
-#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
 #> $results
 #>                SS  df contrast_estimate t_value F_value p_value r_effect_size
 #> Contrast 1 1.1958 147            0.1387  2.5411  6.4574  0.0121        0.0507
@@ -249,19 +234,9 @@ lambda2 <- c(1, 1/3, -1/3, -1) # H2: linear decrease in  approval ratings
 
 # perform contrast analysis
 contrast_dependent(n_group, lambda1, presidents)
-#> Please note that each contrast is tested separately, the contrast are not tested jointly!
-#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
-#> tested together.
-#> * However, the results may differ when non-orthogonal contrasts are tested separately.
-#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
 #>            df contrast_estimate t_value F_value p_value      g
 #> Contrast 1 25            7.9231  3.1008  9.6148  0.0047 0.6081
 contrast_dependent(n_group, lambda2, presidents)
-#> Please note that each contrast is tested separately, the contrast are not tested jointly!
-#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
-#> tested together.
-#> * However, the results may differ when non-orthogonal contrasts are tested separately.
-#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
 #>            df contrast_estimate t_value F_value p_value      g
 #> Contrast 1 25            8.0641  3.2389 10.4904  0.0034 0.6352
 ```
@@ -290,11 +265,6 @@ lambda2 <- c(1, 1/3, -1/3, -1) # H2: linear decrease in  approval ratings
 
 # perform contrast analysis
 compare_dependent(n_group=n_group, lambda_preferred = lambda1, lambda_competing = lambda2, presidents)
-#> Please note that each contrast is tested separately, the contrast are not tested jointly!
-#> * When the contrasts are orthogonal and the samples size is equal in all groups, the results from contrasts tested separately is equal to the results from contrasts
-#> tested together.
-#> * However, the results may differ when non-orthogonal contrasts are tested separately.
-#> * You may want to switch to an alternative package to conduct a joint test of all contrasts
 #> $results
 #>            df contrast_estimate t_value F_value p_value      g
 #> Contrast 1 25            0.3858  0.5439  0.2958  0.5914 0.1067
