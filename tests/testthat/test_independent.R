@@ -27,15 +27,15 @@ ano_result <- data.frame(anova(lm_mod))[-n_group,]
 
 ### Tests
 # equal sums of squares
-expect_equal(contrast_result$SS, ano_result[,2], tolerance = 1e-4)
+expect_equal(contrast_result$results$SS, ano_result[,2], tolerance = 1e-4)
 # equal F value / t value
-expect_equal(contrast_result$F_value, ano_result[,4], tolerance = 1e-4)
-expect_equal(contrast_result$t_value, lm_result[,3], tolerance = 1e-4)
+expect_equal(contrast_result$results$F_value, ano_result[,4], tolerance = 1e-4)
+expect_equal(contrast_result$results$t_value, lm_result[,3], tolerance = 1e-4)
 # equal p values
-expect_equal(contrast_result$p_value, ano_result[,5], tolerance = 1e-4)
-expect_equal(contrast_result$p_value, lm_result[,4], tolerance = 1e-4)
+expect_equal(contrast_result$results$p_value, ano_result[,5], tolerance = 1e-4)
+expect_equal(contrast_result$results$p_value, lm_result[,4], tolerance = 1e-4)
 # squared t value is F value
-expect_equal(contrast_result$F_value, contrast_result$t^2, tolerance = 1e-4)
+expect_equal(contrast_result$results$F_value, contrast_result$results$t^2, tolerance = 1e-4)
 
 
 # compare_independent -----------------------------------------------------
@@ -50,7 +50,7 @@ compare_result <- compare_independent(n_group, lambda_preferred = lambda1, lambd
 
 ### Tests
 # squared t value is F value
-expect_equal(compare_result$results$F_value, compare_result$results$t_value^2, tolerance = 1e-4)
+expect_equal(compare_result$results$results$F_value, compare_result$results$results$t_value^2, tolerance = 1e-4)
 # difference in contrast wteights
 expect_equal(compare_result$contrast_weights$lambda_preferred_std - compare_result$contrast_weights$lambda_competing_std,
              compare_result$contrast_weights$lambda_diff, tolerance = 1e-4)

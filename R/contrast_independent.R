@@ -90,7 +90,6 @@ contrast_independent <- function(n_group,
   df <- nrow(data) - n_group
 
 
-
   # SS contrast and SS within -----------------------------------------------
   SS_contrast <- (numerator^2) / denominator
   MS_within <- sum(group_vals$group_variances) / n_group
@@ -118,6 +117,9 @@ contrast_independent <- function(n_group,
   r_alerting <- c(cor(group_vals$group_means, t(lambda)))
   # r contrast
   r_contrast <- sqrt(tcontrast^2 / (tcontrast^2 + nrow(data) - n_group))
+  # f (according to Perugini, M., Gallucci, M., & Costantini, G., 2018)
+  f_effectsize <- numerator / sqrt(n_group * sum(lambda^2) * MS_within)
+
 
   # Format output -----------------------------------------------------------
   rounding <- 4
@@ -130,8 +132,10 @@ contrast_independent <- function(n_group,
                        "r_effect_size" = round(r_effectsize, rounding),
                        "r_alerting" = round(r_alerting, rounding),
                        "r2_alerting" = round(r_alerting^2, rounding),
-                       "r_contrast" = round(r_contrast, rounding))
+                       "r_contrast" = round(r_contrast, rounding),
+                       "f_effectsize" = round(f_effectsize, rounding))
   row.names(output) <- paste0("Contrast ", 1:nrow(lambda))
-
-  return(output)
+  res <- list(results = output, lambda = lambda)
+  return(res)
 }
+
