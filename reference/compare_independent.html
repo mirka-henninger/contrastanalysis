@@ -110,10 +110,16 @@ contains the dependent variable</p></dd>
 <span class="r-in"><span><span class="co"># perform contrast analysis</span></span></span>
 <span class="r-in"><span><span class="fu">compare_independent</span><span class="op">(</span>n_group<span class="op">=</span><span class="fl">3</span>, <span class="va">lambda_preferred</span>, <span class="va">lambda_competing</span>, <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $results</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $results$results</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                SS  df contrast_estimate t_value F_value p_value r_effect_size</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1 1.1958 147            0.1387  2.5411  6.4574  0.0121        0.0507</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            r_alerting r2_alerting r_contrast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1     0.0523      0.0027     0.2051</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            r_alerting r2_alerting r_contrast f_effectsize</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Contrast 1     0.0523      0.0027     0.2051       0.2075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $results$lambda</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         setosa versicolor virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.1894687 -0.7071068 0.5176381</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $contrast_weights</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lambda_preferred_std lambda_competing_std lambda_diff</span>
