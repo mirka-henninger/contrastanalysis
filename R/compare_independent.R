@@ -75,8 +75,7 @@ compare_independent <- function(n_group,
     lambda_diff = as.vector(lambda_diff)
   )
 
-  output <- list(results = results,
-                 contrast_weights = weights)
-  return(output)
+  results$contrast_weights <- weights
+  return(results)
 }
 

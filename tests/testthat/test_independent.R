@@ -50,7 +50,7 @@ compare_result <- compare_independent(n_group, lambda_preferred = lambda1, lambd
 
 ### Tests
 # squared t value is F value
-expect_equal(compare_result$results$results$F_value, compare_result$results$results$t_value^2, tolerance = 1e-4)
+expect_equal(compare_result$results$F_value, compare_result$results$t_value^2, tolerance = 1e-4)
 # difference in contrast wteights
 expect_equal(compare_result$contrast_weights$lambda_preferred_std - compare_result$contrast_weights$lambda_competing_std,
              compare_result$contrast_weights$lambda_diff, tolerance = 1e-4)
